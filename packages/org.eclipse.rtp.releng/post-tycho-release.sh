@@ -56,7 +56,7 @@ RT_BASIC_SWT_LIB=$RT_BASIC_LINUX32_PRODUCT/$RT_BASIC_FOLDER_NAME/libcairo-swt.so
 [ -f "$RT_BASIC_SWT_LIB" ] && rm $RT_BASIC_SWT_LIB || echo "INFO: no native launcher to delete $RT_BASIC_SWT_LIB"
 # Delete native launcher folder
 RT_BASIC_NATIVE_LAUNCHER=$RT_BASIC_LINUX32_PRODUCT/$RT_BASIC_FOLDER_NAME/plugins/`ls -1 $RT_BASIC_LINUX32_PRODUCT/$RT_BASIC_FOLDER_NAME/plugins | grep org.eclipse.equinox.launcher.gtk.linux.x86 | tail -n 1`
-[ -d "$RT_BASIC_NATIVE_LAUNCHER" ] && rm -rf $RT_BASIC_NATIVE_LAUNCHER || echo "INFO: no native launcher to delete $RT_BASIC_NATIVE_LAUNCHER"
+#[ -d "$RT_BASIC_NATIVE_LAUNCHER" ] && rm -rf $RT_BASIC_NATIVE_LAUNCHER || echo "INFO: no native launcher to delete $RT_BASIC_NATIVE_LAUNCHER"
 
 # Now tar.gz the whole thing
 cd $RT_BASIC_LINUX32_PRODUCT
@@ -80,7 +80,7 @@ RT_WEB_SWT_LIB=$RT_WEB_LINUX32_PRODUCT/$RT_WEB_FOLDER_NAME/libcairo-swt.so
 [ -f "$RT_WEB_SWT_LIB" ] && rm $RT_WEB_SWT_LIB || echo "INFO: no native launcher to delete $RT_WEB_SWT_LIB"
 # Delete native launcher folder
 RT_WEB_NATIVE_LAUNCHER=$RT_WEB_LINUX32_PRODUCT/$RT_WEB_FOLDER_NAME/plugins/`ls -1 $RT_WEB_LINUX32_PRODUCT/$RT_WEB_FOLDER_NAME/plugins | grep org.eclipse.equinox.launcher.gtk.linux.x86 | tail -n 1`
-[ -d "$RT_WEB_NATIVE_LAUNCHER" ] && rm -rf $RT_WEB_NATIVE_LAUNCHER || echo "INFO: no native launcher to delete $RT_WEB_NATIVE_LAUNCHER"
+#[ -d "$RT_WEB_NATIVE_LAUNCHER" ] && rm -rf $RT_WEB_NATIVE_LAUNCHER || echo "INFO: no native launcher to delete $RT_WEB_NATIVE_LAUNCHER"
 
 cd $RT_WEB_LINUX32_PRODUCT
 tar cvzf $RT_WEB_FOLDER_NAME.tar.gz $RT_WEB_FOLDER_NAME/
@@ -104,7 +104,7 @@ if [ ! -d "$DOWNLOAD_FOLDER" ]; then
 fi
 
 # The p2 repository is already taken care of by the build.
-# Although we should definitly take catre of mataining a symbolic link to the latest or update
+# Although we should definitly take care of mataining a symbolic link to the latest or update
 # a composite repository and may delete the old builds.
 # check that the build identifier is defined and well known.
 BUILD_IDENTIFIER=`echo "$BUILD_VERSION" | sed 's/^.*\(.\)$/\1/'`
@@ -122,6 +122,7 @@ elif [ "$BUILD_IDENTIFIER" == "R" ]; then
   BUILD_IDENTIFIER_LABEL="Release"
 else
   echo "Unknown build identifier: the last character in the version $BUILD_VERSION is not 'N', 'I', 'S' or 'R'"
+  echo "The build identifier was $BUILD_IDENTIFIER"
   exit 42
 fi
 mkdir -p $DOWNLOAD_P2_FOLDER
