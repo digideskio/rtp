@@ -24,7 +24,7 @@
     <rtp-version>0.1.0-SNAPSHOT</rtp-version>
     <artifact-build-version>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.v${maven.build.timestamp}-${build-identifier}</artifact-build-version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <tycho-version>0.11.0-SNAPSHOT</tycho-version>
+    <tycho-version>0.11.0</tycho-version>
     <tycho-groupid>org.sonatype.tycho</tycho-groupid>
   </properties>
 
@@ -110,7 +110,11 @@
   </repositories>
 
   <pluginRepositories>
-    <pluginRepository>
+     <pluginRepository>
+       <id>sonatype-staging</id>
+       <url>https://repository.sonatype.org/content/repositories/sonatype_org-002/</url>
+     </pluginRepository>
+     <pluginRepository>
       <id>tycho</id>
       <url>https://repository.sonatype.org/content/repositories/snapshots/</url>
       <snapshots>
