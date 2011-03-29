@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Configurator Console
+Bundle-SymbolicName: org.eclipse.rtp.configurator.console
+Bundle-Version: 0.1.0.qualifier
+Bundle-Vendor: EclipseSource
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: org.eclipse.osgi.framework.console;version="1.1.0"
+Service-Component: OSGI-INF/rtpCommandProviderComponent.xml
