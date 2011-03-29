@@ -76,8 +76,13 @@ echo the console arG %console%
 
 :: startup:
 call :findargvalue startup
-set argvalue=%argValue:/=\%
+if not "%argvalue%"=="" (
+    set argvalue=%argvalue:/=\%
+) else (
+    for /F "tokens=* delims=" %%A in ('dir /b %ECLIPSEHOME%\plugins\org.eclipse.equinox.launcher_*.jar') do set argvalue=plugins\%%A
+)
 set startup=%ECLIPSEHOME%%argvalue%
+
 set install=%ECLIPSEHOME%
 
 :: application
