@@ -112,7 +112,7 @@
   <pluginRepositories>
      <pluginRepository>
        <id>sonatype-staging</id>
-       <url>https://repository.sonatype.org/content/repositories/sonatype_org-002/</url>
+       <url>https://repository.sonatype.org/content/repositories/sonatype_org-043/</url>
      </pluginRepository>
      <pluginRepository>
       <id>tycho</id>
