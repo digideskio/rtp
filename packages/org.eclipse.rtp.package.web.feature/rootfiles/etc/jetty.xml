@@ -133,7 +133,7 @@
           <Call name="addAppProvider">
             <Arg>
               <New class="org.eclipse.jetty.deploy.providers.ContextProvider">
-                <Set name="monitoredDir"><Property name="jetty.home" default="." />/contexts</Set>
+                <Set name="monitoredDirName"><Property name="jetty.home" default="." />/contexts</Set>
                 <Set name="scanInterval">5</Set>
               </New>
             </Arg>
@@ -143,7 +143,7 @@
           <Call name="addAppProvider">
             <Arg>
               <New class="org.eclipse.jetty.osgi.boot.OSGiAppProvider">
-                <Set name="monitoredDir"><Property name="jetty.home" default="." />/webapps</Set>
+                <Set name="monitoredDirName"><Property name="jetty.home" default="." />/webapps</Set>
                 <Set name="defaultsDescriptor"><Property name="jetty.home" default="."/>/etc/webdefault.xml</Set>
                 <Set name="scanInterval">5</Set>
                 <Set name="contextXmlDir"><Property name="jetty.home" default="." />/contexts</Set>
