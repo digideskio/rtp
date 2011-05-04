@@ -233,9 +233,10 @@ if [ -n "$DO_PURGE" ]; then
   cd $DOWNLOAD_P2_FOLDER
   nbFiles=`ls -l |wc -l`
   #This will keep only the 10 oldest builds
-  while [ 15 -le $nbFiles ]
+  while [ 10 -le $nbFiles ]
   do
-    fileToDelete=`ls -tr | head -1`
+    #fileToDelete=`ls -tr | head -1`
+    fileToDelete=`ls -trd */ | head -1 | cut -f 1 -d /`
     echo "Purging the oldest file: $fileToDelete"
     rm -rf $fileToDelete
     nbFiles=`ls -l |wc -l`
