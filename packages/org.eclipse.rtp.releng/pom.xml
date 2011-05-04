@@ -41,9 +41,7 @@
       <properties>
         <build-identifier>N</build-identifier>
         <eclipse-site>http://download.eclipse.org/eclipse/updates/3.7-N-builds</eclipse-site>
-        <jetty-site>http://download.eclipse.org/jetty/updates/jetty-rt-3.7milestones/S-3.7.M7-201105030934</jetty-site>
-        <!-- something is wrong with the jetty repository -->
-        <!-- jetty-site>http://download.eclipse.org/jetty/updates/jetty-rt-3.7-I-builds/7.3.1.201107120810</jetty-site-->
+        <jetty-site>http://download.eclipse.org/jetty/updates/jetty-rt-3.7-N-builds</jetty-site>
       </properties>
     </profile>
     <profile>
