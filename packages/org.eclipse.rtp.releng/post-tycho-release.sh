@@ -111,9 +111,11 @@ BUILD_IDENTIFIER=`echo "$BUILD_VERSION" | sed 's/^.*\(.\)$/\1/'`
 if [ "$BUILD_IDENTIFIER" == "N" ]; then
   DOWNLOAD_P2_FOLDER="$DOWNLOAD_FOLDER/updates/3.7-N-builds"
   BUILD_IDENTIFIER_LABEL="Nightly"
+  DO_PURGE="true"
 elif [ "$BUILD_IDENTIFIER" == "I" ]; then
   DOWNLOAD_P2_FOLDER="$DOWNLOAD_FOLDER/updates/3.7-I-builds"
   BUILD_IDENTIFIER_LABEL="Integration"
+  DO_PURGE="true"
 elif [ "$BUILD_IDENTIFIER" == "S" ]; then
   DOWNLOAD_P2_FOLDER="$DOWNLOAD_FOLDER/updates/3.7milestones"
   BUILD_IDENTIFIER_LABEL="Stable"
@@ -226,5 +228,16 @@ echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
 </repository>" > "$DOWNLOAD_P2_FOLDER/content.xml"
 
 
-echo "Purging the old builds if this is an N or I build: TODO."
-
+if [ -n "$DO_PURGE" ]; then
+  echo "Purging the old builds as this is an N or I build."
+  cd $DOWNLOAD_P2_FOLDER
+  nbFiles=`ls -l |wc -l`
+  while [ 12 -le $nbFiles ]
+  do
+    fileToDelete=`ls -tr | head -1`
+    echo "Purging the oldest file: $fileToDelete"
+    rm -rf $fileToDelete
+    nbFiles=`ls -l |wc -l`
+  done
+  cd $CURRENT_DIR
+fi
