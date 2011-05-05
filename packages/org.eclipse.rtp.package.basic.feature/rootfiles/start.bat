@@ -65,13 +65,13 @@ goto :eof
 
 :assemble
 :: console
-call :findargvalue console
-set "console="
-if not "%argvalue%"=="" (
-    set "console= -console %argvalue%"
-) else (
-    if %argfound%==true  set "console= -console"
-)
+::call :findargvalue console
+set "console= -console"
+::if not "%argvalue%"=="" (
+::    set "console= -console %argvalue%"
+::) else (
+::    if %argfound%==true  set "console= -console"
+::)
 echo the console arG %console%
 
 :: startup:

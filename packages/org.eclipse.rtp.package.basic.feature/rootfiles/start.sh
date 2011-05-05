@@ -141,17 +141,18 @@ fi
 
 #Read the console argument. It could be a flag.
 #console=`awk '{if ($1 ~ /-console/){print $1}}' < $ini | head -1`
-console=`echo "$args" | sed '/^-console/!d'`
-if [ -n "$console" ]; then
-  consoleArg=`echo "$args" | sed -n '/^-console/{n;p;}'`
-  first=`echo "$consoleArg" | cut -c1-1`
-  args=`echo "$args" | sed '/-console/,+1d'`
-  if [ "$first" = "-" ]; then
-    console=" -console"
-  else
-    console=" -console $consoleArg"
-  fi
-fi
+#console=`echo "$args" | sed '/^-console/!d'`
+#if [ -n "$console" ]; then
+#  consoleArg=`echo "$args" | sed -n '/^-console/{n;p;}'`
+#  first=`echo "$consoleArg" | cut -c1-1`
+#  args=`echo "$args" | sed '/-console/,+1d'`
+#  if [ "$first" = "-" ]; then
+#    console=" -console"
+#  else
+#    console=" -console $consoleArg"
+#  fi
+#fi
+console=" -console"
 
 args=`echo "$args" | tr '\n' ' '`
 
