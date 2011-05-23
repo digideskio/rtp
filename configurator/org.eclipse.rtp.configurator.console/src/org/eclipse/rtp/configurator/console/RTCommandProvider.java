@@ -48,7 +48,7 @@ public class RTCommandProvider implements CommandProvider {
   }
 
   private void distributeOperations( String operation, CommandInterpreter interpreter ) {
-    List<String> parameter = extractParameter( interpreter );    
+    List<String> parameter = extractParameter( interpreter ); 
     if( operation.equals( INSTALL ) ) {
       delegate.install( parameter );
     } else if( operation.equals( UPDATE ) ) {
