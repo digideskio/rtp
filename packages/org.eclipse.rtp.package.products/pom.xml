@@ -99,7 +99,7 @@
              <execution>
                <id>pack</id>
                <configuration>
-                 <inputFile>${project.build.directory}/org.eclipse.rtp.releng-repo.zip</inputFile>
+                 <inputFile>${project.build.directory}/org.eclipse.rtp.package.products.zip</inputFile>
                </configuration>
                <phase>package</phase>
                <goals>
@@ -109,7 +109,7 @@
              <execution>
                <id>sign</id>
                <configuration>
-                 <inputFile>${project.build.directory}/packed/org.eclipse.rtp.releng-repo.zip</inputFile>
+                 <inputFile>${project.build.directory}/packed/org.eclipse.rtp.package.products.zip</inputFile>
                  <signerInputDirectory>/home/data/httpd/download-staging.priv/technology/rtp</signerInputDirectory>
                </configuration>
                <phase>package</phase>
