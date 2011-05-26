@@ -83,6 +83,12 @@
   <profiles>
     <profile>
      <id>packAndSign</id>
+      <activation>
+        <property>
+          <name>pack-and-sign</name>
+          <value>true</value>
+        </property>
+      </activation>
      <build>
        <plugins>
          <plugin>
