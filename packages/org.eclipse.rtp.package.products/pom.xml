@@ -40,7 +40,9 @@
           <execution>
             <id>materialize-products</id>
             <!-- Choose a different phase so that we
-            can run the sign and pack goals that take place after the packaging -->
+            can run the sign and pack goals that take place after the packaging
+            and is completed by replacing the unsigned repository folder by the signed one
+            during the pre-integration-test phase -->
             <phase>integration-test</phase>
             <goals>
               <goal>materialize-products</goal>
@@ -139,34 +141,24 @@
              </execution>
            </executions>
          </plugin>
-         <!--plugin>
+         <plugin>
              <artifactId>maven-antrun-plugin</artifactId>
              <executions>
                <execution>
-                 <id>deploy</id>
-                 <phase>install</phase>
+                 <id>replace-unsigned-repository-by-signed-one</id>
+                 <phase>pre-integration-test</phase>
                  <goals>
                    <goal>run</goal>
                  </goals>
                  <configuration>
                    <tasks>
-                     <delete includeemptydirs="false">
-                       <fileset
-                         dir="/home/data/httpd/download.eclipse.org/technology/rtp/updates-nightly">
-                         <include name="**" />
-                       </fileset>
-                     </delete>
-                     <copy includeemptydirs="false"
-                       todir="/home/data/httpd/download.eclipse.org/technology/rtp/updates-nightly">
-                       <fileset dir="target/checksumFix">
-                         <include name="**" />
-                       </fileset>
-                     </copy>
+                     <move file="${project.build.directory}/repository" tofile="${project.build.directory}/repository-not-signed"/>
+                     <move file="${project.build.directory}/checksumFix" tofile="${project.build.directory}/repository"/>
                    </tasks>
                  </configuration>
                </execution>
              </executions>
-           </plugin-->
+           </plugin>
          </plugins>
        </build>
      </profile>
