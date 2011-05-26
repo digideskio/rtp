@@ -109,8 +109,14 @@
 
   <pluginRepositories>
      <pluginRepository>
-       <id>sonatype-staging</id>
-       <url>https://repository.sonatype.org/content/repositories/sonatype_org-043/</url>
+       <id>dash-plugins</id>
+       <url>http://maven.eclipse.org/nexus/content/groups/public/</url>
+       <snapshots>
+        <enabled>true</enabled>
+       </snapshots>
+       <releases>
+        <enabled>true</enabled>
+       </releases>
      </pluginRepository>
      <pluginRepository>
       <id>tycho</id>
