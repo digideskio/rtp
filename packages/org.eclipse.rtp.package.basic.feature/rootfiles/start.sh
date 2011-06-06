@@ -135,8 +135,8 @@ if echo $* | grep -Eq ' -configuration'
 then
     configurationArg=""
 else
-    tmp_config_area=`mktemp -d /tmp/cloudConfigArea.XXXXXX`
-    configurationArg=" -configuration $tmp_config_area"
+    tmp_config_area=`mktemp -d /tmp/configArea`
+    configurationArg=" -configuration /tmp/configArea"
 fi
 
 #Read the console argument. It could be a flag.
