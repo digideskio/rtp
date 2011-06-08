@@ -53,8 +53,8 @@
         </property>
       </activation>
       <properties>
-        <eclipse-site>http://download.eclipse.org/eclipse/updates/3.7milestones/S-3.7RC2-201105191138</eclipse-site>
-        <jetty-site>http://download.eclipse.org/jetty/updates/jetty-rt-3.7milestones/S-3.7.RC2-201105220736</jetty-site>
+        <eclipse-site>http://download.eclipse.org/eclipse/updates/3.7milestones/S-3.7RC4-201106030909</eclipse-site>
+        <jetty-site>http://download.eclipse.org/jetty/updates/jetty-rt-3.7milestones/S-3.7-RC4-201106050456</jetty-site>
       </properties>
     </profile>
   </profiles>
