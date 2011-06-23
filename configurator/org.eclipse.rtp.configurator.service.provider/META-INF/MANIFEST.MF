@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Configurator Service Provider
+Bundle-SymbolicName: org.eclipse.rtp.configurator.service.provider
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: EclipseSource
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipes.rtp.configurator.core;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Service-Component: OSGI-INF/rtpConfiguratorServiceProvider.xml
