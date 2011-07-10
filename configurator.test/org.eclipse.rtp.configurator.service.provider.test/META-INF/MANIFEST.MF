@@ -1,7 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Service Provider Test
+Bundle-Name: Test
 Bundle-SymbolicName: org.eclipse.rtp.configurator.service.provider.test
 Bundle-Version: 1.0.0.qualifier
-Bundle-Vendor: EclipseSource
+Fragment-Host: org.eclipse.rtp.configurator.service.provider;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.junit,
+ org.mockito;bundle-version="1.0.0"

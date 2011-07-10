@@ -9,3 +9,9 @@ Require-Bundle: org.eclipse.core.runtime,
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Service-Component: OSGI-INF/rtpConfiguratorServiceProvider.xml
+Bundle-Activator: org.eclipse.rtp.configurator.service.provider.internal.ProviderActivator
+Import-Package: org.eclipse.equinox.p2.core,
+ org.eclipse.equinox.p2.metadata;version="2.1.0",
+ org.eclipse.equinox.p2.query;version="2.0.0",
+ org.eclipse.equinox.p2.repository;version="2.0.0",
+ org.eclipse.equinox.p2.repository.metadata;version="2.0.0"

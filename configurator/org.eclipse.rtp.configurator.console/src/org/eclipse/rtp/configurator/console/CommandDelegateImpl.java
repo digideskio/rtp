@@ -11,6 +11,8 @@ package org.eclipse.rtp.configurator.console;
 
 import java.util.List;
 
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.rtp.configurator.core.IConfiguratorService;
 
 
@@ -76,12 +78,20 @@ public class CommandDelegateImpl implements CommandDelegate {
     configurationService.show( anyListOf );
   }
 
+  /**
+   * Lists all IUs in the rtp repos.
+   */
   @Override
   public void list() {
-    /*
-     * Should list all IUs in the rtp repos.
-     */
-    configurationService.list();
+    try {
+      List<String> list = configurationService.list();
+      for( String iu : list ) {
+        System.out.println(iu);
+      }
+    } catch( CoreException e ) {
+      IStatus status = e.getStatus();
+      System.out.println(status);
+    }
   }
 
   @Override

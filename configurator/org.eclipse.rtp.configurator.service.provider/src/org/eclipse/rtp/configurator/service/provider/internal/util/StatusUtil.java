@@ -7,28 +7,16 @@
 * Contributors:
 *   EclipseSource - initial API and implementation
 *******************************************************************************/
-package org.eclipse.rtp.configurator.core;
+package org.eclipse.rtp.configurator.service.provider.internal.util;
 
-import java.util.List;
-
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.rtp.configurator.service.provider.internal.ProviderActivator;
 
-public interface IConfiguratorService {
+public class StatusUtil {
 
-	  IStatus install( List<String> parameter );
+	public static IStatus createStatus(int severity, String message, Object object) {
+		return new Status(severity, ProviderActivator.BUNDLE_ID, message);
+	}
 
-	  IStatus update( List<String> anyListOf );
-
-	  IStatus remove( List<String> anyListOf );
-
-	  List<String> search( List<String> anyListOf );
-
-	  List<String> show( List<String> anyListOf );
-
-	  List<String> list( ) throws CoreException;
-
-	  IStatus updateWorld( );
-
-	  IStatus refresh( );
 }
