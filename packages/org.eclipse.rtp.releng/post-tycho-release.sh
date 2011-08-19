@@ -109,18 +109,18 @@ fi
 # check that the build identifier is defined and well known.
 BUILD_IDENTIFIER=`echo "$BUILD_VERSION" | sed 's/^.*\(.\)$/\1/'`
 if [ "$BUILD_IDENTIFIER" == "N" ]; then
-  DOWNLOAD_P2_FOLDER="$DOWNLOAD_FOLDER/updates/3.7-N-builds"
+  DOWNLOAD_P2_FOLDER="$DOWNLOAD_FOLDER/updates/3.8-N-builds"
   BUILD_IDENTIFIER_LABEL="Nightly"
   DO_PURGE="true"
 elif [ "$BUILD_IDENTIFIER" == "I" ]; then
-  DOWNLOAD_P2_FOLDER="$DOWNLOAD_FOLDER/updates/3.7-I-builds"
+  DOWNLOAD_P2_FOLDER="$DOWNLOAD_FOLDER/updates/3.8-I-builds"
   BUILD_IDENTIFIER_LABEL="Integration"
   DO_PURGE="true"
 elif [ "$BUILD_IDENTIFIER" == "S" ]; then
-  DOWNLOAD_P2_FOLDER="$DOWNLOAD_FOLDER/updates/3.7milestones"
+  DOWNLOAD_P2_FOLDER="$DOWNLOAD_FOLDER/updates/3.8milestones"
   BUILD_IDENTIFIER_LABEL="Stable"
 elif [ "$BUILD_IDENTIFIER" == "R" ]; then
-  DOWNLOAD_P2_FOLDER="$DOWNLOAD_FOLDER/updates/3.7"
+  DOWNLOAD_P2_FOLDER="$DOWNLOAD_FOLDER/updates/3.8"
   BUILD_IDENTIFIER_LABEL="Release"
 else
   echo "Unknown build identifier: the last character in the version $BUILD_VERSION is not 'N', 'I', 'S' or 'R'"

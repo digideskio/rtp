@@ -15,7 +15,7 @@
 
   <groupId>org.eclipse</groupId>
   <artifactId>rtp-packages-parent</artifactId>
-  <version>0.1.0-SNAPSHOT</version>
+  <version>1.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>RTP packages (Incubation)</name>
@@ -53,8 +53,36 @@
         </property>
       </activation>
       <properties>
-        <eclipse-site>http://download.eclipse.org/releases/staging</eclipse-site>
+        <eclipse-site>http://download.eclipse.org/releases/indigo</eclipse-site>
         <jetty-site>http://download.eclipse.org/jetty/updates/jetty-rt-3.7milestones/S-3.7.RC5-201106141948</jetty-site>
+      </properties>
+    </profile>
+	<profile>
+      <id>juno-nightly</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+        <property>
+          <name>platform</name>
+          <value>juno-nightly</value>
+        </property>
+      </activation>
+      <properties>
+        <build-identifier>N</build-identifier>
+        <eclipse-site>http://download.eclipse.org/releases/staging</eclipse-site>
+        <jetty-site>http://download.eclipse.org/jetty/updates/jetty-rt-3.8-N-builds/</jetty-site>
+      </properties>
+    </profile>
+    <profile>
+      <id>juno-milestone</id>
+      <activation>
+        <property>
+          <name>platform</name>
+          <value>juno-milestone</value>
+        </property>
+      </activation>
+      <properties>
+        <eclipse-site>http://download.eclipse.org/eclipse/updates/3.8milestones/</eclipse-site>
+        <jetty-site>http://download.eclipse.org/jetty/updates/jetty-rt-3.8milestones/S-3.8M1-201108171853/</jetty-site>
       </properties>
     </profile>
   </profiles>
