@@ -1,0 +1,32 @@
+{
+  "sources": [
+    {
+      "name": "rap",
+      "versions": [
+        {
+          "version": "1.4",
+          "repositoryUrl": "http://foo.bar",
+          "description": "Some text",
+          "infoUrl": "http://foo.bar/info"
+        },
+        {
+          "version": "1.5",
+          "repositoryUrl": "http://foo.bar2",
+          "description": "Some text2",
+          "infoUrl": "http://foo.bar/info2"
+        }
+      ]
+    },
+    {
+      "name": "equinox",
+      "versions": [
+        {
+          "version": "3.8.1",
+          "repositoryUrl": "http://foo.bar3",
+          "description": "Some text3",
+          "infoUrl": "http://foo.bar/info3"
+        }
+      ]
+    }
+  ]
+}
