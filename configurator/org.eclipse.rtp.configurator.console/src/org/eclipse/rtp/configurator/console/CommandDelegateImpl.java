@@ -13,7 +13,7 @@ import java.util.List;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.rtp.core.IConfiguratorService;
+import org.eclipse.rtp.configurator.core.IConfiguratorService;
 
 
 public class CommandDelegateImpl implements CommandDelegate {
