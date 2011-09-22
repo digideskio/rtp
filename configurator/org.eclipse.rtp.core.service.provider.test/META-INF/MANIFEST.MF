@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Test
+Bundle-SymbolicName: org.eclipse.rtp.core.service.provider.test
+Bundle-Version: 1.0.0.qualifier
+Fragment-Host: org.eclipse.rtp.core.service.provider;bundle-version="1.0.0.qualifier"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.junit;bundle-version="[4.8.2,4.9.0)",
+ org.mockito;bundle-version="[1.8.0,1.9.0)"
