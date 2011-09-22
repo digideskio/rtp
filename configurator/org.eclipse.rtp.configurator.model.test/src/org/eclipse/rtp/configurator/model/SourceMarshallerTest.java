@@ -14,7 +14,7 @@ import static org.junit.Assert.assertEquals;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.eclipse.rtp.configurator.model.internal.SourceMarshallerImpl;
+import org.eclipse.rtp.configurator.model.internal.SourceUnMarshallerImpl;
 import org.junit.Test;
 
 
@@ -23,7 +23,7 @@ public class SourceMarshallerTest {
   @Test
   public void first() throws IOException {
     InputStream stream = readExampleSources();
-    SourceMarshaller marshaller = new SourceMarshallerImpl();
+    SourceMarshaller marshaller = new SourceUnMarshallerImpl();
     
     SourceProvider provider = marshaller.marshal( stream );
     assertEquals( 2, provider.getSources().size() );

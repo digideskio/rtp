@@ -20,7 +20,7 @@ import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 
 
-public class SourceMarshallerImpl implements SourceMarshaller {
+public class SourceUnMarshallerImpl implements SourceMarshaller {
 
   @Override
   public SourceProvider marshal( InputStream sources ) {
