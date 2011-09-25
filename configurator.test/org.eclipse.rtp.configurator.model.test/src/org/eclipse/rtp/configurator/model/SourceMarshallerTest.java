@@ -23,7 +23,7 @@ public class SourceMarshallerTest {
   @Test
   public void first() throws IOException {
     InputStream stream = readExampleSources();
-    SourceMarshaller marshaller = new SourceUnMarshallerImpl();
+    SourceUnMarshaller marshaller = new SourceUnMarshallerImpl();
     
     SourceProvider provider = marshaller.marshal( stream );
     assertEquals( 2, provider.getSources().size() );
@@ -33,6 +33,8 @@ public class SourceMarshallerTest {
   
   private void checkFirstSource( Source source ) {
     assertEquals( "rap", source.getName() );
+    assertEquals( "Some text", source.getDescription() );
+    assertEquals( "http://foo.bar/info", source.getInfoUrl() );
     assertEquals( 2, source.getVersions().size() );
     checkFirstRapVersion( source );
     checkSecondRapVersion( source );
@@ -42,20 +44,18 @@ public class SourceMarshallerTest {
     SourceVersion source1 = source.getVersions().get( 0 );
     assertEquals( "1.4", source1.getVersion() );
     assertEquals( "http://foo.bar", source1.getRepositoryUrl() );
-    assertEquals( "Some text", source1.getDescription() );
-    assertEquals( "http://foo.bar/info", source1.getInfoUrl() );
   }
 
   private void checkSecondRapVersion( Source source ) {
     SourceVersion source2 = source.getVersions().get( 1 );
     assertEquals( "1.5", source2.getVersion() );
     assertEquals( "http://foo.bar2", source2.getRepositoryUrl() );
-    assertEquals( "Some text2", source2.getDescription() );
-    assertEquals( "http://foo.bar/info2", source2.getInfoUrl() );
   }
 
   private void checkSecondSource( Source source ) {
     assertEquals( "equinox", source.getName() );
+    assertEquals( "Some text3", source.getDescription() );
+    assertEquals( "http://foo.bar/info3", source.getInfoUrl() );
     assertEquals( 1, source.getVersions().size() );
     checkEquinoxVersion( source );
   }
@@ -64,8 +64,6 @@ public class SourceMarshallerTest {
     SourceVersion source1 = source.getVersions().get( 0 );
     assertEquals( "3.8.1", source1.getVersion() );
     assertEquals( "http://foo.bar3", source1.getRepositoryUrl() );
-    assertEquals( "Some text3", source1.getDescription() );
-    assertEquals( "http://foo.bar/info3", source1.getInfoUrl() );
   }
 
   private InputStream readExampleSources() {

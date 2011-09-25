@@ -25,7 +25,5 @@ public class SourceVersionTest {
     
     assertEquals( "1.4", version.getVersion() );
     assertEquals( "http://foo.bar", version.getRepositoryUrl() );
-    assertEquals( "description", version.getDescription() );
-    assertEquals( "http://info.bar", version.getInfoUrl() );
   }
 }

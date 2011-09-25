@@ -13,14 +13,14 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
-import org.eclipse.rtp.configurator.model.SourceMarshaller;
+import org.eclipse.rtp.configurator.model.SourceUnMarshaller;
 import org.eclipse.rtp.configurator.model.SourceProvider;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 
 
-public class SourceUnMarshallerImpl implements SourceMarshaller {
+public class SourceUnMarshallerImpl implements SourceUnMarshaller {
 
   @Override
   public SourceProvider marshal( InputStream sources ) {

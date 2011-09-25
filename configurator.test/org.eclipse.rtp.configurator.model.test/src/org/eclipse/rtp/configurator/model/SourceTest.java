@@ -25,12 +25,22 @@ public class SourceTest {
 
   @Before
   public void setUp() {
-    source = new Source( "foo" );
+    source = new Source( "foo", "description", "http://info.bar" );
   }
   
   @Test
   public void testGetName() {
     assertEquals( "foo", source.getName() );
+  }
+  
+  @Test
+  public void testGetDescription() {
+    assertEquals( "description", source.getDescription() );
+  }
+  
+  @Test
+  public void testGetInfoUrl() {
+    assertEquals( "http://info.bar", source.getInfoUrl() );
   }
   
   @Test

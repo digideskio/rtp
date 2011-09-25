@@ -12,7 +12,7 @@ package org.eclipse.rtp.configurator.model;
 import java.io.InputStream;
 
 
-public interface SourceMarshaller {
+public interface SourceUnMarshaller {
 
   SourceProvider marshal( InputStream sources );
 }

@@ -14,8 +14,6 @@ public class SourceVersion {
 
   private String version;
   private String repositoryUrl;
-  private String description;
-  private String infoUrl;
 
   SourceVersion() {
     // only for Gson
@@ -24,8 +22,6 @@ public class SourceVersion {
   public SourceVersion( String version, String repositoryUrl, String description, String infoUrl ) {
     this.version = version;
     this.repositoryUrl = repositoryUrl;
-    this.description = description;
-    this.infoUrl = infoUrl;
   }
 
   public String getVersion() {
@@ -34,13 +30,5 @@ public class SourceVersion {
 
   public String getRepositoryUrl() {
     return repositoryUrl;
-  }
-
-  public String getDescription() {
-    return description;
-  }
-
-  public String getInfoUrl() {
-    return infoUrl;
   }
 }
