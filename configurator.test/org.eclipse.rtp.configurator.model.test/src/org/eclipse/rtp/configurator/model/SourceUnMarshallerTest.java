@@ -11,14 +11,21 @@ package org.eclipse.rtp.configurator.model;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 
+import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.rtp.configurator.model.internal.SourceUnMarshallerImpl;
 import org.junit.Test;
+import org.osgi.framework.Bundle;
 
 
-public class SourceMarshallerTest {
+public class SourceUnMarshallerTest {
   
   @Test
   public void first() throws IOException {
@@ -66,9 +73,12 @@ public class SourceMarshallerTest {
     assertEquals( "http://foo.bar3", source1.getRepositoryUrl() );
   }
 
-  private InputStream readExampleSources() {
-    String path = "example-sources.json";
-    return getClass().getResourceAsStream( path );
+  private InputStream readExampleSources() throws IOException {
+    Bundle bundle = Platform.getBundle( "org.eclipse.rtp.configurator.model.test" );
+    URL unResolvedUrl = FileLocator.find( bundle, new Path("data/example-sources.json"), null );
+    URL testDataUrl = FileLocator.resolve( unResolvedUrl );
+    File testDataFile = new Path( testDataUrl.getFile() ).toFile();
+    return new FileInputStream( testDataFile );
   }
   
 }

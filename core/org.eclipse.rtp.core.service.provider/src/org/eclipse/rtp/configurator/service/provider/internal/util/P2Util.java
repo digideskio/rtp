@@ -62,11 +62,9 @@ public class P2Util {
 
 	private static IProvisioningAgent getAgent() throws CoreException {
 		BundleContext bundleContext = ProviderActivator.getBundleContext();
-		String packageLocation = bundleContext.getProperty("package.location");
-		URI packageLocationURI = new Path(packageLocation).append("p2").toFile().toURI();
 		IProvisioningAgentProvider agentProvider = getService(bundleContext, IProvisioningAgentProvider.class, IProvisioningAgentProvider.SERVICE_NAME);
 		checkAgentAvailable(agentProvider);
-		return agentProvider.createAgent(packageLocationURI);
+		return agentProvider.createAgent(null);
 	}
 	
 	private static void checkAgentAvailable(IProvisioningAgentProvider agentProvider) throws CoreException {

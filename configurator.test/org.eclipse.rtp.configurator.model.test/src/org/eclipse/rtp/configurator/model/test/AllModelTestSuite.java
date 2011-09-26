@@ -9,7 +9,7 @@
 *******************************************************************************/ 
 package org.eclipse.rtp.configurator.model.test;
 
-import org.eclipse.rtp.configurator.model.SourceMarshallerTest;
+import org.eclipse.rtp.configurator.model.SourceUnMarshallerTest;
 import org.eclipse.rtp.configurator.model.SourceProviderTest;
 import org.eclipse.rtp.configurator.model.SourceTest;
 import org.eclipse.rtp.configurator.model.SourceVersionTest;
@@ -22,7 +22,7 @@ import org.junit.runners.Suite.SuiteClasses;
   SourceProviderTest.class,
   SourceTest.class,
   SourceVersionTest.class,
-  SourceMarshallerTest.class
+  SourceUnMarshallerTest.class
 } )
 public class AllModelTestSuite {
   // no content

@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="SourceMarshaller">
-   <implementation class="org.eclipse.rtp.configurator.model.internal.SourceMarshallerImpl"/>
-   <service>
-      <provide interface="org.eclipse.rtp.configurator.model.SourceMarshaller"/>
-   </service>
-</scr:component>

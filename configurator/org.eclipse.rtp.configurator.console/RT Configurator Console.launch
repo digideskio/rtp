@@ -17,9 +17,9 @@
 <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Declipse.ignoreApp=true -Dosgi.noShutdown=true"/>
 <stringAttribute key="pde.version" value="3.3"/>
 <booleanAttribute key="show_selected_only" value="false"/>
-<stringAttribute key="target_bundles" value="org.eclipse.equinox.ds@default:true,org.eclipse.osgi.services@default:default,org.eclipse.equinox.util@default:default,org.eclipse.osgi@-1:true"/>
+<stringAttribute key="target_bundles" value="org.eclipse.equinox.ds@default:true,org.eclipse.equinox.util@default:default,org.eclipse.osgi.services@default:default,org.eclipse.osgi@-1:true"/>
 <booleanAttribute key="tracing" value="false"/>
 <booleanAttribute key="useCustomFeatures" value="false"/>
 <booleanAttribute key="useDefaultConfigArea" value="true"/>
-<stringAttribute key="workspace_bundles" value="org.eclipse.rtp.configurator.console@default:default"/>
+<stringAttribute key="workspace_bundles" value="org.eclipes.rtp.core@default:default,org.eclipse.rtp.configurator.console@default:default,org.eclipse.rtp.configurator.model.test@default:false,org.eclipse.rtp.configurator.model@default:default,org.eclipse.rtp.core.service.provider.test@default:false,org.eclipse.rtp.core.service.provider@default:default,org.eclipse.rtp.core.test@default:default"/>
 </launchConfiguration>

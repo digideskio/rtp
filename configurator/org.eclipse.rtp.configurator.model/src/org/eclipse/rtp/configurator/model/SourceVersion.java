@@ -31,4 +31,12 @@ public class SourceVersion {
   public String getRepositoryUrl() {
     return repositoryUrl;
   }
+  
+  @Override
+  public String toString() {
+    StringBuilder result = new StringBuilder();
+    result.append( "Version: " + version + "\n" );
+    result.append( "Repository URL: " + repositoryUrl + "\n" );
+    return result.toString();
+  }
 }
