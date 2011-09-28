@@ -49,12 +49,14 @@ public class SourceUnMarshallerTest {
 
   private void checkFirstRapVersion( Source source ) {
     SourceVersion source1 = source.getVersions().get( 0 );
+    assertEquals( "org.eclipse.rap.feature.group", source1.getId() );
     assertEquals( "1.4", source1.getVersion() );
     assertEquals( "http://foo.bar", source1.getRepositoryUrl() );
   }
 
   private void checkSecondRapVersion( Source source ) {
     SourceVersion source2 = source.getVersions().get( 1 );
+    assertEquals( "org.eclipse.rap.feature.group", source2.getId() );
     assertEquals( "1.5", source2.getVersion() );
     assertEquals( "http://foo.bar2", source2.getRepositoryUrl() );
   }
@@ -69,6 +71,7 @@ public class SourceUnMarshallerTest {
 
   private void checkEquinoxVersion( Source source ) {
     SourceVersion source1 = source.getVersions().get( 0 );
+    assertEquals( "org.eclipse.equinox.feature.group", source1.getId() );
     assertEquals( "3.8.1", source1.getVersion() );
     assertEquals( "http://foo.bar3", source1.getRepositoryUrl() );
   }

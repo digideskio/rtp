@@ -14,12 +14,14 @@ public class SourceVersion {
 
   private String version;
   private String repositoryUrl;
+  private String id;
 
   SourceVersion() {
     // only for Gson
   }
   
-  public SourceVersion( String version, String repositoryUrl, String description, String infoUrl ) {
+  public SourceVersion( String id, String version, String repositoryUrl, String description, String infoUrl ) {
+    this.id = id;
     this.version = version;
     this.repositoryUrl = repositoryUrl;
   }
@@ -30,6 +32,10 @@ public class SourceVersion {
 
   public String getRepositoryUrl() {
     return repositoryUrl;
+  }
+  
+  public String getId(){
+    return id;
   }
   
   @Override

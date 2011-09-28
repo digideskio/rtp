@@ -9,11 +9,8 @@
 *******************************************************************************/
 package org.eclipse.rtp.configurator.service.provider.internal.util;
 
-import java.net.URI;
-
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.equinox.internal.provisional.configurator.Configurator;
 import org.eclipse.equinox.p2.core.IProvisioningAgent;
 import org.eclipse.equinox.p2.core.IProvisioningAgentProvider;
@@ -30,11 +27,11 @@ public class P2Util {
 	private static IProvisioningAgent provisioningAgent;
 	private static FeatureManager featureManager;
 	
-	public static FeatureManager getFeatureManager(){
+	public FeatureManager getFeatureManager(){
 		return featureManager;
 	}
 	
-	public static RepositoryManager getRepositoryManager(){
+	public RepositoryManager getRepositoryManager(){
 		return repositoryManager;
 	}
 	
