@@ -17,14 +17,19 @@ import java.util.List;
 public class Source {
 
   private String name;
+  private String description;
+  private String infoUrl;
   private List<SourceVersion> versions;
+
   
   Source() {
     // only for Gson
   }
 
-  public Source( String name ) {
+  public Source( String name, String description, String infoUrl ) {
     this.name = name;
+    this.description = description;
+    this.infoUrl = infoUrl;
     this.versions = new ArrayList<SourceVersion>();
   }
 
@@ -38,5 +43,25 @@ public class Source {
 
   public List<SourceVersion> getVersions() {
     return new ArrayList<SourceVersion>( versions );
+  }
+  
+  public String getDescription() {
+    return description;
+  }
+
+  public String getInfoUrl() {
+    return infoUrl;
+  }
+  
+  @Override
+  public String toString() {
+    StringBuilder result = new StringBuilder();
+    result.append( "Name: " + name + "\n");
+    result.append( "Description: " + description + "\n");
+    result.append( "Information URL: " + infoUrl + "\n");
+    for( SourceVersion version : versions ) {
+      result.append( version.toString() + "\n" );
+    }
+    return result.toString();
   }
 }

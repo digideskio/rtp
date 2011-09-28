@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde version="3.6"?>
 
-<target name="target" sequenceNumber="13">
+<target name="target" sequenceNumber="17">
 <locations>
 <location includeAllPlatforms="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.platform.sdk" version="3.7.0.I20110613-1736"/>
+<unit id="org.eclipse.sdk.ide" version="3.7.0.I20110613-1736"/>
+<unit id="org.eclipse.test.feature.group" version="3.5.0.v20110503-7R7aBjBgLiJz0Cv6Q4DG58520281"/>
+<repository location="http://download.eclipse.org/eclipse/updates/3.7"/>
+</location>
+<location includeAllPlatforms="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
+<unit id="org.apache.commons.fileupload" version="1.2.0.v20080604-1500"/>
+<unit id="org.apache.commons.fileupload.source" version="1.2.0.v20080604-1500"/>
+<unit id="org.apache.commons.io" version="2.0.1.v201105210651"/>
+<unit id="org.apache.commons.io.source" version="2.0.1.v201105210651"/>
+<unit id="com.google.gson" version="1.6.0.v201101131530"/>
+<unit id="com.google.gson.source" version="1.6.0.v201101131530"/>
 <unit id="org.hamcrest.core" version="1.1.0.v20090501071000"/>
 <unit id="org.hamcrest.core.source" version="1.1.0.v20090501071000"/>
 <unit id="org.hamcrest.integration.source" version="1.1.0.v20090501071000"/>
@@ -20,12 +32,6 @@
 <unit id="org.mockito.source" version="1.8.4.v201102171835"/>
 <unit id="org.mockito" version="1.8.4.v201102171835"/>
 <repository location="http://download.eclipse.org/tools/orbit/downloads/drops/R20110523182458/repository/"/>
-</location>
-<location includeAllPlatforms="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.platform.sdk" version="3.7.0.I20110613-1736"/>
-<unit id="org.eclipse.sdk.ide" version="3.7.0.I20110613-1736"/>
-<unit id="org.eclipse.test.feature.group" version="3.5.0.v20110503-7R7aBjBgLiJz0Cv6Q4DG58520281"/>
-<repository location="http://download.eclipse.org/eclipse/updates/3.7"/>
 </location>
 </locations>
 </target>
