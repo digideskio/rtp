@@ -1,29 +1,29 @@
-/******************************************************************************* 
-* Copyright (c) 2011 EclipseSource and others. All rights reserved. This
-* program and the accompanying materials are made available under the terms of
-* the Eclipse Public License v1.0 which accompanies this distribution, and is
-* available at http://www.eclipse.org/legal/epl-v10.html
-*
-* Contributors:
-*   EclipseSource - initial API and implementation
-*******************************************************************************/ 
+/*******************************************************************************
+ * Copyright (c) 2011 EclipseSource and others. All rights reserved. This program and the
+ * accompanying materials are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html Contributors: EclipseSource - initial API and
+ * implementation
+ *******************************************************************************/
 package org.eclipse.rtp.configurator.model;
 
+import java.util.Collections;
+import java.util.List;
 
 public class SourceVersion {
 
   private String version;
   private String repositoryUrl;
-  private String id;
+  private List<Feature> features;
 
   SourceVersion() {
     // only for Gson
   }
-  
-  public SourceVersion( String id, String version, String repositoryUrl, String description, String infoUrl ) {
-    this.id = id;
+
+  public SourceVersion( String version, String repositoryUrl, String description, String infoUrl ) {
     this.version = version;
     this.repositoryUrl = repositoryUrl;
+    this.features = Collections.emptyList();
   }
 
   public String getVersion() {
@@ -33,11 +33,11 @@ public class SourceVersion {
   public String getRepositoryUrl() {
     return repositoryUrl;
   }
-  
-  public String getId(){
-    return id;
+
+  public List<Feature> getFeatures() {
+    return features;
   }
-  
+
   @Override
   public String toString() {
     StringBuilder result = new StringBuilder();

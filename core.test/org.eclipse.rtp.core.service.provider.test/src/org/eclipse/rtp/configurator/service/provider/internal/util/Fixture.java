@@ -13,20 +13,18 @@ import org.eclipse.rtp.configurator.model.SourceProvider;
 import org.eclipse.rtp.configurator.model.SourceUnMarshaller;
 import org.osgi.framework.Bundle;
 
-
 public class Fixture {
-  
+
   public static InputStream readExampleSources() throws IOException {
-    Bundle bundle = Platform.getBundle( "org.eclipse.rtp.configurator.model.test" );
-    URL unResolvedUrl = FileLocator.find( bundle, new Path("data/example-sources.json"), null );
+    Bundle bundle = Platform.getBundle( "org.eclipse.rtp.core.service.provider" );
+    URL unResolvedUrl = FileLocator.find( bundle, new Path( "data/example-sources.json" ), null );
     URL testDataUrl = FileLocator.resolve( unResolvedUrl );
     File testDataFile = new Path( testDataUrl.getFile() ).toFile();
     return new FileInputStream( testDataFile );
   }
-  
-  public static SourceProvider getSourceProvider(InputStream inputStream){
+
+  public static SourceProvider getSourceProvider( InputStream inputStream ) {
     SourceUnMarshaller marshaller = ConfiguratorModelUtil.getSourceUnMarshaller();
     return marshaller.marshal( inputStream );
   }
-  
 }

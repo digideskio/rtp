@@ -10,6 +10,7 @@
 package org.eclipse.rtp.configurator.model;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import org.junit.Test;
 
@@ -18,14 +19,13 @@ public class SourceVersionTest {
   
   @Test
   public void testGetValues() {
-    SourceVersion version = new SourceVersion( "org.eclipse.rap.feature.group", 
-                                               "1.4", 
+    SourceVersion version = new SourceVersion( "1.4", 
                                                "http://foo.bar", 
                                                "description", 
                                                "http://info.bar" );
     
-    assertEquals( "org.eclipse.rap.feature.group", version.getId() );
     assertEquals( "1.4", version.getVersion() );
     assertEquals( "http://foo.bar", version.getRepositoryUrl() );
+    assertNull( version.getFeatures() );
   }
 }

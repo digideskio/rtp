@@ -77,11 +77,7 @@ public class FeatureManagerTest {
                                        any( ProvisioningContext.class ),
                                        any( SubMonitor.class ) ) ).thenReturn( provisioningPlan );
     try {
-      this.objectUnderTest.installFeature( new SourceVersion( FEATURE_NAME,
-                                                              FEATURE_VERSION,
-                                                              "",
-                                                              "",
-                                                              "" ) );
+      this.objectUnderTest.installFeature( new SourceVersion( FEATURE_VERSION, "", "", "" ) );
       fail();
     } catch( FeatureInstallException e ) {
       assertEquals( "Cannot complete the request.  See the error log for details.\n",
@@ -99,11 +95,7 @@ public class FeatureManagerTest {
                                        any( ProvisioningContext.class ),
                                        any( SubMonitor.class ) ) ).thenReturn( provisioningPlan );
     try {
-      this.objectUnderTest.uninstallFeature( new SourceVersion( FEATURE_NAME,
-                                                                FEATURE_VERSION,
-                                                                "",
-                                                                "",
-                                                                "" ) );
+      this.objectUnderTest.uninstallFeature( new SourceVersion( FEATURE_VERSION, "", "", "" ) );
       fail();
     } catch( FeatureInstallException e ) {
       assertEquals( "Cannot complete the request.  See the error log for details.\n",

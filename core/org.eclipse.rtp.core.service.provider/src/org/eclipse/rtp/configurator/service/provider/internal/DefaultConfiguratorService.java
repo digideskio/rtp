@@ -19,7 +19,6 @@ import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.rtp.configurator.core.IConfiguratorService;
 import org.eclipse.rtp.configurator.model.Source;
-import org.eclipse.rtp.configurator.model.SourceProvider;
 import org.eclipse.rtp.configurator.model.SourceVersion;
 import org.eclipse.rtp.configurator.service.provider.internal.deploy.FeatureInstallException;
 import org.eclipse.rtp.configurator.service.provider.internal.deploy.FeatureManager;
@@ -48,12 +47,12 @@ public class DefaultConfiguratorService implements IConfiguratorService {
     IStatus result = null;
     try {
       SourceVersion sourceVersion = getSourceVersions( parameter );
-      if(sourceVersion != null){
+      if( sourceVersion != null ) {
         loadRepository( sourceVersion );
         install( sourceVersion );
         result = Status.OK_STATUS;
-      }else{
-        System.out.println("No source found to install");
+      } else {
+        System.out.println( "No source found to install" );
         result = Status.CANCEL_STATUS;
       }
     } catch( Exception e ) {
@@ -126,18 +125,13 @@ public class DefaultConfiguratorService implements IConfiguratorService {
     List<Source> sources = ConfiguratorModelUtil.getSourceProvider().getSources();
     List<Source> sourceToUinstall = searchSources( anyListOf, sources );
     for( Source source : sourceToUinstall ) {
-      List<SourceVersion> versions = source.getVersions();
-      for( SourceVersion sourceVersion : versions ) {
-        if( featureManager.isInstalled( sourceVersion.getId(), sourceVersion.getVersion() ) ) {
-          result.add( sourceVersion );
-        }
-      }
+      result.addAll( source.getVersions() );
     }
     return result;
   }
 
   private List<IStatus> uninstall( FeatureManager featureManager,
-                                  List<SourceVersion> sourceVersionsToUnisntall )
+                                   List<SourceVersion> sourceVersionsToUnisntall )
   {
     List<IStatus> errorStatus = new ArrayList<IStatus>();
     for( SourceVersion sourceVersion : sourceVersionsToUnisntall ) {

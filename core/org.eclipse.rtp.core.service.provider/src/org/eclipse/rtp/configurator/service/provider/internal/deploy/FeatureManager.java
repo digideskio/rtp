@@ -26,7 +26,9 @@ import org.eclipse.equinox.p2.operations.ProfileChangeOperation;
 import org.eclipse.equinox.p2.operations.ProvisioningJob;
 import org.eclipse.equinox.p2.operations.ProvisioningSession;
 import org.eclipse.equinox.p2.operations.UninstallOperation;
+import org.eclipse.equinox.p2.query.IQueryable;
 import org.eclipse.equinox.p2.query.QueryUtil;
+import org.eclipse.rtp.configurator.model.Feature;
 import org.eclipse.rtp.configurator.model.SourceVersion;
 
 @SuppressWarnings( "restriction" )
@@ -70,10 +72,16 @@ public class FeatureManager {
   {
     ProvisioningSession session = new ProvisioningSession( provisioningAgent );
     ProvisioningContext context = createProvisioningContext();
-    Collection<IInstallableUnit> units = getInstallableUnits( context,
-                                                              sourceVersion.getId(),
-                                                              sourceVersion.getVersion() );
-    ProfileChangeOperation operation = getOperation( session, units, action );
+    List<Feature> features = sourceVersion.getFeatures();
+    List<IInstallableUnit> unitsToInstall = new ArrayList<IInstallableUnit>();
+    for( Feature feature : features ) {
+      Collection<IInstallableUnit> units = getInstallableUnits( context,
+                                                                feature.getId(),
+                                                                feature.getVersion(),
+                                                                action );
+      unitsToInstall.addAll( units );
+    }
+    ProfileChangeOperation operation = getOperation( session, unitsToInstall, action );
     operation.setProvisioningContext( context );
     resolveOperation( operation );
     return operation;
@@ -139,21 +147,21 @@ public class FeatureManager {
 
   protected Collection<IInstallableUnit> getInstallableUnits( ProvisioningContext context,
                                                               String id,
-                                                              String version )
+                                                              String version,
+                                                              Action action )
   {
-    Collection<IInstallableUnit> toInstall = context.getMetadata( null )
-      .query( QueryUtil.createIUQuery( id, Version.create( version ) ), null )
+    IQueryable<IInstallableUnit> queryable = action == Action.INSTALL
+                                                                     ? context.getMetadata( null )
+                                                                     : getProfile();
+    Collection<IInstallableUnit> toInstall = queryable.query( QueryUtil.createIUQuery( id,
+                                                                                       Version.create( version ) ),
+                                                              null )
       .toUnmodifiableSet();
     return toInstall;
   }
 
-  public boolean isInstalled( String id, String version ) {
+  public IProfile getProfile() {
     IProfileRegistry profileRegistry = ( IProfileRegistry )provisioningAgent.getService( IProfileRegistry.SERVICE_NAME );
-    IProfile profile = profileRegistry.getProfile( IProfileRegistry.SELF );
-    Collection<IInstallableUnit> toInstall = profile.query( QueryUtil.createIUQuery( id,
-                                                                                     Version.create( version ) ),
-                                                            null )
-      .toUnmodifiableSet();
-    return !toInstall.isEmpty();
+    return profileRegistry.getProfile( IProfileRegistry.SELF );
   }
 }
