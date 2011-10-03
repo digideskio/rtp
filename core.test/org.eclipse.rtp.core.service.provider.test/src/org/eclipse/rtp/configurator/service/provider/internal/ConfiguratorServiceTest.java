@@ -11,6 +11,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -19,6 +20,8 @@ import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.eclipse.core.runtime.CoreException;
@@ -33,6 +36,7 @@ import org.eclipse.rtp.configurator.service.provider.internal.util.Fixture;
 import org.eclipse.rtp.configurator.service.provider.internal.util.P2Util;
 import org.junit.Before;
 import org.junit.Test;
+import org.osgi.framework.Version;
 
 public class ConfiguratorServiceTest {
 
@@ -101,5 +105,92 @@ public class ConfiguratorServiceTest {
     parameters.add( "rap" );
     IStatus status = configuratorService.remove( parameters );
     assertTrue( status.isOK() );
+  }
+
+  @Test
+  public void testUpdateWorldUpdateAvailable()
+    throws CoreException, FeatureInstallException, URISyntaxException
+  {
+    List<SourceVersion> sourceVersions = sourceProvider.getSources().get( 0 ).getVersions();
+    Collections.sort( sourceVersions, getSourceVersionComparator() );
+    SourceVersion latestSourceVersion = sourceVersions.get( 0 );
+    featureManager = mock( FeatureManager.class );
+    repositoryManager = mock( RepositoryManager.class );
+    when( p2UtilMock.getFeatureManager() ).thenReturn( featureManager );
+    when( p2UtilMock.getRepositoryManager() ).thenReturn( repositoryManager );
+    IStatus status = configuratorService.updateWorld();
+    verify( featureManager, atLeastOnce() ).uninstallFeature( latestSourceVersion );
+    verify( repositoryManager, atLeastOnce() ).addRepository( new URI( latestSourceVersion.getRepositoryUrl() ) );
+    assertTrue( status.isOK() );
+  }
+
+  @Test
+  public void testUpdateWorldNoUpdateAvailable()
+    throws CoreException, FeatureInstallException, URISyntaxException
+  {
+    List<SourceVersion> sourceVersions = sourceProvider.getSources().get( 0 ).getVersions();
+    Collections.sort( sourceVersions, getSourceVersionComparator() );
+    SourceVersion latestSourceVersion = sourceVersions.get( 0 );
+    featureManager = mock( FeatureManager.class );
+    repositoryManager = mock( RepositoryManager.class );
+    when( p2UtilMock.getFeatureManager() ).thenReturn( featureManager );
+    when( p2UtilMock.getRepositoryManager() ).thenReturn( repositoryManager );
+    when( featureManager.isInstalled( latestSourceVersion ) ).thenReturn( true );
+    IStatus status = configuratorService.updateWorld();
+    verify( featureManager, never() ).uninstallFeature( latestSourceVersion );
+    verify( repositoryManager, never() ).addRepository( new URI( latestSourceVersion.getRepositoryUrl() ) );
+    assertTrue( status.isOK() );
+  }
+
+  @Test
+  public void testUpdateAvailable()
+    throws CoreException, FeatureInstallException, URISyntaxException
+  {
+    List<String> iusToUpdate = new ArrayList<String>();
+    iusToUpdate.add( "rap" );
+    List<SourceVersion> sourceVersions = sourceProvider.getSources().get( 0 ).getVersions();
+    Collections.sort( sourceVersions, getSourceVersionComparator() );
+    SourceVersion latestSourceVersion = sourceVersions.get( 0 );
+    featureManager = mock( FeatureManager.class );
+    repositoryManager = mock( RepositoryManager.class );
+    when( p2UtilMock.getFeatureManager() ).thenReturn( featureManager );
+    when( p2UtilMock.getRepositoryManager() ).thenReturn( repositoryManager );
+    IStatus status = configuratorService.update( iusToUpdate );
+    verify( featureManager, atLeastOnce() ).uninstallFeature( latestSourceVersion );
+    verify( repositoryManager, atLeastOnce() ).addRepository( new URI( latestSourceVersion.getRepositoryUrl() ) );
+    assertTrue( status.isOK() );
+  }
+
+  @Test
+  public void testUpdateNoUpdateAvailable()
+    throws CoreException, FeatureInstallException, URISyntaxException
+  {
+    List<String> iusToUpdate = new ArrayList<String>();
+    iusToUpdate.add( "rap" );
+    List<SourceVersion> sourceVersions = sourceProvider.getSources().get( 0 ).getVersions();
+    Collections.sort( sourceVersions, getSourceVersionComparator() );
+    SourceVersion latestSourceVersion = sourceVersions.get( 0 );
+    featureManager = mock( FeatureManager.class );
+    repositoryManager = mock( RepositoryManager.class );
+    when( p2UtilMock.getFeatureManager() ).thenReturn( featureManager );
+    when( p2UtilMock.getRepositoryManager() ).thenReturn( repositoryManager );
+    when( featureManager.isInstalled( latestSourceVersion ) ).thenReturn( true );
+    IStatus status = configuratorService.update( iusToUpdate );
+    verify( featureManager, never() ).uninstallFeature( latestSourceVersion );
+    verify( repositoryManager, never() ).addRepository( new URI( latestSourceVersion.getRepositoryUrl() ) );
+    assertTrue( status.isOK() );
+  }
+
+  private Comparator<SourceVersion> getSourceVersionComparator() {
+    Comparator<SourceVersion> comparator = new Comparator<SourceVersion>() {
+
+      @Override
+      public int compare( SourceVersion arg0, SourceVersion arg1 ) {
+        String version = arg0.getVersion();
+        String version2 = arg1.getVersion();
+        return new Version( version2 ).compareTo( new Version( version ) );
+      }
+    };
+    return comparator;
   }
 }

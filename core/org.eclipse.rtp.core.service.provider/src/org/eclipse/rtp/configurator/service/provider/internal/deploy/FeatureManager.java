@@ -26,6 +26,7 @@ import org.eclipse.equinox.p2.operations.ProfileChangeOperation;
 import org.eclipse.equinox.p2.operations.ProvisioningJob;
 import org.eclipse.equinox.p2.operations.ProvisioningSession;
 import org.eclipse.equinox.p2.operations.UninstallOperation;
+import org.eclipse.equinox.p2.query.IQueryResult;
 import org.eclipse.equinox.p2.query.IQueryable;
 import org.eclipse.equinox.p2.query.QueryUtil;
 import org.eclipse.rtp.configurator.model.Feature;
@@ -151,7 +152,7 @@ public class FeatureManager {
                                                               Action action )
   {
     IQueryable<IInstallableUnit> queryable = action == Action.INSTALL
-                                                                     ? context.getMetadata( null )
+                                                                     ? context.getMetadata( new NullProgressMonitor() )
                                                                      : getProfile();
     Collection<IInstallableUnit> toInstall = queryable.query( QueryUtil.createIUQuery( id,
                                                                                        Version.create( version ) ),
@@ -163,5 +164,17 @@ public class FeatureManager {
   public IProfile getProfile() {
     IProfileRegistry profileRegistry = ( IProfileRegistry )provisioningAgent.getService( IProfileRegistry.SERVICE_NAME );
     return profileRegistry.getProfile( IProfileRegistry.SELF );
+  }
+
+  public boolean isInstalled( SourceVersion sourceVersion ) {
+    List<IInstallableUnit> result = new ArrayList<IInstallableUnit>();
+    IProfile profile = getProfile();
+    for( Feature feature : sourceVersion.getFeatures() ) {
+      IQueryResult<IInstallableUnit> query = profile.query( QueryUtil.createIUQuery( feature.getId(),
+                                                                                     Version.create( feature.getVersion() ) ),
+                                                            new NullProgressMonitor() );
+      result.addAll( query.toSet() );
+    }
+    return result.size() > 0;
   }
 }

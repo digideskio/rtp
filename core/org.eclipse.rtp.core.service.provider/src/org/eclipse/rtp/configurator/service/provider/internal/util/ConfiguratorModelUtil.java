@@ -9,7 +9,7 @@ public class ConfiguratorModelUtil {
 
   private static SourceUnMarshaller sourceUnMarshaller;
   private static SourceProvider sourceProvider;
-  private static String defaultModeURL = "http://foo";
+  private static String defaultModeURL = "file:///C:/Users/bveliev/org.eclipse.rtp/core/org.eclipse.rtp.core.service.provider/data/real-sources.json";
 
   public static void setUnMarshaller( SourceUnMarshaller sourceUnMarshaller ) {
     ConfiguratorModelUtil.sourceUnMarshaller = sourceUnMarshaller;
@@ -22,13 +22,13 @@ public class ConfiguratorModelUtil {
   public static SourceUnMarshaller getSourceUnMarshaller() {
     return sourceUnMarshaller;
   }
-  
-  public static void setSourceProvider(SourceProvider sourceProvider){
+
+  public static void setSourceProvider( SourceProvider sourceProvider ) {
     ConfiguratorModelUtil.sourceProvider = sourceProvider;
   }
-  
-  public static SourceProvider getSourceProvider(){
-    if(sourceProvider == null){
+
+  public static SourceProvider getSourceProvider() {
+    if( sourceProvider == null ) {
       sourceProvider = getDefaultModel();
     }
     return ConfiguratorModelUtil.sourceProvider;
@@ -38,13 +38,11 @@ public class ConfiguratorModelUtil {
     SourceProvider result = null;
     try {
       URL url = new URL( defaultModeURL );
-      result = sourceUnMarshaller.marshal( url.openStream( ) );
+      result = sourceUnMarshaller.marshal( url.openStream() );
     } catch( Exception e ) {
-      System.out.println("Failed to load model");
+      System.out.println( "Failed to load model" );
       e.printStackTrace();
     }
     return result;
   }
-  
-  
 }

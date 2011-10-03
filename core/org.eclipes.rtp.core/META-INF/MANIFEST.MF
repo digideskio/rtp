@@ -5,6 +5,5 @@ Bundle-SymbolicName: org.eclipes.rtp.core
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: EclipseSource
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Service-Component: OSGI-INF/rtpConfiguratorServiceComponent.xml
 Export-Package: org.eclipse.rtp.configurator.core
 Import-Package: org.eclipse.core.runtime

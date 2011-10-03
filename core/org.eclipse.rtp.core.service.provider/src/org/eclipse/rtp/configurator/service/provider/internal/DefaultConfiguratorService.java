@@ -11,6 +11,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.eclipse.core.runtime.CoreException;
@@ -25,6 +26,7 @@ import org.eclipse.rtp.configurator.service.provider.internal.deploy.FeatureMana
 import org.eclipse.rtp.configurator.service.provider.internal.deploy.RepositoryManager;
 import org.eclipse.rtp.configurator.service.provider.internal.util.ConfiguratorModelUtil;
 import org.eclipse.rtp.configurator.service.provider.internal.util.P2Util;
+import org.osgi.framework.Version;
 
 public class DefaultConfiguratorService implements IConfiguratorService {
 
@@ -98,12 +100,6 @@ public class DefaultConfiguratorService implements IConfiguratorService {
   }
 
   @Override
-  public IStatus update( List<String> anyListOf ) {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  @Override
   public IStatus remove( List<String> anyListOf ) {
     FeatureManager featureManager = p2Util.getFeatureManager();
     List<SourceVersion> sourceVersionsToUnisntall = getSourceVersionsToUninstall( anyListOf,
@@ -174,6 +170,68 @@ public class DefaultConfiguratorService implements IConfiguratorService {
     return sourcesAsString;
   }
 
+  @Override
+  public IStatus update( List<String> anyListOf ) {
+    List<Source> sources = ConfiguratorModelUtil.getSourceProvider().getSources();
+    List<Source> sourceToUpdate = searchSources( anyListOf, sources );
+    IStatus result = updateSources( sourceToUpdate );
+    return result;
+  }
+
+  @Override
+  public IStatus updateWorld() {
+    List<Source> sources = ConfiguratorModelUtil.getSourceProvider().getSources();
+    IStatus result = updateSources( sources );
+    return result;
+  }
+
+  private IStatus updateSources( List<Source> sources ) {
+    List<IStatus> updateStatusList = new ArrayList<IStatus>();
+    FeatureManager featureManager = p2Util.getFeatureManager();
+    for( Source source : sources ) {
+      List<SourceVersion> versions = source.getVersions();
+      Collections.sort( versions, getSourceVersionComparator() );
+      SourceVersion latestSourceVersion = versions.get( 0 );
+      if( !featureManager.isInstalled( latestSourceVersion ) ) {
+        updateStatusList.addAll( uninstall( featureManager, versions ) );
+        List<String> parameters = getInstallParameters( source, latestSourceVersion );
+        updateStatusList.add( install( parameters ) );
+      }
+    }
+    IStatus result = new MultiStatus( ProviderActivator.BUNDLE_ID,
+                                      0,
+                                      updateStatusList.toArray( new IStatus[ 0 ] ),
+                                      "Update status",
+                                      null );
+    return result;
+  }
+
+  private List<String> getInstallParameters( Source source, SourceVersion latestSourceVersion ) {
+    List<String> parameters = new ArrayList<String>();
+    parameters.add( source.getName() );
+    parameters.add( latestSourceVersion.getVersion() );
+    return parameters;
+  }
+
+  private Comparator<SourceVersion> getSourceVersionComparator() {
+    Comparator<SourceVersion> comparator = new Comparator<SourceVersion>() {
+
+      @Override
+      public int compare( SourceVersion arg0, SourceVersion arg1 ) {
+        String version = arg0.getVersion();
+        String version2 = arg1.getVersion();
+        return new Version( version2 ).compareTo( new Version( version ) );
+      }
+    };
+    return comparator;
+  }
+
+  @Override
+  public IStatus refresh() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
   private List<Source> searchSources( List<String> anyListOf, List<Source> sources ) {
     List<Source> result = new ArrayList<Source>();
     for( Source source : sources ) {
@@ -194,17 +252,5 @@ public class DefaultConfiguratorService implements IConfiguratorService {
     }
     Collections.sort( sourcesAsString );
     return sourcesAsString;
-  }
-
-  @Override
-  public IStatus updateWorld() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  @Override
-  public IStatus refresh() {
-    // TODO Auto-generated method stub
-    return null;
   }
 }
