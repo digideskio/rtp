@@ -54,7 +54,7 @@
       </activation>
       <properties>
         <eclipse-site>http://download.eclipse.org/releases/indigo</eclipse-site>
-        <jetty-site>http://download.eclipse.org/jetty/updates/jetty-rt-3.7milestones/S-3.7.RC5-201106141948</jetty-site>
+        <jetty-site>http://download.eclipse.org/jetty/updates/jetty-rt-3.7milestones/S-3.7.1-201109140245</jetty-site>
       </properties>
     </profile>
 	<profile>
@@ -68,7 +68,7 @@
       </activation>
       <properties>
         <build-identifier>N</build-identifier>
-        <eclipse-site>http://download.eclipse.org/releases/staging</eclipse-site>
+        <eclipse-site>http://download.eclipse.org/eclipse/updates/3.8-N-builds/</eclipse-site>
         <jetty-site>http://download.eclipse.org/jetty/updates/jetty-rt-3.8-N-builds/</jetty-site>
       </properties>
     </profile>
@@ -82,7 +82,7 @@
       </activation>
       <properties>
         <eclipse-site>http://download.eclipse.org/eclipse/updates/3.8milestones/</eclipse-site>
-        <jetty-site>http://download.eclipse.org/jetty/updates/jetty-rt-3.8milestones/S-3.8M1-201108171853/</jetty-site>
+        <jetty-site>http://download.eclipse.org/jetty/updates/jetty-rt-3.8milestones/S-3.8M2-201109140450/</jetty-site>
       </properties>
     </profile>
   </profiles>
