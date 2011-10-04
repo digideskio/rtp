@@ -72,8 +72,15 @@ public class DefaultConfiguratorService implements IConfiguratorService {
     List<String> sourceName = new ArrayList<String>();
     sourceName.add( parameter.get( 0 ) );
     List<Source> searchSources = searchSources( sourceName, sources );
-    SourceVersion sourceVersion = searchSourceVerions( parameter.get( 1 ), searchSources );
+    SourceVersion sourceVersion = searchSourceVerions( getVersionParameter( parameter ),
+                                                       searchSources );
     return sourceVersion;
+  }
+
+  private String getVersionParameter( List<String> parameters ) {
+    return parameters.size() > 1
+                                ? parameters.get( 1 )
+                                : "";
   }
 
   private void install( SourceVersion sourceVersion ) throws FeatureInstallException {
@@ -90,6 +97,17 @@ public class DefaultConfiguratorService implements IConfiguratorService {
     SourceVersion result = null;
     for( Source source : sources ) {
       List<SourceVersion> versions = source.getVersions();
+      result = getVersion( sourceVersion, versions );
+    }
+    return result;
+  }
+
+  private SourceVersion getVersion( String sourceVersion, List<SourceVersion> versions ) {
+    SourceVersion result = null;
+    Collections.sort( versions, getSourceVersionComparator() );
+    if( sourceVersion == null || sourceVersion.length() == 0 ) {
+      result = versions.get( 0 );
+    } else {
       for( SourceVersion version : versions ) {
         if( version.getVersion().equals( sourceVersion ) ) {
           result = version;

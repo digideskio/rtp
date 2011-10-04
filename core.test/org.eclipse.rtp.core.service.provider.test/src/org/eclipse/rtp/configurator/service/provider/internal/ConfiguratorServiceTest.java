@@ -73,6 +73,25 @@ public class ConfiguratorServiceTest {
   }
 
   @Test
+  public void testInstallNoVersion()
+    throws CoreException, FeatureInstallException, URISyntaxException
+  {
+    featureManager = mock( FeatureManager.class );
+    repositoryManager = mock( RepositoryManager.class );
+    when( p2UtilMock.getFeatureManager() ).thenReturn( featureManager );
+    when( p2UtilMock.getRepositoryManager() ).thenReturn( repositoryManager );
+    List<SourceVersion> versions = sourceProvider.getSources().get( 0 ).getVersions();
+    Collections.sort( versions, getSourceVersionComparator() );
+    SourceVersion latestSourceVersion = versions.get( 0 );
+    List<String> parameters = new ArrayList<String>();
+    parameters.add( "rap" );
+    IStatus status = configuratorService.install( parameters );
+    verify( featureManager, atLeastOnce() ).installFeature( latestSourceVersion );
+    verify( repositoryManager, atLeastOnce() ).addRepository( new URI( "http://foo.bar2" ) );
+    assertTrue( status.isOK() );
+  }
+
+  @Test
   public void testNothingToInstall()
     throws CoreException, FeatureInstallException, URISyntaxException
   {
