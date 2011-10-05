@@ -1,0 +1,33 @@
+{
+  "sources": [
+    {
+      "name": "rap",
+      "description": "The Rich Ajax Platform lets you build rich, Ajax-enabled Web applications by using the Eclipse development model, plug-ins with the well known Eclipse workbench extension points and a widget toolkit with SWT API.",
+      "infoUrl": "http://eclipse.org/rap/",
+      "versions": [
+        {
+          "features": [ { id : "org.eclipse.rap.runtime.feature.group", version : "1.5.0.20110926-1711" } ],
+          "version": "1.5.0",
+          "repositoryUrl": "http://download.eclipse.org/rt/rap/1.5/runtime"
+        },
+        {
+          "features": [ { id : "org.eclipse.rap.runtime.sdk.feature.group", version : "1.4.1.20110914-1945" } ],
+          "version": "1.4.1",
+          "repositoryUrl": "http://download.eclipse.org/rt/rap/1.4/runtime"
+        }
+      ]
+    },
+    {
+      "name": "equinox-server",
+      "description": "Equinox can be used on the server to serve up static content and to run servlets or JSPs.",
+      "infoUrl": "http://eclipse.org/equinox/",      
+      "versions": [
+        {
+          "features": [ { id : "org.eclipse.equinox.serverside.sdk.feature.group", version : "3.8.0.v20110912-1543-7u7QFyQFN5Ljx9Z5NRF-qJ7jJWj4" } ],
+          "version": "3.8.0",
+          "repositoryUrl": "http://download.eclipse.org/eclipse/updates/3.8milestones/S-3.8M2-201109151308"
+        }
+      ]
+    }
+  ]
+}

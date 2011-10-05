@@ -54,8 +54,8 @@ public class ConfiguratorModelUtil {
         URL url = new URL( modelURLs[ i ] );
         result = sourceUnMarshaller.marshal( url.openStream() );
       } catch( Exception e ) {
-        System.out.println( "Failed to load model" );
-        e.printStackTrace();
+        // System.out.println( "Failed to load model" );
+        // e.printStackTrace();
       }
     }
     return result;
@@ -65,7 +65,7 @@ public class ConfiguratorModelUtil {
     String result = "";
     try {
       URL unresolvedURL = FileLocator.find( ProviderActivator.getBundleContext().getBundle(),
-                                            new Path( "data/real-sources.json" ),
+                                            new Path( "data/juno-sources.json" ),
                                             null );
       result = FileLocator.resolve( unresolvedURL ).toExternalForm();
     } catch( Exception e ) {
