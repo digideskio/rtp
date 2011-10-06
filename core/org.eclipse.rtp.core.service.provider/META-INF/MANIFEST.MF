@@ -5,7 +5,7 @@ Bundle-SymbolicName: org.eclipse.rtp.core.service.provider
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: EclipseSource
 Require-Bundle: org.eclipse.core.runtime,
- org.eclipes.rtp.core;bundle-version="1.0.0",
+ org.eclipse.rtp.core;bundle-version="1.0.0",
  org.eclipse.rtp.configurator.model;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
