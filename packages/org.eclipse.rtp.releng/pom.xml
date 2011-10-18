@@ -117,6 +117,13 @@
   </licenses>
 
   <modules>
+    <!-- Configurator -->
+    <module>../../bundles/org.eclipse.rtp.core</module>
+    <module>../../bundles/org.eclipse.rtp.core.service.provider</module>
+    <module>../../bundles/org.eclipse.rtp.configurator.model</module>
+    <module>../../bundles/org.eclipse.rtp.configurator.console</module>
+    <module>../../bundles/org.eclipse.rtp.configurator.feature</module>
+    <!-- Packages -->
     <module>../org.eclipse.rtp.package.basic.feature</module>
     <module>../org.eclipse.rtp.package.web.feature</module>
     <module>../org.eclipse.rtp.package.products</module>

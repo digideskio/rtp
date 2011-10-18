@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.rtp.configurator.feature"
       label="%featureName"
-      version="0.0.1.qualifier"
+      version="1.0.0.qualifier"
       provider-name="%featureName">
 
    <copyright url="http://www.example.com/copyright">
@@ -13,13 +13,6 @@
       [Enter License Description here.]
    </license>
 
-   <plugin
-         id="org.eclipse.rtp.configurator.console"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-         
    <includes
          id="org.eclipse.equinox.p2.core.feature"
          version="0.0.0"/>
@@ -28,5 +21,32 @@
          id="org.eclipse.rcp"
          version="0.0.0"/>
 
+   <plugin
+         id="org.eclipse.rtp.configurator.console"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.rtp.configurator.model"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.rtp.core"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.rtp.core.service.provider"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
 
 </feature>
