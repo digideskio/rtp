@@ -6,4 +6,4 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: EclipseSource
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.rtp.configurator.core
-Import-Package: org.eclipse.core.runtime
+Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.7.0,4.0.0)"
