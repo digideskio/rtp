@@ -1,4 +1,4 @@
-package org.eclipse.rtp.configurator.service.provider.internal.util;
+package org.eclipse.rtp.configurator.console.internal.util;
 
 import java.io.File;
 import java.io.FileInputStream;

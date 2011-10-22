@@ -17,21 +17,21 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.rtp.configurator.service.provider.internal.util.ModelUtil;
 import org.eclipse.rtp.configurator.service.provider.internal.util.Fixture;
 import org.eclipse.rtp.core.model.Source;
 import org.eclipse.rtp.core.model.SourceProvider;
+import org.eclipse.rtp.core.util.ModelUtil;
 import org.junit.Before;
 import org.junit.Test;
 
 public class ConfiguratorServiceSearchTest {
 
   private SourceProvider provider;
-  private DefaultConfiguratorService configuratorService;
+  private RTPDefaultService configuratorService;
 
   @Before
   public void setUp() throws IOException {
-    configuratorService = new DefaultConfiguratorService();
+    configuratorService = new RTPDefaultService();
     InputStream stream = Fixture.readExampleSources();
     provider = Fixture.getSourceProvider( stream );
     ModelUtil.setSourceProvider( provider );

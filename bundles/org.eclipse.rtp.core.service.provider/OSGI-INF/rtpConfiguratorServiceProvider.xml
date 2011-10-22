@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" activate="setUp" name="org.eclipse.rtp.core.service.provider">
-   <implementation class="org.eclipse.rtp.configurator.service.provider.internal.DefaultConfiguratorService"/>
+   <implementation class="org.eclipse.rtp.configurator.service.provider.internal.RTPDefaultService"/>
    <service>
-      <provide interface="org.eclipse.rtp.configurator.core.IConfiguratorService"/>
+      <provide interface="org.eclipse.rtp.core.IRTPService"/>
    </service>
 </scr:component>

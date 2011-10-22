@@ -29,18 +29,18 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.rtp.configurator.service.provider.internal.deploy.FeatureInstallException;
 import org.eclipse.rtp.configurator.service.provider.internal.deploy.FeatureManager;
 import org.eclipse.rtp.configurator.service.provider.internal.deploy.RepositoryManager;
-import org.eclipse.rtp.configurator.service.provider.internal.util.ModelUtil;
 import org.eclipse.rtp.configurator.service.provider.internal.util.Fixture;
 import org.eclipse.rtp.configurator.service.provider.internal.util.P2Util;
 import org.eclipse.rtp.core.model.SourceProvider;
 import org.eclipse.rtp.core.model.SourceVersion;
+import org.eclipse.rtp.core.util.ModelUtil;
 import org.junit.Before;
 import org.junit.Test;
 import org.osgi.framework.Version;
 
 public class ConfiguratorServiceTest {
 
-  private DefaultConfiguratorService configuratorService;
+  private RTPDefaultService configuratorService;
   private P2Util p2UtilMock;
   private SourceProvider sourceProvider;
   private FeatureManager featureManager;
@@ -48,7 +48,7 @@ public class ConfiguratorServiceTest {
 
   @Before
   public void setUp() throws IOException {
-    configuratorService = new DefaultConfiguratorService();
+    configuratorService = new RTPDefaultService();
     p2UtilMock = mock( P2Util.class );
     configuratorService.setP2Util( p2UtilMock );
     InputStream inputStream = Fixture.readExampleSources();
@@ -63,10 +63,7 @@ public class ConfiguratorServiceTest {
     when( p2UtilMock.getFeatureManager() ).thenReturn( featureManager );
     when( p2UtilMock.getRepositoryManager() ).thenReturn( repositoryManager );
     SourceVersion sourceVersion = sourceProvider.getSources().get( 0 ).getVersions().get( 0 );
-    List<String> parameters = new ArrayList<String>();
-    parameters.add( "rap" );
-    parameters.add( "1.4" );
-    IStatus status = configuratorService.install( parameters );
+    IStatus status = configuratorService.install( sourceVersion );
     verify( featureManager, atLeastOnce() ).installFeature( sourceVersion );
     verify( repositoryManager, atLeastOnce() ).addRepository( new URI( "http://foo.bar" ) );
     assertTrue( status.isOK() );
@@ -83,9 +80,7 @@ public class ConfiguratorServiceTest {
     List<SourceVersion> versions = sourceProvider.getSources().get( 0 ).getVersions();
     Collections.sort( versions, getSourceVersionComparator() );
     SourceVersion latestSourceVersion = versions.get( 0 );
-    List<String> parameters = new ArrayList<String>();
-    parameters.add( "rap" );
-    IStatus status = configuratorService.install( parameters );
+    IStatus status = configuratorService.install( latestSourceVersion );
     verify( featureManager, atLeastOnce() ).installFeature( latestSourceVersion );
     verify( repositoryManager, atLeastOnce() ).addRepository( new URI( "http://foo.bar2" ) );
     assertTrue( status.isOK() );
@@ -95,21 +90,22 @@ public class ConfiguratorServiceTest {
   public void testNothingToInstall()
     throws CoreException, FeatureInstallException, URISyntaxException
   {
-    List<String> parameters = new ArrayList<String>();
-    parameters.add( "rap" );
-    parameters.add( "1.6" );
-    IStatus status = configuratorService.install( parameters );
+    SourceVersion sourceVersion = new SourceVersion( "1.6",
+                                                     "http://test.com",
+                                                     "",
+                                                     "http://test.com" );
+    IStatus status = configuratorService.install( sourceVersion );
     assertFalse( status.isOK() );
   }
 
   @Test
   public void testRemove() throws CoreException, FeatureInstallException, URISyntaxException {
     SourceVersion sourceVersion = sourceProvider.getSources().get( 0 ).getVersions().get( 0 );
+    List<SourceVersion> souceVersionToUninstall = new ArrayList<SourceVersion>();
+    souceVersionToUninstall.add( sourceVersion );
     featureManager = mock( FeatureManager.class );
     when( p2UtilMock.getFeatureManager() ).thenReturn( featureManager );
-    List<String> parameters = new ArrayList<String>();
-    parameters.add( "rap" );
-    IStatus status = configuratorService.remove( parameters );
+    IStatus status = configuratorService.remove( souceVersionToUninstall );
     verify( featureManager, atLeastOnce() ).uninstallFeature( sourceVersion );
     assertTrue( status.isOK() );
   }
@@ -120,9 +116,13 @@ public class ConfiguratorServiceTest {
   {
     featureManager = mock( FeatureManager.class );
     when( p2UtilMock.getFeatureManager() ).thenReturn( featureManager );
-    List<String> parameters = new ArrayList<String>();
-    parameters.add( "rap" );
-    IStatus status = configuratorService.remove( parameters );
+    SourceVersion sourceVersion = new SourceVersion( "1.6",
+                                                     "http://test.com",
+                                                     "",
+                                                     "http://test.com" );
+    List<SourceVersion> sourceVersionsToUninstall = new ArrayList<SourceVersion>();
+    sourceVersionsToUninstall.add( sourceVersion );
+    IStatus status = configuratorService.remove( sourceVersionsToUninstall );
     assertTrue( status.isOK() );
   }
 

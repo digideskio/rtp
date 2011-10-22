@@ -5,20 +5,21 @@
  * http://www.eclipse.org/legal/epl-v10.html Contributors: EclipseSource - initial API and
  * implementation
  *******************************************************************************/
-package org.eclipse.rtp.configurator.core;
+package org.eclipse.rtp.core;
 
 import java.util.List;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.rtp.core.model.SourceVersion;
 
-public interface IConfiguratorService {
+public interface IRTPService {
 
-  IStatus install( List<String> parameter );
+  IStatus install( SourceVersion sourceVersion );
 
   IStatus update( List<String> anyListOf );
 
-  IStatus remove( List<String> anyListOf );
+  IStatus remove( List<SourceVersion> sourceVersionsToUnisntall );
 
   List<String> search( List<String> anyListOf );
 

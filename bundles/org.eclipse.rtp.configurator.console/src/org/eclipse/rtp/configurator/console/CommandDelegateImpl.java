@@ -11,19 +11,22 @@ import java.util.List;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.rtp.configurator.core.IConfiguratorService;
+import org.eclipse.rtp.configurator.console.internal.CommandUtil;
+import org.eclipse.rtp.core.IRTPService;
+import org.eclipse.rtp.core.model.SourceVersion;
 
 public class CommandDelegateImpl implements CommandDelegate {
 
-  private static IConfiguratorService configurationService;
+  private static IRTPService configurationService;
+  private static CommandUtil commandUtil;
   private final static String TAB = "\t"; //$NON-NLS-1$
   private final static String NEW_LINE = "\r\n"; //$NON-NLS-1$
 
-  public static void setUp( IConfiguratorService service ) {
+  public static void setUp( IRTPService service ) {
     CommandDelegateImpl.configurationService = service;
   }
 
-  public static void shutDown( IConfiguratorService service ) {
+  public static void shutDown( IRTPService service ) {
     CommandDelegateImpl.configurationService = null;
   }
 
@@ -87,7 +90,8 @@ public class CommandDelegateImpl implements CommandDelegate {
      * Should install an iu to the latest version. The name of the iu ist the first list entry. If
      * the secodn entry is not a OSGI.version than the latest should be installed.
      */
-    configurationService.install( parameter );
+    SourceVersion sourceVersion = commandUtil.getSourceVersions( parameter );
+    configurationService.install( sourceVersion );
   }
 
   @Override
@@ -103,7 +107,8 @@ public class CommandDelegateImpl implements CommandDelegate {
     /*
      * removes a spcific compoment. Same parameter as install
      */
-    configurationService.remove( anyListOf );
+    List<SourceVersion> sourceVersionsToUninstall = commandUtil.getSourceVersionsToUninstall( anyListOf );
+    configurationService.remove( sourceVersionsToUninstall );
   }
 
   @Override

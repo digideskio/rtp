@@ -9,7 +9,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.rtp.core.model;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
-Service-Component: OSGI-INF/rtpConfiguratorServiceProvider.xml, OSGI-INF/rtpConfigurator.xml, OSGI-INF/rtpConfiguratorModel.xml
+Service-Component: OSGI-INF/rtpConfiguratorServiceProvider.xml, OSGI-INF/rtpConfigurator.xml
 Bundle-Activator: org.eclipse.rtp.configurator.service.provider.internal.ProviderActivator
 Import-Package: org.apache.commons.io;version="2.0.1",
  org.eclipse.equinox.internal.provisional.configurator,
