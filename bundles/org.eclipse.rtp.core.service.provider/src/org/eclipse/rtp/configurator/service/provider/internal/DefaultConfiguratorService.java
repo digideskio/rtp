@@ -22,7 +22,7 @@ import org.eclipse.rtp.configurator.core.IConfiguratorService;
 import org.eclipse.rtp.configurator.service.provider.internal.deploy.FeatureInstallException;
 import org.eclipse.rtp.configurator.service.provider.internal.deploy.FeatureManager;
 import org.eclipse.rtp.configurator.service.provider.internal.deploy.RepositoryManager;
-import org.eclipse.rtp.configurator.service.provider.internal.util.ConfiguratorModelUtil;
+import org.eclipse.rtp.configurator.service.provider.internal.util.ModelUtil;
 import org.eclipse.rtp.configurator.service.provider.internal.util.P2Util;
 import org.eclipse.rtp.core.model.Source;
 import org.eclipse.rtp.core.model.SourceVersion;
@@ -73,7 +73,7 @@ public class DefaultConfiguratorService implements IConfiguratorService {
   }
 
   private SourceVersion getSourceVersions( List<String> parameter ) {
-    List<Source> sources = ConfiguratorModelUtil.getSourceProvider().getSources();
+    List<Source> sources = ModelUtil.getSourceProvider().getSources();
     List<String> sourceName = new ArrayList<String>();
     sourceName.add( parameter.get( 0 ) );
     List<Source> searchSources = searchSources( sourceName, sources );
@@ -141,7 +141,7 @@ public class DefaultConfiguratorService implements IConfiguratorService {
                                                             FeatureManager featureManager )
   {
     List<SourceVersion> result = new ArrayList<SourceVersion>();
-    List<Source> sources = ConfiguratorModelUtil.getSourceProvider().getSources();
+    List<Source> sources = ModelUtil.getSourceProvider().getSources();
     List<Source> sourceToUinstall = searchSources( anyListOf, sources );
     for( Source source : sourceToUinstall ) {
       result.addAll( source.getVersions() );
@@ -172,14 +172,14 @@ public class DefaultConfiguratorService implements IConfiguratorService {
 
   @Override
   public List<String> search( List<String> anyListOf ) {
-    List<Source> sources = ConfiguratorModelUtil.getSourceProvider().getSources();
+    List<Source> sources = ModelUtil.getSourceProvider().getSources();
     List<Source> result = searchSources( anyListOf, sources );
     return getSortedSources( result );
   }
 
   @Override
   public List<String> show( List<String> anyListOf ) {
-    List<Source> sources = ConfiguratorModelUtil.getSourceProvider().getSources();
+    List<Source> sources = ModelUtil.getSourceProvider().getSources();
     List<String> showSource = new ArrayList<String>();
     showSource.add( anyListOf.get( 0 ) );
     List<Source> result = searchSources( showSource, sources );
@@ -188,14 +188,14 @@ public class DefaultConfiguratorService implements IConfiguratorService {
 
   @Override
   public List<String> list() throws CoreException {
-    List<Source> sources = ConfiguratorModelUtil.getSourceProvider().getSources();
+    List<Source> sources = ModelUtil.getSourceProvider().getSources();
     List<String> sourcesAsString = getSortedSources( sources );
     return sourcesAsString;
   }
 
   @Override
   public IStatus update( List<String> anyListOf ) {
-    List<Source> sources = ConfiguratorModelUtil.getSourceProvider().getSources();
+    List<Source> sources = ModelUtil.getSourceProvider().getSources();
     System.out.println( "Searching for updates" );
     List<Source> sourceToUpdate = searchSources( anyListOf, sources );
     System.out.println( "Update started" );
@@ -206,7 +206,7 @@ public class DefaultConfiguratorService implements IConfiguratorService {
 
   @Override
   public IStatus updateWorld() {
-    List<Source> sources = ConfiguratorModelUtil.getSourceProvider().getSources();
+    List<Source> sources = ModelUtil.getSourceProvider().getSources();
     System.out.println( "Update started" );
     IStatus result = updateSources( sources );
     System.out.println( "Update successful" );

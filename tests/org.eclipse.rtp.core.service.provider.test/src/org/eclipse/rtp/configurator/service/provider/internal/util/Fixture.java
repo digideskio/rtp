@@ -24,7 +24,7 @@ public class Fixture {
   }
 
   public static SourceProvider getSourceProvider( InputStream inputStream ) {
-    SourceUnMarshaller marshaller = ConfiguratorModelUtil.getSourceUnMarshaller();
+    SourceUnMarshaller marshaller = ModelUtil.getSourceUnMarshaller();
     return marshaller.marshal( inputStream );
   }
 }

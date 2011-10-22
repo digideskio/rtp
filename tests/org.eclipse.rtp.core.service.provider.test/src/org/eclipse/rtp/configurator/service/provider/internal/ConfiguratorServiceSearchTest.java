@@ -17,7 +17,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.rtp.configurator.service.provider.internal.util.ConfiguratorModelUtil;
+import org.eclipse.rtp.configurator.service.provider.internal.util.ModelUtil;
 import org.eclipse.rtp.configurator.service.provider.internal.util.Fixture;
 import org.eclipse.rtp.core.model.Source;
 import org.eclipse.rtp.core.model.SourceProvider;
@@ -34,7 +34,7 @@ public class ConfiguratorServiceSearchTest {
     configuratorService = new DefaultConfiguratorService();
     InputStream stream = Fixture.readExampleSources();
     provider = Fixture.getSourceProvider( stream );
-    ConfiguratorModelUtil.setSourceProvider( provider );
+    ModelUtil.setSourceProvider( provider );
   }
 
   @Test

@@ -15,18 +15,18 @@ import org.eclipse.rtp.configurator.service.provider.internal.ProviderActivator;
 import org.eclipse.rtp.core.model.SourceProvider;
 import org.eclipse.rtp.core.model.SourceUnMarshaller;
 
-public class ConfiguratorModelUtil {
+public class ModelUtil {
 
+  private static final String CONFIGURATION_URL = "configuration.url";
   private static SourceUnMarshaller sourceUnMarshaller;
   private static SourceProvider sourceProvider;
-  private static String defaultModeURL = "http://foo";
 
   public static void setUnMarshaller( SourceUnMarshaller sourceUnMarshaller ) {
-    ConfiguratorModelUtil.sourceUnMarshaller = sourceUnMarshaller;
+    ModelUtil.sourceUnMarshaller = sourceUnMarshaller;
   }
 
   public static void unsetUnMarshaller( SourceUnMarshaller sourceUnMarshaller ) {
-    ConfiguratorModelUtil.sourceUnMarshaller = null;
+    ModelUtil.sourceUnMarshaller = null;
   }
 
   public static SourceUnMarshaller getSourceUnMarshaller() {
@@ -34,20 +34,20 @@ public class ConfiguratorModelUtil {
   }
 
   public static void setSourceProvider( SourceProvider sourceProvider ) {
-    ConfiguratorModelUtil.sourceProvider = sourceProvider;
+    ModelUtil.sourceProvider = sourceProvider;
   }
 
   public static SourceProvider getSourceProvider() {
     if( sourceProvider == null ) {
       sourceProvider = getDefaultModel();
     }
-    return ConfiguratorModelUtil.sourceProvider;
+    return ModelUtil.sourceProvider;
   }
 
   private static SourceProvider getDefaultModel() {
     SourceProvider result = null;
     String[] modelURLs = new String[]{
-      defaultModeURL, getLocalURL()
+      getConfigurationURL(), getLocalURL()
     };
     for( int i = 0; i < modelURLs.length && result == null; i++ ) {
       try {
@@ -72,5 +72,9 @@ public class ConfiguratorModelUtil {
       // Ignore
     }
     return result;
+  }
+
+  protected static String getConfigurationURL() {
+    return ProviderActivator.getBundleContext().getProperty( CONFIGURATION_URL );
   }
 }

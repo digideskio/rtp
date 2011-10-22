@@ -29,7 +29,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.rtp.configurator.service.provider.internal.deploy.FeatureInstallException;
 import org.eclipse.rtp.configurator.service.provider.internal.deploy.FeatureManager;
 import org.eclipse.rtp.configurator.service.provider.internal.deploy.RepositoryManager;
-import org.eclipse.rtp.configurator.service.provider.internal.util.ConfiguratorModelUtil;
+import org.eclipse.rtp.configurator.service.provider.internal.util.ModelUtil;
 import org.eclipse.rtp.configurator.service.provider.internal.util.Fixture;
 import org.eclipse.rtp.configurator.service.provider.internal.util.P2Util;
 import org.eclipse.rtp.core.model.SourceProvider;
@@ -53,7 +53,7 @@ public class ConfiguratorServiceTest {
     configuratorService.setP2Util( p2UtilMock );
     InputStream inputStream = Fixture.readExampleSources();
     sourceProvider = Fixture.getSourceProvider( inputStream );
-    ConfiguratorModelUtil.setSourceProvider( sourceProvider );
+    ModelUtil.setSourceProvider( sourceProvider );
   }
 
   @Test
