@@ -23,9 +23,7 @@ public interface CommandDelegate {
 
   void show( List<String> anyListOf );
 
-  void list( );
+  void list();
 
-  void updateWorld( );
-
-  void refresh( );
+  void updateWorld();
 }

@@ -255,12 +255,6 @@ public class DefaultConfiguratorService implements IConfiguratorService {
     return comparator;
   }
 
-  @Override
-  public IStatus refresh() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
   private List<Source> searchSources( List<String> anyListOf, List<Source> sources ) {
     List<Source> result = new ArrayList<Source>();
     for( Source source : sources ) {

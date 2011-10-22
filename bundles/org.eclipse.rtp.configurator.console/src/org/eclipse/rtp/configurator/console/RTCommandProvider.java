@@ -1,12 +1,10 @@
-/******************************************************************************* 
-* Copyright (c) 2011 EclipseSource and others. All rights reserved. This
-* program and the accompanying materials are made available under the terms of
-* the Eclipse Public License v1.0 which accompanies this distribution, and is
-* available at http://www.eclipse.org/legal/epl-v10.html
-*
-* Contributors:
-*   EclipseSource - initial API and implementation
-*******************************************************************************/
+/*******************************************************************************
+ * Copyright (c) 2011 EclipseSource and others. All rights reserved. This program and the
+ * accompanying materials are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html Contributors: EclipseSource - initial API and
+ * implementation
+ *******************************************************************************/
 package org.eclipse.rtp.configurator.console;
 
 import java.util.ArrayList;
@@ -25,13 +23,12 @@ public class RTCommandProvider implements CommandProvider {
   private static final String SHOW = "show";
   private static final String LIST = "list";
   private static final String UPDATE_WORLD = "update-world";
-  private static final String REFRESH = "refresh";
-  private CommandDelegate delegate;
+  private final CommandDelegate delegate;
 
   public RTCommandProvider( CommandDelegate delegate ) {
     this.delegate = delegate;
   }
-  
+
   public RTCommandProvider() {
     this.delegate = new CommandDelegateImpl();
   }
@@ -48,7 +45,7 @@ public class RTCommandProvider implements CommandProvider {
   }
 
   private void distributeOperations( String operation, CommandInterpreter interpreter ) {
-    List<String> parameter = extractParameter( interpreter ); 
+    List<String> parameter = extractParameter( interpreter );
     if( operation.equals( INSTALL ) ) {
       delegate.install( parameter );
     } else if( operation.equals( UPDATE ) ) {
@@ -61,8 +58,6 @@ public class RTCommandProvider implements CommandProvider {
       delegate.list();
     } else if( operation.equals( UPDATE_WORLD ) ) {
       delegate.updateWorld();
-    } else if( operation.equals( REFRESH ) ) {
-      delegate.refresh();
     } else if( operation.equals( REMOVE ) ) {
       delegate.remove( parameter );
     } else {
@@ -85,5 +80,4 @@ public class RTCommandProvider implements CommandProvider {
     buffer.append( "---RT Commands---\n" );
     return buffer.toString();
   }
-  
 }

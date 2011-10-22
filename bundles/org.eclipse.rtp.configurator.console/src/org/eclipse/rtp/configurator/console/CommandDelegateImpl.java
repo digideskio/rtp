@@ -146,12 +146,4 @@ public class CommandDelegateImpl implements CommandDelegate {
      */
     configurationService.updateWorld();
   }
-
-  @Override
-  public void refresh() {
-    /*
-     * Should refresh the avalaible repos.
-     */
-    configurationService.refresh();
-  }
 }
