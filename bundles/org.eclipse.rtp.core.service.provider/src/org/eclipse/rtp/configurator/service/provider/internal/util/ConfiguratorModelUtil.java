@@ -11,9 +11,9 @@ import java.net.URL;
 
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.rtp.configurator.model.SourceProvider;
-import org.eclipse.rtp.configurator.model.SourceUnMarshaller;
 import org.eclipse.rtp.configurator.service.provider.internal.ProviderActivator;
+import org.eclipse.rtp.core.model.SourceProvider;
+import org.eclipse.rtp.core.model.SourceUnMarshaller;
 
 public class ConfiguratorModelUtil {
 

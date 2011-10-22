@@ -26,14 +26,14 @@ import java.util.List;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.rtp.configurator.model.SourceProvider;
-import org.eclipse.rtp.configurator.model.SourceVersion;
 import org.eclipse.rtp.configurator.service.provider.internal.deploy.FeatureInstallException;
 import org.eclipse.rtp.configurator.service.provider.internal.deploy.FeatureManager;
 import org.eclipse.rtp.configurator.service.provider.internal.deploy.RepositoryManager;
 import org.eclipse.rtp.configurator.service.provider.internal.util.ConfiguratorModelUtil;
 import org.eclipse.rtp.configurator.service.provider.internal.util.Fixture;
 import org.eclipse.rtp.configurator.service.provider.internal.util.P2Util;
+import org.eclipse.rtp.core.model.SourceProvider;
+import org.eclipse.rtp.core.model.SourceVersion;
 import org.junit.Before;
 import org.junit.Test;
 import org.osgi.framework.Version;

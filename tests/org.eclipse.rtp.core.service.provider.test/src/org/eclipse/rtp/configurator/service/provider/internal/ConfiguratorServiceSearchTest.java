@@ -17,10 +17,10 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.rtp.configurator.model.Source;
-import org.eclipse.rtp.configurator.model.SourceProvider;
 import org.eclipse.rtp.configurator.service.provider.internal.util.ConfiguratorModelUtil;
 import org.eclipse.rtp.configurator.service.provider.internal.util.Fixture;
+import org.eclipse.rtp.core.model.Source;
+import org.eclipse.rtp.core.model.SourceProvider;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -19,13 +19,13 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.rtp.configurator.core.IConfiguratorService;
-import org.eclipse.rtp.configurator.model.Source;
-import org.eclipse.rtp.configurator.model.SourceVersion;
 import org.eclipse.rtp.configurator.service.provider.internal.deploy.FeatureInstallException;
 import org.eclipse.rtp.configurator.service.provider.internal.deploy.FeatureManager;
 import org.eclipse.rtp.configurator.service.provider.internal.deploy.RepositoryManager;
 import org.eclipse.rtp.configurator.service.provider.internal.util.ConfiguratorModelUtil;
 import org.eclipse.rtp.configurator.service.provider.internal.util.P2Util;
+import org.eclipse.rtp.core.model.Source;
+import org.eclipse.rtp.core.model.SourceVersion;
 import org.osgi.framework.Version;
 
 public class DefaultConfiguratorService implements IConfiguratorService {
@@ -58,7 +58,8 @@ public class DefaultConfiguratorService implements IConfiguratorService {
         result = Status.CANCEL_STATUS;
       }
     } catch( Exception e ) {
-      System.out.println( "Feature will not be installed. Failed to load repository" );
+      System.out.println( "Feature will not be installed" );
+      e.printStackTrace();
       result = new Status( IStatus.ERROR,
                            ProviderActivator.BUNDLE_ID,
                            "Failed to isntall features",

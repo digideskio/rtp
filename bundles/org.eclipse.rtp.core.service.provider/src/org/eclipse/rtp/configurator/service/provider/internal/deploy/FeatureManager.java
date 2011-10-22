@@ -29,8 +29,8 @@ import org.eclipse.equinox.p2.operations.UninstallOperation;
 import org.eclipse.equinox.p2.query.IQueryResult;
 import org.eclipse.equinox.p2.query.IQueryable;
 import org.eclipse.equinox.p2.query.QueryUtil;
-import org.eclipse.rtp.configurator.model.Feature;
-import org.eclipse.rtp.configurator.model.SourceVersion;
+import org.eclipse.rtp.core.model.Feature;
+import org.eclipse.rtp.core.model.SourceVersion;
 
 @SuppressWarnings( "restriction" )
 public class FeatureManager {

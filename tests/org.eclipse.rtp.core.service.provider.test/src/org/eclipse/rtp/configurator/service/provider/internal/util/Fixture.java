@@ -9,8 +9,8 @@ import java.net.URL;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.rtp.configurator.model.SourceProvider;
-import org.eclipse.rtp.configurator.model.SourceUnMarshaller;
+import org.eclipse.rtp.core.model.SourceProvider;
+import org.eclipse.rtp.core.model.SourceUnMarshaller;
 import org.osgi.framework.Bundle;
 
 public class Fixture {

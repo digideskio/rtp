@@ -27,7 +27,7 @@ import org.eclipse.equinox.p2.planner.IPlanner;
 import org.eclipse.equinox.p2.planner.IProfileChangeRequest;
 import org.eclipse.equinox.p2.repository.IRepositoryManager;
 import org.eclipse.equinox.p2.repository.metadata.IMetadataRepositoryManager;
-import org.eclipse.rtp.configurator.model.SourceVersion;
+import org.eclipse.rtp.core.model.SourceVersion;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;

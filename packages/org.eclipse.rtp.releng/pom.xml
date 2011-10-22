@@ -124,7 +124,7 @@
     <!-- Configurator -->
     <module>../../bundles/org.eclipse.rtp.core</module>
     <module>../../bundles/org.eclipse.rtp.core.service.provider</module>
-    <module>../../bundles/org.eclipse.rtp.configurator.model</module>
+    <module>../../bundles/org.eclipse.rtp.core.model</module>
     <module>../../bundles/org.eclipse.rtp.configurator.console</module>
     <module>../../bundles/org.eclipse.rtp.configurator.feature</module>
     <!-- Packages -->
