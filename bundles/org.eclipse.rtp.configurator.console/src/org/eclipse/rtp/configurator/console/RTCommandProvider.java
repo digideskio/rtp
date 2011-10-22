@@ -76,8 +76,6 @@ public class RTCommandProvider implements CommandProvider {
 
   @Override
   public String getHelp() {
-    StringBuffer buffer = new StringBuffer();
-    buffer.append( "---RT Commands---\n" );
-    return buffer.toString();
+    return delegate.getHelp();
   }
 }

@@ -36,8 +36,10 @@ public class CommandDelegateImpl implements CommandDelegate {
     System.out.println( help );
   }
 
-  private String getHelp() {
+  @Override
+  public String getHelp() {
     StringBuilder help = new StringBuilder();
+    addRTHeader( help );
     addHeader( "Update Commands", help );
     addCommand( "install",
                 "Installs a feature. The name of the feature is the first entry. If "
@@ -59,10 +61,15 @@ public class CommandDelegateImpl implements CommandDelegate {
     return help.toString();
   }
 
+  private void addRTHeader( StringBuilder help ) {
+    help.append( "---RT Commands---" ); //$NON-NLS-1$
+    help.append( NEW_LINE );
+  }
+
   private void addHeader( String header, StringBuilder help ) {
-    help.append( "---" ); //$NON-NLS-1$
+    help.append( "  -" ); //$NON-NLS-1$
     help.append( header );
-    help.append( "---" ); //$NON-NLS-1$
+    help.append( "-" ); //$NON-NLS-1$
     help.append( NEW_LINE );
   }
 

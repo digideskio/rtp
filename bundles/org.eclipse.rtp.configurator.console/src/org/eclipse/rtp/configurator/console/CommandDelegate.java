@@ -26,4 +26,6 @@ public interface CommandDelegate {
   void list();
 
   void updateWorld();
+
+  String getHelp();
 }
