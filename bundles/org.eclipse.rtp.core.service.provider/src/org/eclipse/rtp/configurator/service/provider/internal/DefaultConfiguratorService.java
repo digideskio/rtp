@@ -50,8 +50,12 @@ public class DefaultConfiguratorService implements IConfiguratorService {
     try {
       SourceVersion sourceVersion = getSourceVersions( parameter );
       if( sourceVersion != null ) {
+        System.out.println( "Loading repository: " + sourceVersion.getRepositoryUrl() );
         loadRepository( sourceVersion );
+        System.out.println( "Repository loaded: " + sourceVersion.getRepositoryUrl() );
+        System.out.println( "Installation started" );
         install( sourceVersion );
+        System.out.println( "Installaiton successful" );
         result = Status.OK_STATUS;
       } else {
         System.out.println( "No source found to install" );
@@ -192,15 +196,20 @@ public class DefaultConfiguratorService implements IConfiguratorService {
   @Override
   public IStatus update( List<String> anyListOf ) {
     List<Source> sources = ConfiguratorModelUtil.getSourceProvider().getSources();
+    System.out.println( "Searching for updates" );
     List<Source> sourceToUpdate = searchSources( anyListOf, sources );
+    System.out.println( "Update started" );
     IStatus result = updateSources( sourceToUpdate );
+    System.out.println( "Update successful" );
     return result;
   }
 
   @Override
   public IStatus updateWorld() {
     List<Source> sources = ConfiguratorModelUtil.getSourceProvider().getSources();
+    System.out.println( "Update started" );
     IStatus result = updateSources( sources );
+    System.out.println( "Update successful" );
     return result;
   }
 
@@ -212,6 +221,7 @@ public class DefaultConfiguratorService implements IConfiguratorService {
       Collections.sort( versions, getSourceVersionComparator() );
       SourceVersion latestSourceVersion = versions.get( 0 );
       if( !featureManager.isInstalled( latestSourceVersion ) ) {
+        System.out.println( "Updating feature: " + source.getName() );
         updateStatusList.addAll( uninstall( featureManager, versions ) );
         List<String> parameters = getInstallParameters( source, latestSourceVersion );
         updateStatusList.add( install( parameters ) );
