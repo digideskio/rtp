@@ -117,7 +117,7 @@ public class RTPDefaultService implements IRTPService {
   public List<String> search( List<String> anyListOf ) {
     List<Source> sources = ModelUtil.getSourceProvider().getSources();
     List<Source> result = searchSources( sources, anyListOf );
-    return getSortedSources( result );
+    return sourcesToStringSorted( result, false );
   }
 
   @Override
@@ -126,13 +126,13 @@ public class RTPDefaultService implements IRTPService {
     List<String> showSource = new ArrayList<String>();
     showSource.add( anyListOf.get( 0 ) );
     List<Source> result = searchSources( sources, showSource );
-    return getSortedSources( result );
+    return sourcesToStringSorted( result, false );
   }
 
   @Override
   public List<String> list() throws CoreException {
     List<Source> sources = ModelUtil.getSourceProvider().getSources();
-    List<String> sourcesAsString = getSortedSources( sources );
+    List<String> sourcesAsString = sourcesToStringSorted( sources, true );
     return sourcesAsString;
   }
 
@@ -182,12 +182,42 @@ public class RTPDefaultService implements IRTPService {
     return result;
   }
 
-  private List<String> getSortedSources( List<Source> sources ) {
+  private List<String> sourcesToStringSorted( List<Source> sources, boolean addInstalledInfo ) {
+    List<String> sourcesAsString = sourcesToString( sources, addInstalledInfo );
+    return sourcesAsString;
+  }
+
+  private List<String> sourcesToString( List<Source> sources, boolean addInstalledInfo ) {
+    Collections.sort( sources, new ModelUtil().getSourceComparator() );
     List<String> sourcesAsString = new ArrayList<String>();
     for( Source source : sources ) {
       sourcesAsString.add( source.toString() );
+      List<String> versionsToString = versionsToString( source, addInstalledInfo );
+      sourcesAsString.addAll( versionsToString );
     }
-    Collections.sort( sourcesAsString );
     return sourcesAsString;
+  }
+
+  private List<String> versionsToString( Source source, boolean addInstalledInfo ) {
+    List<SourceVersion> versions = source.getVersions();
+    Collections.sort( versions, new ModelUtil().getSourceVersionComparator() );
+    List<String> result = new ArrayList<String>();
+    for( SourceVersion sourceVersion : versions ) {
+      if( addInstalledInfo ) {
+        String installedInfo = getInstallInfor( sourceVersion );
+        result.add( installedInfo );
+      }
+      result.add( sourceVersion.toString() );
+    }
+    return result;
+  }
+
+  private String getInstallInfor( SourceVersion sourceVersion ) {
+    FeatureManager featureManager = p2Util.getFeatureManager();
+    boolean installed = featureManager.isInstalled( sourceVersion );
+    String installedInfo = installed
+                                    ? "[installed]"
+                                    : "[not installed]";
+    return installedInfo;
   }
 }

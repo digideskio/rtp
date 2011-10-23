@@ -98,6 +98,19 @@ public class ModelUtil {
     return comparator;
   }
 
+  public Comparator<Source> getSourceComparator() {
+    Comparator<Source> comparator = new Comparator<Source>() {
+
+      @Override
+      public int compare( Source arg0, Source arg1 ) {
+        String name = arg0.getName();
+        String name2 = arg1.getName();
+        return name.compareTo( name2 );
+      }
+    };
+    return comparator;
+  }
+
   public List<Source> searchSources( List<String> anyListOf, List<Source> sources ) {
     List<Source> result = new ArrayList<Source>();
     for( Source source : sources ) {

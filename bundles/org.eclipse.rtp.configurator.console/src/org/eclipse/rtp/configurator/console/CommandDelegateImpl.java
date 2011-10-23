@@ -24,6 +24,7 @@ public class CommandDelegateImpl implements CommandDelegate {
 
   public static void setUp( IRTPService service ) {
     CommandDelegateImpl.configurationService = service;
+    commandUtil = new CommandUtil();
   }
 
   public static void shutDown( IRTPService service ) {

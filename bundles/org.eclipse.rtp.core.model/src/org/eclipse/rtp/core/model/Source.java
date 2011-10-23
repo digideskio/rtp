@@ -1,18 +1,14 @@
-/******************************************************************************* 
-* Copyright (c) 2011 EclipseSource and others. All rights reserved. This
-* program and the accompanying materials are made available under the terms of
-* the Eclipse Public License v1.0 which accompanies this distribution, and is
-* available at http://www.eclipse.org/legal/epl-v10.html
-*
-* Contributors:
-*   EclipseSource - initial API and implementation
-*******************************************************************************/ 
+/*******************************************************************************
+ * Copyright (c) 2011 EclipseSource and others. All rights reserved. This program and the
+ * accompanying materials are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html Contributors: EclipseSource - initial API and
+ * implementation
+ *******************************************************************************/
 package org.eclipse.rtp.core.model;
 
 import java.util.ArrayList;
 import java.util.List;
-
-
 
 public class Source {
 
@@ -21,7 +17,6 @@ public class Source {
   private String infoUrl;
   private List<SourceVersion> versions;
 
-  
   Source() {
     // only for Gson
   }
@@ -44,7 +39,7 @@ public class Source {
   public List<SourceVersion> getVersions() {
     return new ArrayList<SourceVersion>( versions );
   }
-  
+
   public String getDescription() {
     return description;
   }
@@ -52,16 +47,13 @@ public class Source {
   public String getInfoUrl() {
     return infoUrl;
   }
-  
+
   @Override
   public String toString() {
     StringBuilder result = new StringBuilder();
-    result.append( "Name: " + name + "\n");
-    result.append( "Description: " + description + "\n");
-    result.append( "Information URL: " + infoUrl + "\n");
-    for( SourceVersion version : versions ) {
-      result.append( version.toString() + "\n" );
-    }
+    result.append( "Name: " + name + "\n" );
+    result.append( "Description: " + description + "\n" );
+    result.append( "Information URL: " + infoUrl + "\n" );
     return result.toString();
   }
 }
