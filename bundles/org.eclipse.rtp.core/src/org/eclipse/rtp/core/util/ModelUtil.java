@@ -61,8 +61,8 @@ public class ModelUtil {
         URL url = new URL( modelURLs[ i ] );
         result = sourceUnMarshaller.marshal( url.openStream() );
       } catch( Exception e ) {
-        // System.out.println( "Failed to load model" );
-        // e.printStackTrace();
+        System.out.println( "Failed to load model" );
+        e.printStackTrace();
       }
     }
     return result;
