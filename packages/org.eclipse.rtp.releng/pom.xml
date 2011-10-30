@@ -42,7 +42,7 @@
         <build-identifier>N</build-identifier>
         <eclipse-site>http://download.eclipse.org/releases/staging</eclipse-site>
         <jetty-site>http://download.eclipse.org/jetty/updates/jetty-rt-3.7-N-builds</jetty-site>     
-		<orbit-site>http://download.eclipse.org/tools/orbit/downloads/drops/R20110523182458/repository/</orbit-site>  
+		    <orbit-site>http://download.eclipse.org/tools/orbit/downloads/drops/R20110523182458/repository/</orbit-site>  
       </properties>
     </profile>
     <profile>
@@ -72,7 +72,7 @@
         <build-identifier>N</build-identifier>
         <eclipse-site>http://download.eclipse.org/eclipse/updates/3.8-N-builds/</eclipse-site>
         <jetty-site>http://download.eclipse.org/jetty/updates/jetty-rt-3.8-N-builds/</jetty-site> 
-		<orbit-site>http://download.eclipse.org/tools/orbit/downloads/drops/I20110919015729/repository/</orbit-site>
+		<orbit-site>http://download.eclipse.org/tools/orbit/downloads/drops/I20111024194300/repository/</orbit-site>
       </properties>
     </profile>
     <profile>
@@ -86,7 +86,7 @@
       <properties>
         <eclipse-site>http://download.eclipse.org/eclipse/updates/3.8milestones/</eclipse-site>
         <jetty-site>http://download.eclipse.org/jetty/updates/jetty-rt-3.8milestones/S-3.8M2-201109140450/</jetty-site>  
-		<orbit-site>http://download.eclipse.org/tools/orbit/downloads/drops/I20110919015729/repository/</orbit-site>
+		<orbit-site>http://download.eclipse.org/tools/orbit/downloads/drops/I20111024194300/repository/</orbit-site>
       </properties>
     </profile>
   </profiles>
