@@ -53,7 +53,7 @@ public class CommandDelegateImpl implements CommandDelegate {
                 "Updates a feature. The name of the feature is the first entry. The feature is updated to its latest version.",
                 help );
     addCommand( "update-world", "Updates all installed feature to their latest version.", help );
-    addCommand( "Remove", "the first entry is the feature which should be removed.", help );
+    addCommand( "remove", "the first entry is the feature which should be removed.", help );
     addHeader( "Search Commands", help );
     addCommand( "list", "Lists all available features in the rtp repos.", help );
     addCommand( "show",
