@@ -1,10 +1,11 @@
 package org.eclipse.rtp.core.internal;
+
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
 public class RTPCoreActivator implements BundleActivator {
 
-  public static String BUNDLE_ID = "org.eclipse.rtp.coree";
+  public static String BUNDLE_ID = "org.eclipse.rtp.core";
   private static BundleContext bundleContext;
 
   @Override
