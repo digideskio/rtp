@@ -7,18 +7,17 @@
  *******************************************************************************/
 package org.eclipse.rtp.configurator.service.provider.internal;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.rtp.configurator.service.provider.internal.util.Fixture;
-import org.eclipse.rtp.core.model.Source;
 import org.eclipse.rtp.core.model.SourceProvider;
 import org.eclipse.rtp.core.util.ModelUtil;
 import org.junit.Before;
@@ -32,6 +31,7 @@ public class ConfiguratorServiceSearchTest {
   @Before
   public void setUp() throws IOException {
     configuratorService = new RTPDefaultService();
+    configuratorService.setUp();
     InputStream stream = Fixture.readExampleSources();
     provider = Fixture.getSourceProvider( stream );
     ModelUtil.setSourceProvider( provider );
@@ -39,50 +39,55 @@ public class ConfiguratorServiceSearchTest {
 
   @Test
   public void testList() throws CoreException {
-    List<String> listExpected = getSortedTestData();
+    List<String> sourcesExpected = getSortedTestData( true );
     List<String> list = configuratorService.list();
-    assertTrue( Arrays.equals( listExpected.toArray(), list.toArray() ) );
+    assertTrue( Arrays.equals( sourcesExpected.toArray(), list.toArray() ) );
   }
 
   @Test
   public void testShow() throws CoreException {
-    List<String> listExpected = getSortedTestData();
+    List<String> testData = getSortedTestData( false );
+    ArrayList<String> expectedList = new ArrayList<String>();
+    expectedList.add( testData.get( 0 ) );
+    expectedList.add( testData.get( 1 ) );
     List<String> showParameters = new ArrayList<String>();
     showParameters.add( "equinox" );
     List<String> list = configuratorService.show( showParameters );
-    assertTrue( Arrays.equals( new String[]{
-      listExpected.get( 0 )
-    }, list.toArray() ) );
+    assertListsEquals( expectedList, list );
   }
 
   @Test
   public void testShowManyParameters() throws CoreException {
-    List<String> listExpected = getSortedTestData();
+    List<String> testData = getSortedTestData( false );
+    ArrayList<String> expectedList = new ArrayList<String>();
+    expectedList.add( testData.get( 0 ) );
+    expectedList.add( testData.get( 1 ) );
     List<String> showParameters = new ArrayList<String>();
     showParameters.add( "equinox" );
     List<String> list = configuratorService.show( showParameters );
-    assertTrue( Arrays.equals( new String[]{
-      listExpected.get( 0 )
-    }, list.toArray() ) );
+    assertListsEquals( expectedList, list );
   }
 
   @Test
   public void testSearch() throws CoreException {
-    List<String> listExpected = getSortedTestData();
+    List<String> testData = getSortedTestData( false );
+    ArrayList<String> expectedList = new ArrayList<String>();
+    expectedList.add( testData.get( 2 ) );
+    expectedList.add( testData.get( 3 ) );
+    expectedList.add( testData.get( 4 ) );
     List<String> searchParameters = new ArrayList<String>();
     searchParameters.add( "ra" );
     List<String> list = configuratorService.search( searchParameters );
-    assertTrue( Arrays.equals( new String[]{
-      listExpected.get( 1 )
-    }, list.toArray() ) );
+    assertListsEquals( expectedList, list );
   }
 
-  private List<String> getSortedTestData() {
-    List<String> listExpected = new ArrayList<String>();
-    for( Source source : provider.getSources() ) {
-      listExpected.add( source.toString() );
+  private void assertListsEquals( List<String> expectedList, List<String> list2 ) {
+    for( int i = 0; i < expectedList.size(); i++ ) {
+      assertEquals( expectedList.get( i ), list2.get( i ) );
     }
-    Collections.sort( listExpected );
-    return listExpected;
+  }
+
+  private List<String> getSortedTestData( boolean addInstallInfo ) {
+    return configuratorService.sourcesToString( provider.getSources(), addInstallInfo );
   }
 }

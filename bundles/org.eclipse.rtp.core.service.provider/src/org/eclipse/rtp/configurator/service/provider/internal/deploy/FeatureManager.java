@@ -169,11 +169,13 @@ public class FeatureManager {
   public boolean isInstalled( SourceVersion sourceVersion ) {
     List<IInstallableUnit> result = new ArrayList<IInstallableUnit>();
     IProfile profile = getProfile();
-    for( Feature feature : sourceVersion.getFeatures() ) {
-      IQueryResult<IInstallableUnit> query = profile.query( QueryUtil.createIUQuery( feature.getId(),
-                                                                                     Version.create( feature.getVersion() ) ),
-                                                            new NullProgressMonitor() );
-      result.addAll( query.toSet() );
+    if( profile != null ) {
+      for( Feature feature : sourceVersion.getFeatures() ) {
+        IQueryResult<IInstallableUnit> query = profile.query( QueryUtil.createIUQuery( feature.getId(),
+                                                                                       Version.create( feature.getVersion() ) ),
+                                                              new NullProgressMonitor() );
+        result.addAll( query.toSet() );
+      }
     }
     return result.size() > 0;
   }

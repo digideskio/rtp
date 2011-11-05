@@ -187,7 +187,7 @@ public class RTPDefaultService implements IRTPService {
     return sourcesAsString;
   }
 
-  private List<String> sourcesToString( List<Source> sources, boolean addInstalledInfo ) {
+  protected List<String> sourcesToString( List<Source> sources, boolean addInstalledInfo ) {
     Collections.sort( sources, new ModelUtil().getSourceComparator() );
     List<String> sourcesAsString = new ArrayList<String>();
     for( Source source : sources ) {
@@ -204,7 +204,7 @@ public class RTPDefaultService implements IRTPService {
     List<String> result = new ArrayList<String>();
     for( SourceVersion sourceVersion : versions ) {
       if( addInstalledInfo ) {
-        String installedInfo = getInstallInfor( sourceVersion );
+        String installedInfo = getInstallInfo( sourceVersion );
         result.add( installedInfo );
       }
       result.add( sourceVersion.toString() );
@@ -212,7 +212,7 @@ public class RTPDefaultService implements IRTPService {
     return result;
   }
 
-  private String getInstallInfor( SourceVersion sourceVersion ) {
+  private String getInstallInfo( SourceVersion sourceVersion ) {
     FeatureManager featureManager = p2Util.getFeatureManager();
     boolean installed = featureManager.isInstalled( sourceVersion );
     String installedInfo = installed
