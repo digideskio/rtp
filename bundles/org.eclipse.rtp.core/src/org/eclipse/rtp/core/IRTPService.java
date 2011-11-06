@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.rtp.core;
 
+import java.net.URI;
 import java.util.List;
 
 import org.eclipse.core.runtime.CoreException;
@@ -28,4 +29,10 @@ public interface IRTPService {
   List<String> list() throws CoreException;
 
   IStatus updateWorld();
+  
+  void addRepository(URI repository);
+  
+  void removeRepository(URI repository);
+
+  URI[] getRepositories();
 }

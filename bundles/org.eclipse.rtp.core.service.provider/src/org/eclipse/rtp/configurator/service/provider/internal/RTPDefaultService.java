@@ -75,8 +75,10 @@ public class RTPDefaultService implements IRTPService {
   }
 
   private void loadRepository( SourceVersion sourceVersion ) throws URISyntaxException {
-    RepositoryManager repositoryManager = p2Util.getRepositoryManager();
-    repositoryManager.addRepository( new URI( sourceVersion.getRepositoryUrl() ) );
+    if( sourceVersion.getRepositoryUrl() != null ) {
+      RepositoryManager repositoryManager = p2Util.getRepositoryManager();
+      repositoryManager.addRepository( new URI( sourceVersion.getRepositoryUrl() ) );
+    }
   }
 
   @Override
@@ -137,6 +139,16 @@ public class RTPDefaultService implements IRTPService {
   }
 
   @Override
+  public void addRepository( URI repository ) {
+    p2Util.getRepositoryManager().addRepository( repository );
+  }
+
+  @Override
+  public void removeRepository( URI repository ) {
+    p2Util.getRepositoryManager().removeRepository( repository );
+  }
+
+  @Override
   public IStatus update( List<String> anyListOf ) {
     List<Source> sources = ModelUtil.getSourceProvider().getSources();
     System.out.println( "Searching for updates" );
@@ -145,6 +157,11 @@ public class RTPDefaultService implements IRTPService {
     IStatus result = updateSources( sourceToUpdate );
     System.out.println( "Update successful" );
     return result;
+  }
+
+  @Override
+  public URI[] getRepositories() {
+    return p2Util.getRepositoryManager().getRepositories();
   }
 
   protected List<Source> searchSources( List<Source> sources, List<String> showSource ) {

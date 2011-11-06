@@ -200,6 +200,26 @@ public class ConfiguratorServiceTest {
     assertTrue( status.isOK() );
   }
 
+  @Test
+  public void testAddRepository() throws URISyntaxException {
+    URI testRepository = new URI( "file:/tmp" );
+    repositoryManager = mock( RepositoryManager.class );
+    when( p2UtilMock.getRepositoryManager() ).thenReturn( repositoryManager );
+    configuratorService.addRepository( testRepository );
+    verify( repositoryManager ).addRepository( testRepository );
+    verify( p2UtilMock ).getRepositoryManager();
+  }
+
+  @Test
+  public void testRemoveRepository() throws URISyntaxException {
+    URI testRepository = new URI( "file:/tmp" );
+    repositoryManager = mock( RepositoryManager.class );
+    when( p2UtilMock.getRepositoryManager() ).thenReturn( repositoryManager );
+    configuratorService.removeRepository( testRepository );
+    verify( repositoryManager ).removeRepository( testRepository );
+    verify( p2UtilMock ).getRepositoryManager();
+  }
+
   private Comparator<SourceVersion> getSourceVersionComparator() {
     Comparator<SourceVersion> comparator = new Comparator<SourceVersion>() {
 

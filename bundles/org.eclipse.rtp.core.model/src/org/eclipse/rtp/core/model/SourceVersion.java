@@ -7,23 +7,22 @@
  *******************************************************************************/
 package org.eclipse.rtp.core.model;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SourceVersion {
 
   private String version;
   private String repositoryUrl;
-  private List<Feature> features;
+  private List<Feature> features = new ArrayList<Feature>();
 
-  SourceVersion() {
+  public SourceVersion() {
     // only for Gson
   }
 
   public SourceVersion( String version, String repositoryUrl, String description, String infoUrl ) {
     this.version = version;
     this.repositoryUrl = repositoryUrl;
-    this.features = Collections.emptyList();
   }
 
   public String getVersion() {
@@ -36,6 +35,10 @@ public class SourceVersion {
 
   public List<Feature> getFeatures() {
     return features;
+  }
+
+  public void addFeature( Feature feature ) {
+    this.features.add( feature );
   }
 
   @Override
