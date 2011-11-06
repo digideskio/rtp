@@ -10,8 +10,7 @@ package org.eclipse.rtp.httpdeployer.internal;
 
 import javax.servlet.ServletException;
 
-import org.eclipse.equinox.internal.provisional.configurator.Configurator;
-import org.eclipse.equinox.p2.core.IProvisioningAgent;
+import org.eclipse.rtp.core.IRTPService;
 import org.eclipse.rtp.httpdeployer.bundle.BundleServlet;
 import org.eclipse.rtp.httpdeployer.feature.FeatureManager;
 import org.eclipse.rtp.httpdeployer.feature.FeatureServlet;
@@ -20,7 +19,6 @@ import org.eclipse.rtp.httpdeployer.repository.RepositoryServlet;
 import org.osgi.service.http.HttpService;
 import org.osgi.service.http.NamespaceException;
 
-@SuppressWarnings("restriction")
 public class HttpDeployerInitializer {
 
 	public static final String ALIAS_BUNDLE = "/bundle"; //$NON-NLS-N$
@@ -29,14 +27,13 @@ public class HttpDeployerInitializer {
 	public static final String ALIAS_SYSTEM = "/system"; //$NON-NLS-N$
 
 	private HttpService httpService;
-	private Configurator configurator;
-	private IProvisioningAgent provisioningAgent;
 	private BundleServlet bundleServlet;
 	private RepositoryServlet repositoryServlet;
 	private FeatureServlet featureServlet;
 	private SystemServlet systemServlet;
 	private RepositoryManager repositoryManager;
 	private FeatureManager featureManager;
+	private IRTPService rtpService;
 
 	public void init() throws ServletException, NamespaceException {
 		createManager();
@@ -45,8 +42,8 @@ public class HttpDeployerInitializer {
 	}
 
 	private void createManager() {
-		repositoryManager = new RepositoryManager(provisioningAgent);
-		featureManager = new FeatureManager(provisioningAgent, repositoryManager, configurator);
+		repositoryManager = new RepositoryManager(rtpService);
+		featureManager = new FeatureManager(rtpService);
 	}
 
 	private void createServlets() {
@@ -58,21 +55,19 @@ public class HttpDeployerInitializer {
 
 	private void registerServlets() throws ServletException, NamespaceException {
 		httpService.registerServlet(ALIAS_BUNDLE, bundleServlet, null, null);
-		httpService.registerServlet(ALIAS_REPOSITORY, repositoryServlet, null, null);
+		httpService.registerServlet(ALIAS_REPOSITORY, repositoryServlet, null,
+				null);
 		httpService.registerServlet(ALIAS_FEATURE, featureServlet, null, null);
 		httpService.registerServlet(ALIAS_SYSTEM, systemServlet, null, null);
+		System.out.println("Registered HttpDeployer Servlets");
+	}
+
+	public void setRtpService(IRTPService rtpService) {
+		this.rtpService = rtpService;
 	}
 
 	public void setHttpService(HttpService httpService) {
 		this.httpService = httpService;
-	}
-
-	public void setConfigurator(Configurator configurator) {
-		this.configurator = configurator;
-	}
-
-	public void setProvisioningAgent(IProvisioningAgent provisioningAgent) {
-		this.provisioningAgent = provisioningAgent;
 	}
 
 	public void unregister() {
@@ -81,4 +76,5 @@ public class HttpDeployerInitializer {
 		httpService.unregister(ALIAS_FEATURE);
 		httpService.unregister(ALIAS_SYSTEM);
 	}
+
 }

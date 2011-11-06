@@ -19,9 +19,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import org.apache.commons.io.FileUtils;
-import org.eclipse.equinox.p2.core.IProvisioningAgent;
-import org.eclipse.equinox.p2.repository.artifact.IArtifactRepositoryManager;
-import org.eclipse.equinox.p2.repository.metadata.IMetadataRepositoryManager;
+import org.eclipse.rtp.core.IRTPService;
 import org.eclipse.rtp.httpdeployer.internal.CommonConstants;
 
 public class RepositoryManager {
@@ -30,27 +28,23 @@ public class RepositoryManager {
 	private static final String FILENAME_CONTENT = "content.jar"; //$NON-NLS-N$
 	private static final String FILENAME_ARTIFACTS = "artifacts.jar"; //$NON-NLS-N$
 	private static final int FILE_BUFFER = 8192;
-	private final IProvisioningAgent provisioningAgent;
+	private final IRTPService rtpService;
 
-	public RepositoryManager(IProvisioningAgent provisioningAgent) {
-		this.provisioningAgent = provisioningAgent;
+	public RepositoryManager(IRTPService rtpService) {
+		this.rtpService = rtpService;
 	}
 
 	public URI[] getRepositories() {
-		IMetadataRepositoryManager metaRepoManager = getMetadataRepositoryManager();
-
-		return metaRepoManager.getKnownRepositories(IMetadataRepositoryManager.REPOSITORIES_ALL);
+		return rtpService.getRepositories();
 	}
 
 	public void addRepository(URI repository) {
-		IMetadataRepositoryManager metaRepoManager = getMetadataRepositoryManager();
-		IArtifactRepositoryManager artiRepoManager = getArtifactRepositoryManager();
-
-		metaRepoManager.addRepository(repository);
-		artiRepoManager.addRepository(repository);
+		rtpService.addRepository(repository);
 	}
 
-	public URI addRepository(InputStream inputStream) throws InvalidRepositoryException, FileNotFoundException, IOException {
+	public URI addRepository(InputStream inputStream)
+			throws InvalidRepositoryException, FileNotFoundException,
+			IOException {
 		ZipInputStream zis = new ZipInputStream(inputStream);
 		File repository = createLocalRepository(zis);
 		URI repositoryURI = repository.toURI();
@@ -59,8 +53,11 @@ public class RepositoryManager {
 		return repositoryURI;
 	}
 
-	private File createLocalRepository(ZipInputStream zis) throws InvalidRepositoryException, IOException, FileNotFoundException {
-		File repository = new File(System.getProperty("java.io.tmpdir") + CommonConstants.DIR_SEPARATOR + LOCAL_REPOSITORY_PREFIX
+	private File createLocalRepository(ZipInputStream zis)
+			throws InvalidRepositoryException, IOException,
+			FileNotFoundException {
+		File repository = new File(System.getProperty("java.io.tmpdir")
+				+ CommonConstants.DIR_SEPARATOR + LOCAL_REPOSITORY_PREFIX
 				+ Long.toString(System.nanoTime()));
 		repository.mkdirs();
 		createLocalRepositoryStructure(zis, repository);
@@ -76,14 +73,11 @@ public class RepositoryManager {
 	}
 
 	public void removeRepository(URI repository) {
-		IMetadataRepositoryManager metaRepoManager = getMetadataRepositoryManager();
-		IArtifactRepositoryManager artiRepoManager = getArtifactRepositoryManager();
-
-		metaRepoManager.removeRepository(repository);
-		artiRepoManager.removeRepository(repository);
+		rtpService.removeRepository(repository);
 	}
 
-	private void createLocalRepositoryStructure(ZipInputStream zis, File repository) throws IOException, FileNotFoundException {
+	private void createLocalRepositoryStructure(ZipInputStream zis,
+			File repository) throws IOException, FileNotFoundException {
 		ZipEntry currentFile;
 		while ((currentFile = zis.getNextEntry()) != null) {
 			if (currentFile.isDirectory()) {
@@ -95,13 +89,15 @@ public class RepositoryManager {
 	}
 
 	private void createLocalDirectory(File repository, ZipEntry currentFile) {
-		File file = new File(repository.getAbsolutePath() + CommonConstants.DIR_SEPARATOR + currentFile.getName());
+		File file = new File(repository.getAbsolutePath()
+				+ CommonConstants.DIR_SEPARATOR + currentFile.getName());
 		file.mkdirs();
 	}
 
-	private void createLocalFile(ZipInputStream zis, File repository, ZipEntry currentFile) throws IOException,
-			FileNotFoundException {
-		File file = new File(repository.getAbsolutePath() + CommonConstants.DIR_SEPARATOR + currentFile.getName());
+	private void createLocalFile(ZipInputStream zis, File repository,
+			ZipEntry currentFile) throws IOException, FileNotFoundException {
+		File file = new File(repository.getAbsolutePath()
+				+ CommonConstants.DIR_SEPARATOR + currentFile.getName());
 		file.getParentFile().mkdirs();
 		file.createNewFile();
 		FileOutputStream fos = new FileOutputStream(file);
@@ -109,7 +105,8 @@ public class RepositoryManager {
 		saveFileData(zis, bfos);
 	}
 
-	private void saveFileData(ZipInputStream zis, BufferedOutputStream bfos) throws IOException {
+	private void saveFileData(ZipInputStream zis, BufferedOutputStream bfos)
+			throws IOException {
 		int resultLength;
 		byte[] data = new byte[FILE_BUFFER];
 		while ((resultLength = zis.read(data, 0, FILE_BUFFER)) != -1) {
@@ -119,7 +116,8 @@ public class RepositoryManager {
 		bfos.close();
 	}
 
-	public void validateLocalRepository(File repository) throws InvalidRepositoryException {
+	public void validateLocalRepository(File repository)
+			throws InvalidRepositoryException {
 		File[] files = repository.listFiles();
 		boolean artifactsFound = false;
 		boolean contentFound = false;
@@ -133,22 +131,9 @@ public class RepositoryManager {
 		}
 
 		if (!artifactsFound || !contentFound) {
-			throw new InvalidRepositoryException("invalid repository: required files not found");
+			throw new InvalidRepositoryException(
+					"invalid repository: required files not found");
 		}
-	}
-
-	public IMetadataRepositoryManager getMetadataRepositoryManager() {
-		IMetadataRepositoryManager service = (IMetadataRepositoryManager) provisioningAgent
-				.getService(IMetadataRepositoryManager.SERVICE_NAME);
-
-		return service;
-	}
-
-	public IArtifactRepositoryManager getArtifactRepositoryManager() {
-		IArtifactRepositoryManager service = (IArtifactRepositoryManager) provisioningAgent
-				.getService(IArtifactRepositoryManager.SERVICE_NAME);
-
-		return service;
 	}
 
 	public void removeLocalRepository(URI repository) throws IOException {

@@ -18,8 +18,7 @@ import java.util.Dictionary;
 import javax.servlet.Servlet;
 import javax.servlet.ServletException;
 
-import org.eclipse.equinox.internal.provisional.configurator.Configurator;
-import org.eclipse.equinox.p2.core.IProvisioningAgent;
+import org.eclipse.rtp.core.IRTPService;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -28,17 +27,13 @@ import org.osgi.service.http.HttpContext;
 import org.osgi.service.http.HttpService;
 import org.osgi.service.http.NamespaceException;
 
-@SuppressWarnings("restriction")
 public class HttpDeployerComponentTest {
-
-	@Mock
-	IProvisioningAgent agent;
 
 	@Mock
 	HttpService service;
 
 	@Mock
-	Configurator configurator;
+	IRTPService rtpService;
 
 	@Before
 	public void setUp() {
@@ -49,8 +44,7 @@ public class HttpDeployerComponentTest {
 	public void deployerComponentTest() throws ServletException, NamespaceException {
 		HttpDeployerComponent component = new HttpDeployerComponent();
 		component.setHttpService(service);
-		component.setProvisioningAgent(agent);
-		component.setConfigurator(configurator);
+		component.setRtpService(rtpService);
 		component.startService();
 
 		verify(service).registerServlet(eq(HttpDeployerInitializer.ALIAS_REPOSITORY), any(Servlet.class), any(Dictionary.class),
@@ -61,7 +55,6 @@ public class HttpDeployerComponentTest {
 				any(HttpContext.class));
 		verify(service).registerServlet(eq(HttpDeployerInitializer.ALIAS_SYSTEM), any(Servlet.class), any(Dictionary.class),
 				any(HttpContext.class));
-		assertEquals(configurator, component.configurator);
 
 		component.shutdownService();
 		verify(service).unregister(HttpDeployerInitializer.ALIAS_BUNDLE);
@@ -70,11 +63,9 @@ public class HttpDeployerComponentTest {
 		verify(service).unregister(HttpDeployerInitializer.ALIAS_SYSTEM);
 
 		component.unsetHttpService(service);
-		component.unsetProvisioningAgent(agent);
-		component.unsetConfigurator(configurator);
+		component.unsetRtpService(rtpService);
 
-		assertEquals(null, component.configurator);
 		assertEquals(null, component.httpService);
-		assertEquals(null, component.provisioningAgent);
+		assertEquals(null, component.rtpService);
 	}
 }

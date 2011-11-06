@@ -10,19 +10,24 @@ package org.eclipse.rtp.httpdeployer.internal;
 
 import javax.servlet.ServletException;
 
-import org.eclipse.equinox.internal.provisional.configurator.Configurator;
-import org.eclipse.equinox.p2.core.IProvisioningAgent;
+import org.eclipse.rtp.core.IRTPService;
 import org.osgi.service.http.HttpService;
 import org.osgi.service.http.NamespaceException;
 
-@SuppressWarnings("restriction")
 public class HttpDeployerComponent {
 
 	private HttpDeployerInitializer initializer = new HttpDeployerInitializer();
 
 	protected HttpService httpService;
-	protected IProvisioningAgent provisioningAgent;
-	protected Configurator configurator;
+	protected IRTPService rtpService;
+
+	public void setRtpService(IRTPService rtpService) {
+		this.rtpService = rtpService;
+	}
+
+	public void unsetRtpService(IRTPService rtpService) {
+		this.rtpService = null;
+	}
 
 	public void setHttpService(HttpService httpService) {
 		this.httpService = httpService;
@@ -32,25 +37,8 @@ public class HttpDeployerComponent {
 		this.httpService = null;
 	}
 
-	public void setConfigurator(Configurator configurator) {
-		this.configurator = configurator;
-	}
-
-	public void unsetConfigurator(Configurator configurator) {
-		this.configurator = null;
-	}
-
-	public void setProvisioningAgent(IProvisioningAgent provisioningAgent) {
-		this.provisioningAgent = provisioningAgent;
-	}
-
-	public void unsetProvisioningAgent(IProvisioningAgent provisioningAgent) {
-		this.provisioningAgent = null;
-	}
-
 	protected void startService() throws ServletException, NamespaceException {
-		initializer.setProvisioningAgent(provisioningAgent);
-		initializer.setConfigurator(configurator);
+		initializer.setRtpService(rtpService);
 		initializer.setHttpService(httpService);
 		initializer.init();
 	}
