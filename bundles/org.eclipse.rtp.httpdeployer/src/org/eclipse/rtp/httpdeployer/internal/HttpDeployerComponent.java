@@ -10,7 +10,7 @@ package org.eclipse.rtp.httpdeployer.internal;
 
 import javax.servlet.ServletException;
 
-import org.eclipse.rtp.core.IRTPService;
+import org.eclipse.rtp.core.RuntimeProvisioningService;
 import org.osgi.service.http.HttpService;
 import org.osgi.service.http.NamespaceException;
 
@@ -19,13 +19,13 @@ public class HttpDeployerComponent {
 	private HttpDeployerInitializer initializer = new HttpDeployerInitializer();
 
 	protected HttpService httpService;
-	protected IRTPService rtpService;
+	protected RuntimeProvisioningService rtpService;
 
-	public void setRtpService(IRTPService rtpService) {
+	public void setRuntimeProvisioningService(RuntimeProvisioningService rtpService) {
 		this.rtpService = rtpService;
 	}
 
-	public void unsetRtpService(IRTPService rtpService) {
+	public void unsetRuntimeProvisioningService(RuntimeProvisioningService rtpService) {
 		this.rtpService = null;
 	}
 

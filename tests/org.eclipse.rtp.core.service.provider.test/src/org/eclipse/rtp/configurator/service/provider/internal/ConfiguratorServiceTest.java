@@ -40,7 +40,7 @@ import org.osgi.framework.Version;
 
 public class ConfiguratorServiceTest {
 
-  private RTPDefaultService configuratorService;
+  private RuntimeProvisioningServiceImpl configuratorService;
   private P2Util p2UtilMock;
   private SourceProvider sourceProvider;
   private FeatureManager featureManager;
@@ -48,7 +48,7 @@ public class ConfiguratorServiceTest {
 
   @Before
   public void setUp() throws IOException {
-    configuratorService = new RTPDefaultService();
+    configuratorService = new RuntimeProvisioningServiceImpl();
     p2UtilMock = mock( P2Util.class );
     configuratorService.setP2Util( p2UtilMock );
     InputStream inputStream = Fixture.readExampleSources();

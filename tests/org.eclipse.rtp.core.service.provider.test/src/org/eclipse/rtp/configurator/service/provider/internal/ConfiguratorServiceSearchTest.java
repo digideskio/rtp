@@ -26,11 +26,11 @@ import org.junit.Test;
 public class ConfiguratorServiceSearchTest {
 
   private SourceProvider provider;
-  private RTPDefaultService configuratorService;
+  private RuntimeProvisioningServiceImpl configuratorService;
 
   @Before
   public void setUp() throws IOException {
-    configuratorService = new RTPDefaultService();
+    configuratorService = new RuntimeProvisioningServiceImpl();
     configuratorService.setUp();
     InputStream stream = Fixture.readExampleSources();
     provider = Fixture.getSourceProvider( stream );

@@ -12,15 +12,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.rtp.core.IRTPService;
+import org.eclipse.rtp.core.RuntimeProvisioningService;
 import org.eclipse.rtp.core.model.Feature;
 import org.eclipse.rtp.core.model.SourceVersion;
 
 public class FeatureManager {
 
-	private IRTPService rtpService;
+	private RuntimeProvisioningService rtpService;
 
-	public FeatureManager(IRTPService rtpService) {
+	public FeatureManager(RuntimeProvisioningService rtpService) {
 		this.rtpService = rtpService;
 	}
 

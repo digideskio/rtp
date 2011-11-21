@@ -12,22 +12,22 @@ import java.util.List;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.rtp.configurator.console.internal.CommandUtil;
-import org.eclipse.rtp.core.IRTPService;
+import org.eclipse.rtp.core.RuntimeProvisioningService;
 import org.eclipse.rtp.core.model.SourceVersion;
 
 public class CommandDelegateImpl implements CommandDelegate {
 
-  private static IRTPService configurationService;
+  private static RuntimeProvisioningService configurationService;
   private static CommandUtil commandUtil;
   private final static String TAB = "\t"; //$NON-NLS-1$
   private final static String NEW_LINE = "\r\n"; //$NON-NLS-1$
 
-  public static void setUp( IRTPService service ) {
+  public static void setUp( RuntimeProvisioningService service ) {
     CommandDelegateImpl.configurationService = service;
     commandUtil = new CommandUtil();
   }
 
-  public static void shutDown( IRTPService service ) {
+  public static void shutDown( RuntimeProvisioningService service ) {
     CommandDelegateImpl.configurationService = null;
   }
 

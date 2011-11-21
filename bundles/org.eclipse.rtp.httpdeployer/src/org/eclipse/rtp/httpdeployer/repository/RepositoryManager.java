@@ -19,7 +19,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import org.apache.commons.io.FileUtils;
-import org.eclipse.rtp.core.IRTPService;
+import org.eclipse.rtp.core.RuntimeProvisioningService;
 import org.eclipse.rtp.httpdeployer.internal.CommonConstants;
 
 public class RepositoryManager {
@@ -28,9 +28,9 @@ public class RepositoryManager {
 	private static final String FILENAME_CONTENT = "content.jar"; //$NON-NLS-N$
 	private static final String FILENAME_ARTIFACTS = "artifacts.jar"; //$NON-NLS-N$
 	private static final int FILE_BUFFER = 8192;
-	private final IRTPService rtpService;
+	private final RuntimeProvisioningService rtpService;
 
-	public RepositoryManager(IRTPService rtpService) {
+	public RepositoryManager(RuntimeProvisioningService rtpService) {
 		this.rtpService = rtpService;
 	}
 

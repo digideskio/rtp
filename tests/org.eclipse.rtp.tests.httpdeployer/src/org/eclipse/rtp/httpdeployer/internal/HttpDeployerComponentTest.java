@@ -18,7 +18,7 @@ import java.util.Dictionary;
 import javax.servlet.Servlet;
 import javax.servlet.ServletException;
 
-import org.eclipse.rtp.core.IRTPService;
+import org.eclipse.rtp.core.RuntimeProvisioningService;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -33,7 +33,7 @@ public class HttpDeployerComponentTest {
 	HttpService service;
 
 	@Mock
-	IRTPService rtpService;
+	RuntimeProvisioningService rtpService;
 
 	@Before
 	public void setUp() {
@@ -44,7 +44,7 @@ public class HttpDeployerComponentTest {
 	public void deployerComponentTest() throws ServletException, NamespaceException {
 		HttpDeployerComponent component = new HttpDeployerComponent();
 		component.setHttpService(service);
-		component.setRtpService(rtpService);
+		component.setRuntimeProvisioningService(rtpService);
 		component.startService();
 
 		verify(service).registerServlet(eq(HttpDeployerInitializer.ALIAS_REPOSITORY), any(Servlet.class), any(Dictionary.class),
@@ -63,7 +63,7 @@ public class HttpDeployerComponentTest {
 		verify(service).unregister(HttpDeployerInitializer.ALIAS_SYSTEM);
 
 		component.unsetHttpService(service);
-		component.unsetRtpService(rtpService);
+		component.unsetRuntimeProvisioningService(rtpService);
 
 		assertEquals(null, component.httpService);
 		assertEquals(null, component.rtpService);

@@ -22,7 +22,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import org.apache.commons.io.FileUtils;
-import org.eclipse.rtp.core.IRTPService;
+import org.eclipse.rtp.core.RuntimeProvisioningService;
 import org.eclipse.rtp.httpdeployer.internal.CommonConstants;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,7 +32,7 @@ import org.mockito.MockitoAnnotations;
 public class RepositoryManagerTest {
 
 	@Mock
-	private IRTPService rtpMock;
+	private RuntimeProvisioningService rtpMock;
 
 	@Before
 	public void setUp() {

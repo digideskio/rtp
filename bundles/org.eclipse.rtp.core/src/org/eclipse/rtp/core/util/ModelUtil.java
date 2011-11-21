@@ -15,7 +15,7 @@ import java.util.List;
 
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.rtp.core.internal.RTPCoreActivator;
+import org.eclipse.rtp.core.internal.CoreActivator;
 import org.eclipse.rtp.core.model.Source;
 import org.eclipse.rtp.core.model.SourceProvider;
 import org.eclipse.rtp.core.model.SourceUnMarshaller;
@@ -71,7 +71,7 @@ public class ModelUtil {
   private static String getLocalURL() {
     String result = "";
     try {
-      URL unresolvedURL = FileLocator.find( RTPCoreActivator.getBundleContext().getBundle(),
+      URL unresolvedURL = FileLocator.find( CoreActivator.getBundleContext().getBundle(),
                                             new Path( "data/juno-sources.json" ),
                                             null );
       result = FileLocator.resolve( unresolvedURL ).toExternalForm();
@@ -82,7 +82,7 @@ public class ModelUtil {
   }
 
   public static String getConfigurationURL() {
-    return RTPCoreActivator.getBundleContext().getProperty( CONFIGURATION_URL );
+    return CoreActivator.getBundleContext().getProperty( CONFIGURATION_URL );
   }
 
   public Comparator<SourceVersion> getSourceVersionComparator() {

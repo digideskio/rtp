@@ -10,7 +10,7 @@ package org.eclipse.rtp.httpdeployer.internal;
 
 import javax.servlet.ServletException;
 
-import org.eclipse.rtp.core.IRTPService;
+import org.eclipse.rtp.core.RuntimeProvisioningService;
 import org.eclipse.rtp.httpdeployer.bundle.BundleServlet;
 import org.eclipse.rtp.httpdeployer.feature.FeatureManager;
 import org.eclipse.rtp.httpdeployer.feature.FeatureServlet;
@@ -33,7 +33,7 @@ public class HttpDeployerInitializer {
 	private SystemServlet systemServlet;
 	private RepositoryManager repositoryManager;
 	private FeatureManager featureManager;
-	private IRTPService rtpService;
+	private RuntimeProvisioningService rtpService;
 
 	public void init() throws ServletException, NamespaceException {
 		createManager();
@@ -62,7 +62,7 @@ public class HttpDeployerInitializer {
 		System.out.println("Registered HttpDeployer Servlets");
 	}
 
-	public void setRtpService(IRTPService rtpService) {
+	public void setRtpService(RuntimeProvisioningService rtpService) {
 		this.rtpService = rtpService;
 	}
 

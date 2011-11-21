@@ -21,12 +21,12 @@ import org.eclipse.rtp.configurator.service.provider.internal.deploy.FeatureInst
 import org.eclipse.rtp.configurator.service.provider.internal.deploy.FeatureManager;
 import org.eclipse.rtp.configurator.service.provider.internal.deploy.RepositoryManager;
 import org.eclipse.rtp.configurator.service.provider.internal.util.P2Util;
-import org.eclipse.rtp.core.IRTPService;
+import org.eclipse.rtp.core.RuntimeProvisioningService;
 import org.eclipse.rtp.core.model.Source;
 import org.eclipse.rtp.core.model.SourceVersion;
 import org.eclipse.rtp.core.util.ModelUtil;
 
-public class RTPDefaultService implements IRTPService {
+public class RuntimeProvisioningServiceImpl implements RuntimeProvisioningService {
 
   private P2Util p2Util;
 

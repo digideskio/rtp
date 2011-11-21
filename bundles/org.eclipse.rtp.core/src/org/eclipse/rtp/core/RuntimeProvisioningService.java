@@ -14,7 +14,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.rtp.core.model.SourceVersion;
 
-public interface IRTPService {
+public interface RuntimeProvisioningService {
 
   IStatus install( SourceVersion sourceVersion );
 
