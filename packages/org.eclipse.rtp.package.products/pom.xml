@@ -76,9 +76,9 @@
   </build>
   <pluginRepositories>
     <pluginRepository>
-      <id>jetty-snapshots</id>
+      <id>eclipse-juno-milestones</id>
       <layout>default</layout>
-      <url>https://oss.sonatype.org/content/groups/jetty</url>
+      <url>http://maven.eclipse.org/nexus/content/repositories/milestone-juno/</url>
       <snapshots><enabled>true</enabled></snapshots>
     </pluginRepository>
   </pluginRepositories>
