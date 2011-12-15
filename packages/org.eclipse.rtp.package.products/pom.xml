@@ -78,7 +78,7 @@
     <pluginRepository>
       <id>eclipse-indigo-milestones</id>
       <layout>default</layout>
-      <url>http://maven.eclipse.org/nexus/content/repositories/milestone-indigo/</url>
+      <url>http://maven.eclipse.org/nexus/content/groups/public</url>
       <snapshots><enabled>true</enabled></snapshots>
     </pluginRepository>
   </pluginRepositories>
