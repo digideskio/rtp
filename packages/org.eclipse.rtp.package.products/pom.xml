@@ -76,9 +76,9 @@
   </build>
   <pluginRepositories>
     <pluginRepository>
-      <id>eclipse-juno-milestones</id>
+      <id>eclipse-indigo-milestones</id>
       <layout>default</layout>
-      <url>http://maven.eclipse.org/nexus/content/repositories/milestone-juno/</url>
+      <url>http://maven.eclipse.org/nexus/content/repositories/milestone-indigo/</url>
       <snapshots><enabled>true</enabled></snapshots>
     </pluginRepository>
   </pluginRepositories>
@@ -96,7 +96,7 @@
          <plugin>
            <groupId>org.eclipse.dash.maven</groupId>
            <artifactId>eclipse-maven-signing-plugin</artifactId>
-           <version>1.0.5-SNAPSHOT</version>
+           <version>1.0.5</version>
            <executions>
              <execution>
                <id>pack</id>
