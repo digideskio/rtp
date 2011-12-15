@@ -74,14 +74,6 @@
       </plugin>
     </plugins>
   </build>
-  <pluginRepositories>
-    <pluginRepository>
-      <id>eclipse-indigo-milestones</id>
-      <layout>default</layout>
-      <url>http://maven.eclipse.org/nexus/content/groups/public</url>
-      <snapshots><enabled>true</enabled></snapshots>
-    </pluginRepository>
-  </pluginRepositories>
   <profiles>
     <profile>
      <id>packAndSign</id>
@@ -94,9 +86,9 @@
      <build>
        <plugins>
          <plugin>
-           <groupId>org.eclipse.dash.maven</groupId>
-           <artifactId>eclipse-maven-signing-plugin</artifactId>
-           <version>1.0.5</version>
+          <groupId>org.eclipse.dash.maven</groupId>
+          <artifactId>eclipse-signing-maven-plugin</artifactId>
+          <version>1.0.5</version>    
            <executions>
              <execution>
                <id>pack</id>
