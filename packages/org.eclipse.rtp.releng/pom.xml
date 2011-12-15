@@ -72,7 +72,7 @@
         <build-identifier>N</build-identifier>
         <eclipse-site>http://download.eclipse.org/eclipse/updates/3.8-N-builds/</eclipse-site>
         <jetty-site>http://download.eclipse.org/jetty/updates/jetty-rt-3.8-N-builds/</jetty-site> 
-		<orbit-site>http://download.eclipse.org/tools/orbit/downloads/drops/I20111024194300/repository/</orbit-site>
+		<orbit-site>http://download.eclipse.org/tools/orbit/downloads/drops/S20111201180206/repository/</orbit-site>
       </properties>
     </profile>
     <profile>
