@@ -85,8 +85,8 @@
       </activation>
       <properties>
         <eclipse-site>http://download.eclipse.org/eclipse/updates/3.8milestones/</eclipse-site>
-        <jetty-site>http://download.eclipse.org/jetty/updates/jetty-rt-3.8milestones/S-3.8M2-201109140450/</jetty-site>  
-		<orbit-site>http://download.eclipse.org/tools/orbit/downloads/drops/I20111024194300/repository/</orbit-site>
+        <jetty-site>http://download.eclipse.org/jetty/updates/jetty-rt-3.8milestones/S-3.8M4-201112120252/</jetty-site>  
+		<orbit-site>http://download.eclipse.org/tools/orbit/downloads/drops/S20111201180206/repository/</orbit-site>
       </properties>
     </profile>
   </profiles>
