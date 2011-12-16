@@ -24,7 +24,7 @@
     <rtp-version>0.1.0-SNAPSHOT</rtp-version>
     <artifact-build-version>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.v${maven.build.timestamp}-${build-identifier}</artifact-build-version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <tycho-version>0.13.0-SNAPSHOT</tycho-version>
+    <tycho-version>0.13.0</tycho-version>
     <tycho-groupid>org.eclipse.tycho</tycho-groupid>
   </properties>
 
@@ -72,7 +72,7 @@
         <build-identifier>N</build-identifier>
         <eclipse-site>http://download.eclipse.org/eclipse/updates/3.8-N-builds/</eclipse-site>
         <jetty-site>http://download.eclipse.org/jetty/updates/jetty-rt-3.8-N-builds/</jetty-site> 
-		<orbit-site>http://download.eclipse.org/tools/orbit/downloads/drops/S20111201180206/repository/</orbit-site>
+		    <orbit-site>http://download.eclipse.org/tools/orbit/downloads/drops/S20111201180206/repository/</orbit-site>
       </properties>
     </profile>
     <profile>
@@ -84,9 +84,9 @@
         </property>
       </activation>
       <properties>
-        <eclipse-site>http://download.eclipse.org/eclipse/updates/3.8milestones/</eclipse-site>
-        <jetty-site>http://download.eclipse.org/jetty/updates/jetty-rt-3.8milestones/S-3.8M4-201112120252/</jetty-site>  
-		<orbit-site>http://download.eclipse.org/tools/orbit/downloads/drops/S20111201180206/repository/</orbit-site>
+        <eclipse-site>http://download.eclipse.org/eclipse/updates/3.8milestones/S-3.8M4-201112091447</eclipse-site>
+        <jetty-site>http://download.eclipse.org/jetty/updates/jetty-rt-3.8milestones/</jetty-site>  
+		    <orbit-site>http://download.eclipse.org/tools/orbit/downloads/drops/S20111201180206/repository/</orbit-site>
       </properties>
     </profile>
   </profiles>
@@ -162,16 +162,6 @@
         <enabled>true</enabled>
        </releases>
      </pluginRepository>
-     <pluginRepository>
-      <id>tycho</id>
-      <url>https://repository.sonatype.org/content/repositories/snapshots/</url>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-    </pluginRepository>
   </pluginRepositories>
 
   <build>
