@@ -72,7 +72,8 @@ public class P2Util {
 		}
 	}
 	
-	private static <T> T getService(BundleContext context, Class<T> type, String name) {
+  @SuppressWarnings( "unchecked" )
+  private static <T> T getService(BundleContext context, Class<T> type, String name) {
 		if (context == null || name == null) {
 			throw new IllegalArgumentException();
 		}
