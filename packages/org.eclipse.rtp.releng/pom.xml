@@ -121,35 +121,19 @@
   </licenses>
 
   <modules>
-    <!-- Configurator -->
+    <!-- Bundles -->
     <module>../../bundles/org.eclipse.rtp.core</module>
     <module>../../bundles/org.eclipse.rtp.core.service.provider</module>
     <module>../../bundles/org.eclipse.rtp.core.model</module>
     <module>../../bundles/org.eclipse.rtp.configurator.console</module>
-    <module>../../bundles/org.eclipse.rtp.configurator.feature</module>
-    <!-- Packages -->
-    <module>../org.eclipse.rtp.package.basic.feature</module>
-    <module>../org.eclipse.rtp.package.web.feature</module>
-    <module>../org.eclipse.rtp.package.products</module>
+    <module>../../bundles/org.eclipse.rtp.httpdeployer</module>
+    <!-- Features -->
+    <module>../org.eclipse.rtp.package.runtime.feature</module>
+    <module>../org.eclipse.rtp.package.headless.feature</module>
+    <module>../org.eclipse.rtp.package.feature</module>
+    <!-- Products -->
+    <module>../org.eclipse.rtp.package.headless.product</module>
   </modules>
-
-  <repositories>
-    <repository>
-      <id>eclipse</id>
-      <layout>p2</layout>
-      <url>${eclipse-site}</url>
-    </repository>
-    <repository>
-      <id>jetty</id>
-      <layout>p2</layout>
-      <url>${jetty-site}</url>
-    </repository>   
-    <repository>
-      <id>orbit</id>
-      <layout>p2</layout>
-      <url>${orbit-site}</url>
-    </repository>
-  </repositories>
 
   <pluginRepositories>
      <pluginRepository>
@@ -189,6 +173,14 @@
         <configuration>
           <resolver>p2</resolver>
           <ignoreTychoRepositories>true</ignoreTychoRepositories>
+          <target>
+            <artifact>
+              <groupId>${project.groupId}</groupId>
+              <artifactId>${project.artifactId}</artifactId>
+              <version>${project.version}</version>
+              <classifier>../../packages/org.eclipse.rtp.build.target/juno-milestones</classifier>
+            </artifact>
+          </target>          
           <environments>
             <environment>
               <os>linux</os>

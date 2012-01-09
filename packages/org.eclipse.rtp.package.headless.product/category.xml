@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/org.eclipse.rtp.package.runtime.feature_1.0.0.qualifier.jar" id="org.eclipse.rtp.package.runtime.feature" version="1.0.0.qualifier">
+      <category name="org.eclipse.rtp"/>
+   </feature>
+   <feature url="features/org.eclipse.rtp.package.headless.feature_1.0.0.qualifier.jar" id="org.eclipse.rtp.package.headless.feature" version="1.0.0.qualifier">
+      <category name="org.eclipse.rtp"/>
+   </feature>
+   <category-def name="org.eclipse.rtp" label="RTP Target Components"/>
+</site>

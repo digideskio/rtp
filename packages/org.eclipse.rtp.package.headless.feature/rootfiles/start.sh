@@ -12,7 +12,7 @@
 # This scripts generates a command-line to launch equinox.
 # It uses the arguments defined in the *.ini file
 
-# set path to eclipse folder. If local folder, use '.'; otherwise, use /path/to/eclipse/
+# set path to eclipse folder. If local folder, use '.'; otherwise, use /path/to/eclipse/     
 eclipsehome=`dirname $0`;
 cd $eclipsehome
 eclipsehome=`pwd`
@@ -42,7 +42,7 @@ if [ ! -f "$startup" ]; then
   #was returned as path relative to iniLookupFolder
   if [ ! -f "$iniLookupFolder/$startup" ]; then
     if [ -d "$eclipsehome/plugins" ]; then
-      startup=$(find "$eclipsehome/plugins" -name "org.eclipse.equinox.launcher_*.jar" | sort | tail -1);
+      startup=$(find "$eclipsehome/plugins" -name "org.eclipse.equinox.launcher_*.jar" | sort | tail -1); 
     fi
     if [ ! -f "$startup" ]; then
       echo "Can't locate the launcher jar $startup"
@@ -51,19 +51,20 @@ if [ ! -f "$startup" ]; then
   else
     startup="$iniLookupFolder/$startup"
   fi
-fi
+fi  
+
 
 ##VM arguments and system properties
 #PermGen
-XXMaxPermSize=`echo "$args" | sed -n '/--launcher\.XXMaxPermSize/{n;p;}'`
-if [ -n "$XXMaxPermSize" ]; then
-  XXMaxPermSize="-XX:MaxPermSize=$XXMaxPermSize"
-  #also remove those 2 lines from the args
-  args=`echo "$args" | sed '/--launcher\.XXMaxPermSize/,+1d'`
-fi
+#XXMaxPermSize=`echo "$args" | sed -n '/--launcher\.XXMaxPermSize/{n;p;}'`
+#if [ -n "$XXMaxPermSize" ]; then  
+#  XXMaxPermSize="-XX:MaxPermSize=$XXMaxPermSize"
+#  #also remove those 2 lines from the args
+#  args=`echo "$args" | sed '/--launcher\.XXMaxPermSize/,+1d'`
+#fi
 #vmargs
 #VMARGS=`sed '1,/-vmargs/d' $ini | tr '\n' ' '`$XXMaxPermSize
-VMARGS=`sed '1,/-vmargs/d' $ini`
+#VMARGS=`sed '1,/-vmargs/d' $ini`     
 
 if [ -z "$JAVA_OPTS" ]; then
   JAVA_OPTS=`echo "$VMARGS" | tr '\n' ' '`$XXMaxPermSize
@@ -117,7 +118,7 @@ elif [ -n "$VMARGS" ]; then
   fi
   JAVA_OPTS="$JAVA_OPTS $VMARGS_UPDATED"
   #echo "JAVA_OPTS MERGED $JAVA_OPTS"
-fi
+fi     
 
 #use -install unless it was already specified in the ini file:
 installArg=$(echo "$args" | sed '/^-install/!d')
@@ -138,19 +139,6 @@ else
     configurationArg=" -configuration configuration"
 fi
 
-#Read the console argument. It could be a flag.
-#console=`awk '{if ($1 ~ /-console/){print $1}}' < $ini | head -1`
-#console=`echo "$args" | sed '/^-console/!d'`
-#if [ -n "$console" ]; then
-#  consoleArg=`echo "$args" | sed -n '/^-console/{n;p;}'`
-#  first=`echo "$consoleArg" | cut -c1-1`
-#  args=`echo "$args" | sed '/-console/,+1d'`
-#  if [ "$first" = "-" ]; then
-#    console=" -console"
-#  else
-#    console=" -console $consoleArg"
-#  fi
-#fi
 console=" -console"
 
 args=`echo "$args" | tr '\n' ' '`
