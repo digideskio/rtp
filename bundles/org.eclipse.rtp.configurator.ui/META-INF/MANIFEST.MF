@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: RTP Configurator UI
+Bundle-SymbolicName: org.eclipse.rtp.configurator.ui
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: Eclipse RTP
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.eclipse.rap.rwt;bundle-version="[1.5.0,1.6.0)"
+Service-Component: OSGI-INF/UIConfigurator.xml

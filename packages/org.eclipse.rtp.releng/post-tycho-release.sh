@@ -1,6 +1,6 @@
 #!/bin/bash
 ################################################################################
-# Copyright (c) 2011 EclipseSource Inc. and others.
+# Copyright (c) 2011-2012 EclipseSource Inc. and others.
 # All rights reserved. This program and the accompanying materials
 # are made available under the terms of the Eclipse Public License v1.0
 # which accompanies this distribution, and is available at
@@ -8,6 +8,7 @@
 # 
 # Contributors:
 #     hmalphettes - initial API and implementation
+#     hstaduacher - ongoing development
 ################################################################################
 # Called once the tycho build has completed.
 # Takes care of a few shortcomings in the current tycho build.
@@ -26,67 +27,68 @@ cd $PACKAGES_FOLDER
 # Look for the *.sh files there and change their permission to executable.
 # tar.gz those products.
 # For example:
-# org.eclipse.rtp.package.products/target/products/org.eclipse.rtp.package.basic/linux/gtk/x86/rt-basic-incubation-0.1.0.v20110308-1242-N
+# org.eclipse.rtp.packages/target/products/org.eclipse.rtp.package/linux/gtk/x86/rt-incubation-0.1.0.v20110308-1242-N
 # is such a folder where the manips must take place.
-BUILT_PRODUCTS="$PACKAGES_FOLDER/org.eclipse.rtp.package.headless.product/target/products"
+BUILT_PRODUCTS="$PACKAGES_FOLDER/org.eclipse.rtp.packages/target/products"
 
 
 #We choose to be mention by name each one of the product
 # It is tedious and a bit redundant but we want to make sure that the expected folders
 # are where they are supposed to be.
 # If that is not the case let's fail the build quickly.
-RT_BASIC_LINUX32_PRODUCT="$BUILT_PRODUCTS/org.eclipse.rtp.package.headless.product/linux/gtk/x86"
-[ ! -d "$RT_BASIC_LINUX32_PRODUCT" ] && { echo "ERROR: unable to locate a built product $RT_BASIC_LINUX32_PRODUCT is not a folder"; exit 42; }
+RT_HEADLESS_LINUX32_PRODUCT="$BUILT_PRODUCTS/org.eclipse.rtp.package.headless/linux/gtk/x86"
+[ ! -d "$RT_HEADLESS_LINUX32_PRODUCT" ] && { echo "ERROR: unable to locate a built product $RT_HEADLESS_LINUX32_PRODUCT is not a folder"; exit 42; }
 # Reads the name of the top level folder.
-RT_BASIC_FOLDER_NAME=`find $RT_BASIC_LINUX32_PRODUCT -maxdepth 1 -mindepth 1 -type d -exec basename {} \;`
+RT_HEADLESS_FOLDER_NAME=`find $RT_HEADLESS_LINUX32_PRODUCT -maxdepth 1 -mindepth 1 -type d -exec basename {} \;`
 #get the version number from the folder name. it looks like this:
-# rt-basic-incubation-0.1.0.v20110308-1653-N
-BUILD_VERSION=$(echo "$RT_BASIC_FOLDER_NAME" | sed 's/^rt-basic-incubation-//')
+# rt-headless-incubation-0.1.0.v20110308-1653-N
 
 
 # Now change the permission: NOT useful anymore with TYCHO-566 partially fixed.
-find $RT_BASIC_LINUX32_PRODUCT/$RT_BASIC_FOLDER_NAME -maxdepth 1 -name *.sh -exec chmod +x {} \;
+find $RT_HEADLESS_LINUX32_PRODUCT/$RT_HEADLESS_FOLDER_NAME -maxdepth 1 -name *.sh -exec chmod +x {} \;
 
 #Remove the executable launcher specific to linux32
 # Delete eclipse executable
-RT_BASIC_EXEC=$RT_BASIC_LINUX32_PRODUCT/$RT_BASIC_FOLDER_NAME/eclipse
-[ -f "$RT_BASIC_EXEC" ] && rm $RT_BASIC_EXEC || echo "INFO: no native launcher to delete $RT_BASIC_EXEC"
+RT_HEADLESS_EXEC=$RT_HEADLESS_LINUX32_PRODUCT/$RT_HEADLESS_FOLDER_NAME/eclipse
+[ -f "$RT_HEADLESS_EXEC" ] && rm $RT_HEADLESS_EXEC || echo "INFO: no native launcher to delete $RT_HEADLESS_EXEC"
 # Delete libcairo-swt.so
-RT_BASIC_SWT_LIB=$RT_BASIC_LINUX32_PRODUCT/$RT_BASIC_FOLDER_NAME/libcairo-swt.so
-[ -f "$RT_BASIC_SWT_LIB" ] && rm $RT_BASIC_SWT_LIB || echo "INFO: no native launcher to delete $RT_BASIC_SWT_LIB"
+RT_HEADLESS_SWT_LIB=$RT_HEADLESS_LINUX32_PRODUCT/$RT_HEADLESS_FOLDER_NAME/libcairo-swt.so
+[ -f "$RT_HEADLESS_SWT_LIB" ] && rm $RT_HEADLESS_SWT_LIB || echo "INFO: no native launcher to delete $RT_HEADLESS_SWT_LIB"
 # Delete native launcher folder
-RT_BASIC_NATIVE_LAUNCHER=$RT_BASIC_LINUX32_PRODUCT/$RT_BASIC_FOLDER_NAME/plugins/`ls -1 $RT_BASIC_LINUX32_PRODUCT/$RT_BASIC_FOLDER_NAME/plugins | grep org.eclipse.equinox.launcher.gtk.linux.x86 | tail -n 1`
-#[ -d "$RT_BASIC_NATIVE_LAUNCHER" ] && rm -rf $RT_BASIC_NATIVE_LAUNCHER || echo "INFO: no native launcher to delete $RT_BASIC_NATIVE_LAUNCHER"
+RT_HEADLESS_NATIVE_LAUNCHER=$RT_HEADLESS_LINUX32_PRODUCT/$RT_HEADLESS_FOLDER_NAME/plugins/`ls -1 $RT_HEADLESS_LINUX32_PRODUCT/$RT_HEADLESS_FOLDER_NAME/plugins | grep org.eclipse.equinox.launcher.gtk.linux.x86 | tail -n 1`
+#[ -d "$RT_HEADLESS_NATIVE_LAUNCHER" ] && rm -rf $RT_HEADLESS_NATIVE_LAUNCHER || echo "INFO: no native launcher to delete $RT_HEADLESS_NATIVE_LAUNCHER"
 
 # Now tar.gz the whole thing
-cd $RT_BASIC_LINUX32_PRODUCT
-tar cvzf $RT_BASIC_FOLDER_NAME.tar.gz $RT_BASIC_FOLDER_NAME/
+cd $RT_HEADLESS_LINUX32_PRODUCT
+tar cvzf $RT_HEADLESS_FOLDER_NAME.tar.gz $RT_HEADLESS_FOLDER_NAME/
 #Also zip the product. It will look better than the zip produced by tycho that contains the native launcher.
-zip -r $RT_BASIC_FOLDER_NAME.zip $RT_BASIC_FOLDER_NAME/
-mv $RT_BASIC_FOLDER_NAME.zip $BUILT_PRODUCTS/../
-mv $RT_BASIC_FOLDER_NAME.tar.gz $BUILT_PRODUCTS/../
+zip -r $RT_HEADLESS_FOLDER_NAME.zip $RT_HEADLESS_FOLDER_NAME/
+mv $RT_HEADLESS_FOLDER_NAME.zip $BUILT_PRODUCTS/../
+mv $RT_HEADLESS_FOLDER_NAME.tar.gz $BUILT_PRODUCTS/../
 cd $PACKAGES_FOLDER
 
-#Same for web:
-#RT_WEB_LINUX32_PRODUCT="$BUILT_PRODUCTS/org.eclipse.rtp.package.web/linux/gtk/x86"
-#[ ! -d "$RT_WEB_LINUX32_PRODUCT" ] && { echo "ERROR: unable to locate a built product $RT_WEB_LINUX32_PRODUCT is not a folder"; exit 42; }
-#RT_WEB_FOLDER_NAME=`find $RT_WEB_LINUX32_PRODUCT -maxdepth 1 -mindepth 1 -type d -exec basename {} \;`
-#find $RT_WEB_LINUX32_PRODUCT/$RT_WEB_FOLDER_NAME -maxdepth 1 -name *.sh -exec chmod +x {} \;
-# Delete eclipse executable
-#RT_WEB_EXEC=$RT_WEB_LINUX32_PRODUCT/$RT_WEB_FOLDER_NAME/eclipse
-#[ -f "$RT_WEB_EXEC" ] && rm $RT_WEB_EXEC || echo "INFO: no native launcher to delete $RT_WEB_EXEC"
-# Delete libcairo-swt.so
-#RT_WEB_SWT_LIB=$RT_WEB_LINUX32_PRODUCT/$RT_WEB_FOLDER_NAME/libcairo-swt.so
-#[ -f "$RT_WEB_SWT_LIB" ] && rm $RT_WEB_SWT_LIB || echo "INFO: no native launcher to delete $RT_WEB_SWT_LIB"
-# Delete native launcher folder
-#RT_WEB_NATIVE_LAUNCHER=$RT_WEB_LINUX32_PRODUCT/$RT_WEB_FOLDER_NAME/plugins/`ls -1 $RT_WEB_LINUX32_PRODUCT/$RT_WEB_FOLDER_NAME/plugins | grep org.eclipse.equinox.launcher.gtk.linux.x86 | tail -n 1`
+BUILD_VERSION=$(echo "$RT_HEADLESS_FOLDER_NAME" | sed 's/^rt-headless-incubation-//')
 
-#cd $RT_WEB_LINUX32_PRODUCT
-#tar cvzf $RT_WEB_FOLDER_NAME.tar.gz $RT_WEB_FOLDER_NAME/
-#zip -r $RT_WEB_FOLDER_NAME.zip $RT_WEB_FOLDER_NAME/
-#mv $RT_WEB_FOLDER_NAME.zip $BUILT_PRODUCTS/../
-#mv $RT_WEB_FOLDER_NAME.tar.gz $BUILT_PRODUCTS/../
-#cd $PACKAGES_FOLDER
+#Same for normal package:
+RT_LINUX32_PRODUCT="$BUILT_PRODUCTS/org.eclipse.rtp.package/linux/gtk/x86"
+[ ! -d "$RT_LINUX32_PRODUCT" ] && { echo "ERROR: unable to locate a built product $RT_LINUX32_PRODUCT is not a folder"; exit 42; }
+RT_FOLDER_NAME=`find $RT_LINUX32_PRODUCT -maxdepth 1 -mindepth 1 -type d -exec basename {} \;`
+find $RT_LINUX32_PRODUCT/$RT_FOLDER_NAME -maxdepth 1 -name *.sh -exec chmod +x {} \;
+# Delete eclipse executable
+RT_EXEC=$RT_LINUX32_PRODUCT/$RT_FOLDER_NAME/eclipse
+[ -f "$RT_EXEC" ] && rm $RT_EXEC || echo "INFO: no native launcher to delete $RT_EXEC"
+# Delete libcairo-swt.so
+RT_SWT_LIB=$RT_LINUX32_PRODUCT/$RT_FOLDER_NAME/libcairo-swt.so
+[ -f "$RT_SWT_LIB" ] && rm $RT_SWT_LIB || echo "INFO: no native launcher to delete $RT_SWT_LIB"
+# Delete native launcher folder
+RT_NATIVE_LAUNCHER=$RT_LINUX32_PRODUCT/$RT_FOLDER_NAME/plugins/`ls -1 $RT_LINUX32_PRODUCT/$RT_FOLDER_NAME/plugins | grep org.eclipse.equinox.launcher.gtk.linux.x86 | tail -n 1`
+
+cd $RT_LINUX32_PRODUCT
+tar cvzf $RT_FOLDER_NAME.tar.gz $RT_FOLDER_NAME/
+zip -r $RT_FOLDER_NAME.zip $RT_FOLDER_NAME/
+mv $RT_FOLDER_NAME.zip $BUILT_PRODUCTS/../
+mv $RT_FOLDER_NAME.tar.gz $BUILT_PRODUCTS/../
+cd $PACKAGES_FOLDER
 
 #If we have many more products let's consider something more generic.
 
@@ -154,9 +156,10 @@ mv "$BUILT_PRODUCTS/../$BUILD_VERSION_NO_BUILD_IDENTIFIER" "$DOWNLOAD_P2_FOLDER"
 
 echo "Deploying the archived products in $DOWNLOAD_PRODUCTS_FOLDER"
 mkdir -p $DOWNLOAD_PRODUCTS_FOLDER
-echo "$BUILT_PRODUCTS/../$RT_BASIC_FOLDER_NAME.zip"
-cp $BUILT_PRODUCTS/../$RT_BASIC_FOLDER_NAME.zip $DOWNLOAD_PRODUCTS_FOLDER
-#cp $BUILT_PRODUCTS/../$RT_WEB_FOLDER_NAME.zip $DOWNLOAD_PRODUCTS_FOLDER
+echo "$BUILT_PRODUCTS/../$RT_HEADLESS_FOLDER_NAME.zip"
+cp $BUILT_PRODUCTS/../$RT_HEADLESS_FOLDER_NAME.zip $DOWNLOAD_PRODUCTS_FOLDER
+echo "$BUILT_PRODUCTS/../$RT_FOLDER_NAME.zip"
+cp $BUILT_PRODUCTS/../$RT_FOLDER_NAME.zip $DOWNLOAD_PRODUCTS_FOLDER
 
 TIMESTAMP=`date +%s`
 TIMESTAMP_FORMATTED=`date -d "1970-01-01 UTC + $TIMESTAMP seconds"`
@@ -170,11 +173,12 @@ echo "<html>
   <body>
     <h2>Eclipse RTP build $BUILD_VERSION_NO_BUILD_IDENTIFIER</h2>
     <p>This is a p2 repository built on $TIMESTAMP_FORMATTED.<br/>
-    It contains the Eclipse Package.
+    It contains the Eclipse Packages.
     Point PDE or p2-driector or maven-tycho at the current url to start installing products and features published here</p>
     <p>Product archives:
        <ul>
-         <li><a href=\"$RT_BASIC_FOLDER_NAME.zip\">$RT_BASIC_FOLDER_NAME.zip</a></li>
+         <li><a href=\"$RT_HEADLESS_FOLDER_NAME.zip\">$RT_HEADLESS_FOLDER_NAME.zip</a></li>
+         <li><a href=\"$RT_FOLDER_NAME.zip\">$RT_FOLDER_NAME.zip</a></li>
        </ul>
     </p>
     <p>See <a href=\"http://eclipse.org/rtp\">Eclipse RTP</a></p>
