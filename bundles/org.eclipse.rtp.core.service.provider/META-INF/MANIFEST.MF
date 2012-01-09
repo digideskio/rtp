@@ -1,25 +1,26 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Configurator Service Provider
+Bundle-Name: RTP Configurator Service Provider
 Bundle-SymbolicName: org.eclipse.rtp.core.service.provider
 Bundle-Version: 1.0.0.qualifier
-Bundle-Vendor: EclipseSource
-Require-Bundle: org.eclipse.rtp.core;bundle-version="1.0.0",
- org.eclipse.rtp.core.model;bundle-version="1.0.0"
+Bundle-Vendor: Ecipse RTP
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Service-Component: OSGI-INF/rtpConfiguratorServiceProvider.xml, OSGI-INF/rtpConfigurator.xml
 Bundle-Activator: org.eclipse.rtp.configurator.service.provider.internal.ProviderActivator
-Import-Package: org.apache.commons.io;version="2.0.1",
+Import-Package: org.apache.commons.io;version="[2.0.1,2.1.0)",
  org.eclipse.core.runtime;version="[3.4.0,4.0.0)",
  org.eclipse.core.runtime.jobs,
  org.eclipse.equinox.internal.provisional.configurator,
- org.eclipse.equinox.p2.core,
- org.eclipse.equinox.p2.engine;version="2.0.0",
- org.eclipse.equinox.p2.metadata;version="2.1.0",
- org.eclipse.equinox.p2.operations;version="2.0.0",
- org.eclipse.equinox.p2.query;version="2.0.0",
- org.eclipse.equinox.p2.repository;version="2.0.0",
- org.eclipse.equinox.p2.repository.artifact;version="2.0.0",
- org.eclipse.equinox.p2.repository.metadata;version="2.0.0",
+ org.eclipse.equinox.p2.core;version="[2.0.0,3.0.0)",
+ org.eclipse.equinox.p2.engine;version="[2.0.0,3.0.0)",
+ org.eclipse.equinox.p2.metadata;version="[2.0.0,3.0.0)",
+ org.eclipse.equinox.p2.operations;version="[2.0.0,3.0.0)",
+ org.eclipse.equinox.p2.query;version="[2.0.0,3.0.0)",
+ org.eclipse.equinox.p2.repository;version="[2.0.0,3.0.0)",
+ org.eclipse.equinox.p2.repository.artifact;version="[2.0.0,3.0.0)",
+ org.eclipse.equinox.p2.repository.metadata;version="[2.0.0,3.0.0)",
+ org.eclipse.rtp.core;version="[1.0.0,1.1.0)",
+ org.eclipse.rtp.core.model;version="[1.0.0,1.1.0)",
+ org.eclipse.rtp.core.util;version="[1.0.0,1.1.0)",
  org.osgi.framework;version="[1.7.0,2.0.0)"
