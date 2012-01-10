@@ -25,7 +25,21 @@
          unpack="false"/>
 
    <plugin
+         id="org.eclipse.rtp.configurator.console.source"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
          id="org.eclipse.rtp.core"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.rtp.core.source"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -39,6 +53,13 @@
          unpack="false"/>
 
    <plugin
+         id="org.eclipse.rtp.core.model.source"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
          id="org.eclipse.rtp.core.service.provider"
          download-size="0"
          install-size="0"
@@ -46,7 +67,21 @@
          unpack="false"/>
 
    <plugin
+         id="org.eclipse.rtp.core.service.provider.source"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
          id="org.eclipse.rtp.httpdeployer"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.rtp.httpdeployer.source"
          download-size="0"
          install-size="0"
          version="0.0.0"

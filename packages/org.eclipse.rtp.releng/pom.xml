@@ -131,6 +131,20 @@
           <encoding>${project.build.sourceEncoding}</encoding>
         </configuration>
       </plugin>
+      
+      <plugin>
+        <groupId>${tycho-groupid}</groupId>
+        <artifactId>tycho-source-plugin</artifactId>
+        <version>${tycho-version}</version>
+        <executions>
+          <execution>
+            <id>plugin-source</id>
+            <goals>
+              <goal>plugin-source</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
 
       <plugin>
         <groupId>${tycho-groupid}</groupId>

@@ -29,7 +29,21 @@
          unpack="false"/>
 
    <plugin
+         id="org.eclipse.rap.rwt.source"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
          id="org.eclipse.rap.rwt.osgi"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+         
+   <plugin
+         id="org.eclipse.rap.rwt.osgi.source"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -37,6 +51,13 @@
 
    <plugin
          id="org.eclipse.rtp.configurator.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.rtp.configurator.ui.source"
          download-size="0"
          install-size="0"
          version="0.0.0"

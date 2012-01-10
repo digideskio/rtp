@@ -58,13 +58,13 @@ RT_HEADLESS_SWT_LIB=$RT_HEADLESS_LINUX32_PRODUCT/$RT_HEADLESS_FOLDER_NAME/libcai
 RT_HEADLESS_NATIVE_LAUNCHER=$RT_HEADLESS_LINUX32_PRODUCT/$RT_HEADLESS_FOLDER_NAME/plugins/`ls -1 $RT_HEADLESS_LINUX32_PRODUCT/$RT_HEADLESS_FOLDER_NAME/plugins | grep org.eclipse.equinox.launcher.gtk.linux.x86 | tail -n 1`
 #[ -d "$RT_HEADLESS_NATIVE_LAUNCHER" ] && rm -rf $RT_HEADLESS_NATIVE_LAUNCHER || echo "INFO: no native launcher to delete $RT_HEADLESS_NATIVE_LAUNCHER"
 
-# Now tar.gz the whole thing
+# Now pack the whole thing
 cd $RT_HEADLESS_LINUX32_PRODUCT
-tar cvzf $RT_HEADLESS_FOLDER_NAME.tar.gz $RT_HEADLESS_FOLDER_NAME/
+# Delete the source bunldes
+rm -rf $RT_HEADLESS_LINUX32_PRODUCT/$RT_HEADLESS_FOLDER_NAME/plugins/*.source_*.jar
 #Also zip the product. It will look better than the zip produced by tycho that contains the native launcher.
 zip -r $RT_HEADLESS_FOLDER_NAME.zip $RT_HEADLESS_FOLDER_NAME/
 mv $RT_HEADLESS_FOLDER_NAME.zip $BUILT_PRODUCTS/../
-mv $RT_HEADLESS_FOLDER_NAME.tar.gz $BUILT_PRODUCTS/../
 cd $PACKAGES_FOLDER
 
 BUILD_VERSION=$(echo "$RT_HEADLESS_FOLDER_NAME" | sed 's/^rt-headless-incubation-//')
@@ -84,15 +84,14 @@ RT_SWT_LIB=$RT_LINUX32_PRODUCT/$RT_FOLDER_NAME/libcairo-swt.so
 RT_NATIVE_LAUNCHER=$RT_LINUX32_PRODUCT/$RT_FOLDER_NAME/plugins/`ls -1 $RT_LINUX32_PRODUCT/$RT_FOLDER_NAME/plugins | grep org.eclipse.equinox.launcher.gtk.linux.x86 | tail -n 1`
 
 cd $RT_LINUX32_PRODUCT
-tar cvzf $RT_FOLDER_NAME.tar.gz $RT_FOLDER_NAME/
+rm -rf $RT_LINUX32_PRODUCT/$RT_FOLDER_NAME/plugins/*.source_*.jar
 zip -r $RT_FOLDER_NAME.zip $RT_FOLDER_NAME/
 mv $RT_FOLDER_NAME.zip $BUILT_PRODUCTS/../
-mv $RT_FOLDER_NAME.tar.gz $BUILT_PRODUCTS/../
 cd $PACKAGES_FOLDER
 
 #If we have many more products let's consider something more generic.
 
-# Move one linux tar.gz and one linux zip archive of each product to
+# Move one linux zip archive of each product to
 # a location on download.eclipse.org where they can be downloaded.
 # Move the generated p2 repository to a location on download.eclipse.org
 # where they can be consumed.

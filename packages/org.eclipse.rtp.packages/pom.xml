@@ -50,6 +50,7 @@
           </execution>
         </executions>
         <configuration>
+          <includeSources>false</includeSources>
           <products>
             <product>
               <id>org.eclipse.rtp.package.headless</id>
