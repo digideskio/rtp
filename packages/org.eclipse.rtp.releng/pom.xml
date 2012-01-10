@@ -35,57 +35,11 @@
 
   <profiles>
     <profile>
-      <id>indigo-nightly</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-        <property>
-          <name>platform</name>
-          <value>indigo-nightly</value>
-        </property>
-      </activation>
-      <properties>
-        <build-identifier>N</build-identifier>
-        <eclipse-site>http://download.eclipse.org/releases/staging</eclipse-site>
-        <jetty-site>http://download.eclipse.org/jetty/updates/jetty-rt-3.7-N-builds</jetty-site>     
-		    <orbit-site>http://download.eclipse.org/tools/orbit/downloads/drops/R20110523182458/repository/</orbit-site>  
-      </properties>
-    </profile>
-    <profile>
-      <id>indigo-milestone</id>
+      <id>juno</id>
       <activation>
         <property>
           <name>platform</name>
-          <value>indigo-milestone</value>
-        </property>
-      </activation>
-      <properties>
-        <eclipse-site>http://download.eclipse.org/releases/indigo</eclipse-site>
-        <jetty-site>http://download.eclipse.org/jetty/updates/jetty-rt-3.7milestones/S-3.7.1-201109140245</jetty-site>  
-		<orbit-site>http://download.eclipse.org/tools/orbit/downloads/drops/R20110523182458/repository/</orbit-site>  
-      </properties>
-    </profile>
-	<profile>
-      <id>juno-nightly</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-        <property>
-          <name>platform</name>
-          <value>juno-nightly</value>
-        </property>
-      </activation>
-      <properties>
-        <build-identifier>N</build-identifier>
-        <eclipse-site>http://download.eclipse.org/eclipse/updates/3.8-N-builds/</eclipse-site>
-        <jetty-site>http://download.eclipse.org/jetty/updates/jetty-rt-3.8-N-builds/</jetty-site> 
-		    <orbit-site>http://download.eclipse.org/tools/orbit/downloads/drops/S20111201180206/repository/</orbit-site>
-      </properties>
-    </profile>
-    <profile>
-      <id>juno-milestone</id>
-      <activation>
-        <property>
-          <name>platform</name>
-          <value>juno-milestone</value>
+          <value>juno</value>
         </property>
       </activation>
       <properties>
@@ -190,7 +144,7 @@
               <groupId>${project.groupId}</groupId>
               <artifactId>${project.artifactId}</artifactId>
               <version>${project.version}</version>
-              <classifier>../../packages/org.eclipse.rtp.build.target/juno-milestones</classifier>
+              <classifier>../../packages/org.eclipse.rtp.build.target/${target}</classifier>
             </artifact>
           </target>          
           <environments>
