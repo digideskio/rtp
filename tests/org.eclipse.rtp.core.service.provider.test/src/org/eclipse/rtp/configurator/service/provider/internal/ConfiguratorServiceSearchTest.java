@@ -18,7 +18,6 @@ import java.util.List;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.rtp.configurator.service.provider.internal.util.Fixture;
-import org.eclipse.rtp.configurator.service.provider.internal.util.P2Util;
 import org.eclipse.rtp.core.model.SourceProvider;
 import org.eclipse.rtp.core.util.ModelUtil;
 import org.junit.Before;
