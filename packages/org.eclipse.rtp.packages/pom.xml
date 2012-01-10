@@ -48,15 +48,6 @@
               <goal>materialize-products</goal>
             </goals>
           </execution>
-          <!-- don't archive: we do the archiving from a post-tycho-release.sh script
-          it takes care of a few things. -->
-          <!--execution>
-            <id>archive-products</id>
-            <phase>integration-test</phase>
-            <goals>
-              <goal>archive-products</goal>
-            </goals>
-          </execution-->
         </executions>
         <configuration>
           <products>
@@ -74,6 +65,7 @@
       </plugin>
     </plugins>
   </build>
+  
   <profiles>
     <profile>
      <id>packAndSign</id>

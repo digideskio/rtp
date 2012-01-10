@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Launch Configuration Tests
-Bundle-SymbolicName: org.eclipse.rtp.tests.httpdeployer.launch
+Bundle-SymbolicName: org.eclipse.rtp.httpdeployer.launch.test
 Bundle-Version: 1.0.0
 Require-Bundle: org.eclipse.core.runtime
 Bundle-ActivationPolicy: lazy

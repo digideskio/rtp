@@ -1,31 +1,20 @@
 package org.eclipse.rtp.configurator.service.provider.internal.util;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 
-import org.eclipse.core.runtime.FileLocator;
-import org.eclipse.core.runtime.Path;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.rtp.core.model.SourceProvider;
 import org.eclipse.rtp.core.model.SourceUnMarshaller;
-import org.eclipse.rtp.core.util.ModelUtil;
-import org.osgi.framework.Bundle;
+import org.eclipse.rtp.core.model.internal.SourceUnMarshallerImpl;
 
 public class Fixture {
 
   public static InputStream readExampleSources() throws IOException {
-    Bundle bundle = Platform.getBundle( "org.eclipse.rtp.core.model.test" );
-    URL unResolvedUrl = FileLocator.find( bundle, new Path( "data/example-sources.json" ), null );
-    URL testDataUrl = FileLocator.resolve( unResolvedUrl );
-    File testDataFile = new Path( testDataUrl.getFile() ).toFile();
-    return new FileInputStream( testDataFile );
+    return Fixture.class.getResourceAsStream( "/example-sources.json" );
   }
 
   public static SourceProvider getSourceProvider( InputStream inputStream ) {
-    SourceUnMarshaller marshaller = ModelUtil.getSourceUnMarshaller();
+    SourceUnMarshaller marshaller = new SourceUnMarshallerImpl();
     return marshaller.marshal( inputStream );
   }
 }

@@ -26,6 +26,11 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <tycho-version>0.13.0</tycho-version>
     <tycho-groupid>org.eclipse.tycho</tycho-groupid>
+    
+    <surefire-version>2.9</surefire-version>
+    <junit-version>4.8.2</junit-version>
+    <mockito-version>1.8.4</mockito-version>
+    <test-arguments>-Xms512m -Xmx512m</test-arguments>
   </properties>
 
   <profiles>
@@ -128,6 +133,12 @@
     <module>../../bundles/org.eclipse.rtp.configurator.console</module>
     <module>../../bundles/org.eclipse.rtp.configurator.ui</module>
     <module>../../bundles/org.eclipse.rtp.httpdeployer</module>
+    <!-- Tests -->
+    <module>../../tests/org.eclipse.rtp.core.test</module>
+    <module>../../tests/org.eclipse.rtp.core.model.test</module>
+    <!-- <module>../../tests/org.eclipse.rtp.core.service.provider.test</module>  -->
+    <module>../../tests/org.eclipse.rtp.httpdeployer.test</module>
+    <!--  <module>../../tests/org.eclipse.rtp.configurator.console.test</module>  -->
     <!-- Features -->
     <module>../org.eclipse.rtp.package.runtime.feature</module>
     <module>../org.eclipse.rtp.package.headless.feature</module>

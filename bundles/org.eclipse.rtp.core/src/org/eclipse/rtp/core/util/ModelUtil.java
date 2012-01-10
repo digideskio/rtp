@@ -53,7 +53,7 @@ public class ModelUtil {
 
   private static SourceProvider getDefaultModel() {
     SourceProvider result = null;
-    String[] modelURLs = new String[]{
+    String[] modelURLs = new String[] {
       getConfigurationURL(), getLocalURL()
     };
     for( int i = 0; i < modelURLs.length && result == null; i++ ) {
