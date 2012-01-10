@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde version="3.8"?>
 
-<target name="juno-M4" sequenceNumber="9">
+<target name="juno-M4" sequenceNumber="10">
 <locations>
 <location includeAllPlatforms="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
 <unit id="org.apache.commons.io" version="2.0.1.v201105210651"/>
@@ -29,7 +29,7 @@
 <unit id="org.eclipse.equinox.executable.feature.group" version="3.6.0.v20111122-1556-7P7OFvNFLWUl76ponNOCoeY"/>
 <unit id="org.eclipse.equinox.compendium.sdk.feature.group" version="3.8.0.v20111010-1614-7X7aGGFFPGjtJJJ1PhSL3ja"/>
 <unit id="org.eclipse.equinox.core.sdk.feature.group" version="3.8.0.v20111111-1618-7yFARG3kFh1z-WFF9V8Msj93O"/>
-<unit id="org.eclipse.equinox.p2.sdk.feature.group" version="3.8.0.v20111122-0424-9N81HUXGMMn4xV5hbUnCUz0e39OL"/>
+<unit id="org.eclipse.equinox.p2.core.feature.feature.group" version="1.1.0.v20111122-1412-8292FiwFWmE7gfJmrPd0Fbk"/>
 <unit id="org.eclipse.equinox.server.jetty.feature.group" version="1.1.0.v20111206-1542-8077BgD-hQ888B5A47FGA"/>
 <repository location="http://download.eclipse.org/eclipse/updates/3.8milestones/S-3.8M4-201112091447"/>
 </location>

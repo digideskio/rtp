@@ -17,7 +17,7 @@ set -e
 CURRENT_DIR=`pwd`
 
 #Change to the packages directory starting from the directory of this script:
-cd `dirname $0`/..
+cd `dirname $0`/../..
 PACKAGES_FOLDER=`pwd`
 
 echo "Running post-tycho-release.sh from $PACKAGES_FOLDER"
@@ -159,70 +159,6 @@ echo "$BUILT_PRODUCTS/../$RT_HEADLESS_FOLDER_NAME.zip"
 cp $BUILT_PRODUCTS/../$RT_HEADLESS_FOLDER_NAME.zip $DOWNLOAD_PRODUCTS_FOLDER
 echo "$BUILT_PRODUCTS/../$RT_FOLDER_NAME.zip"
 cp $BUILT_PRODUCTS/../$RT_FOLDER_NAME.zip $DOWNLOAD_PRODUCTS_FOLDER
-
-TIMESTAMP=`date +%s`
-TIMESTAMP_FORMATTED=`date -d "1970-01-01 UTC + $TIMESTAMP seconds"`
-
-echo "Generating the index.html for the p2 repository."
-echo "<html>
-  <head>
-    <title>Eclipse RTP build $BUILD_VERSION_NO_BUILD_IDENTIFIER</title>
-    <link rel=\"icon\" type=\"image/png\" href=\"http://eclipse.org/rtp/images/favicon.png\" />
-  </head>
-  <body>
-    <h2>Eclipse RTP build $BUILD_VERSION_NO_BUILD_IDENTIFIER</h2>
-    <p>This is a p2 repository built on $TIMESTAMP_FORMATTED.<br/>
-    It contains the Eclipse Packages.
-    Point PDE or p2-driector or maven-tycho at the current url to start installing products and features published here</p>
-    <p>Product archives:
-       <ul>
-         <li><a href=\"$RT_HEADLESS_FOLDER_NAME.zip\">$RT_HEADLESS_FOLDER_NAME.zip</a></li>
-         <li><a href=\"$RT_FOLDER_NAME.zip\">$RT_FOLDER_NAME.zip</a></li>
-       </ul>
-    </p>
-    <p>See <a href=\"http://eclipse.org/rtp\">Eclipse RTP</a></p>
-  </body>
-</html>" > "$DOWNLOAD_PRODUCTS_FOLDER/index.html"
-
-echo "Generating the composite repository in $DOWNLOAD_P2_FOLDER"
-echo "<html>
-  <head>
-    <title>Eclipse RTP current $BUILD_IDENTIFIER_LABEL build</title>
-    <link rel=\"icon\" type=\"image/png\" href=\"http://eclipse.org/rtp/images/favicon.png\" />
-  </head>
-  <body>
-    <h2>Eclipse RTP current $BUILD_IDENTIFIER_LABEL build. </h2>
-    <p>This is a composite p2 repository that point to the current $BUILD_IDENTIFIER_LABEL repository.<br/>
-      It was updated on $TIMESTAMP_FORMATTED.
-    </p>
-    <p>
-      The current $BUILD_IDENTIFIER_LABEL build and product archives are located here: <a href=\"$BUILD_VERSION_NO_BUILD_IDENTIFIER\">$BUILD_VERSION_NO_BUILD_IDENTIFIER</a>
-    </p>
-    <p>See <a href=\"http://eclipse.org/rtp\">Eclipse RTP</a></p>
-  </body>
-</html>" > "$DOWNLOAD_P2_FOLDER/index.html"
-echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
-<?compositeArtifactRepository version=\"1.0.0\"?>
-<repository name=\"&quot;Eclipse RTP $BUILD_IDENTIFIER_LABEL&quot;\"
-    type=\"org.eclipse.equinox.internal.p2.artifact.repository.CompositeArtifactRepository\" version=\"1.0.0\">
-  <properties size=\"1\">
-    <property name=\"p2.timestamp\" value=\"$TIMESTAMP\"/>
-  </properties>
-  <children size=\"1\">
-    <child location=\"$BUILD_VERSION_NO_BUILD_IDENTIFIER\"/>
-  </children>
-</repository>" > "$DOWNLOAD_P2_FOLDER/artifacts.xml"
-echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
-<?compositeMetadataRepository version=\"1.0.0\"?>
-<repository name=\"&quot;Eclipse RTP $BUILD_IDENTIFIER_LABEL&quot;\"
-    type=\"org.eclipse.equinox.internal.p2.metadata.repository.CompositeMetadataRepository\" version=\"1.0.0\">
-  <properties size=\"1\">
-    <property name=\"p2.timestamp\" value=\"$TIMESTAMP\"/>
-  </properties>
-  <children size=\"1\">
-    <child location=\"$BUILD_VERSION_NO_BUILD_IDENTIFIER\"/>
-  </children>
-</repository>" > "$DOWNLOAD_P2_FOLDER/content.xml"
 
 
 if [ -n "$DO_PURGE" ]; then
