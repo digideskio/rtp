@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.eclipse.rtp.package.runtime.feature"
-      label="RT Package Runtime Feature (Incubation)"
+      id="org.eclipse.rtp.package.runtime"
+      label="RT Package Runtime (Incubation)"
       version="1.0.0.qualifier"
       provider-name="Eclipse RTP">
 
@@ -41,7 +41,21 @@
          unpack="false"/>
 
    <plugin
+         id="com.google.gson.source"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
          id="org.jdom"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.jdom.source"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -55,7 +69,21 @@
          unpack="false"/>
 
    <plugin
+         id="org.apache.commons.fileupload.source"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
          id="org.apache.commons.io"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.apache.commons.io.source"
          download-size="0"
          install-size="0"
          version="0.0.0"

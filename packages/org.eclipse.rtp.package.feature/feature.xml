@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.eclipse.rtp.package.feature"
-      label="RT Package Feature (Incubation)"
+      id="org.eclipse.rtp.package"
+      label="RT Package (Incubation)"
       version="1.0.0.qualifier"
       provider-name="Eclipse RTP">
 
@@ -18,7 +18,7 @@
    </license>
 
    <includes
-         id="org.eclipse.rtp.package.headless.feature"
+         id="org.eclipse.rtp.package.headless"
          version="0.0.0"/>
 
    <plugin
@@ -41,7 +41,7 @@
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-         
+
    <plugin
          id="org.eclipse.rap.rwt.osgi.source"
          download-size="0"

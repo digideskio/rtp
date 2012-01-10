@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.eclipse.rtp.package.headless.feature"
-      label="RT Package Headless Feature (Incubation)"
+      id="org.eclipse.rtp.package.headless"
+      label="RT Package Headless (Incubation)"
       version="1.0.0.qualifier"
       provider-name="Eclipse RTP">
 

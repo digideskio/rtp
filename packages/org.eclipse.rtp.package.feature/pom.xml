@@ -14,7 +14,7 @@
     <relativePath>../org.eclipse.rtp.releng/pom.xml</relativePath>
   </parent>
   <groupId>org.eclipse</groupId>
-  <artifactId>org.eclipse.rtp.package.feature</artifactId>
+  <artifactId>org.eclipse.rtp.package</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>eclipse-feature</packaging>
 </project>
