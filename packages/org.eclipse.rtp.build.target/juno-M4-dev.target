@@ -27,6 +27,8 @@
 <location includeAllPlatforms="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.core.runtime.feature.feature.group" version="1.1.0.v20110822-1716-7H7MFGBBpeIlVWjYhWlfjuP_TY9S"/>
 <unit id="org.eclipse.equinox.executable.feature.group" version="3.6.0.v20111122-1556-7P7OFvNFLWUl76ponNOCoeY"/>
+<unit id="org.eclipse.platform.sdk" version="3.8.0.I20111209-1447"/>
+<unit id="org.eclipse.pde.feature.group" version="3.8.0.v20111007-1306-7b7uFb4FEx2Xnnmphn9PhXL"/>
 <unit id="org.eclipse.equinox.compendium.sdk.feature.group" version="3.8.0.v20111010-1614-7X7aGGFFPGjtJJJ1PhSL3ja"/>
 <unit id="org.eclipse.equinox.core.sdk.feature.group" version="3.8.0.v20111111-1618-7yFARG3kFh1z-WFF9V8Msj93O"/>
 <unit id="org.eclipse.equinox.p2.sdk.feature.group" version="3.8.0.v20111122-0424-9N81HUXGMMn4xV5hbUnCUz0e39OL"/>
