@@ -59,7 +59,6 @@ public class HttpDeployerInitializer {
 				null);
 		httpService.registerServlet(ALIAS_FEATURE, featureServlet, null, null);
 		httpService.registerServlet(ALIAS_SYSTEM, systemServlet, null, null);
-		System.out.println("Registered HttpDeployer Servlets");
 	}
 
 	public void setRtpService(RuntimeProvisioningService rtpService) {
