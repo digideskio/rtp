@@ -1,0 +1,4 @@
+# this bundle should not be installed into IDE
+requires.0.namespace = A.PDE.Target.Platform
+requires.0.name = Cannot be installed into the IDE
+requires.0.range = 0.0.0
