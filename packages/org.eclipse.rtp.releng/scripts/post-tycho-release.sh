@@ -95,7 +95,7 @@ cd $PACKAGES_FOLDER
 # a location on download.eclipse.org where they can be downloaded.
 # Move the generated p2 repository to a location on download.eclipse.org
 # where they can be consumed.
-DOWNLOAD_FOLDER=/home/data/httpd/download.eclipse.org/rtp/incubation
+DOWNLOAD_FOLDER=/home/data/httpd/download.eclipse.org/rtp
 if [ ! -d "$DOWNLOAD_FOLDER" ]; then
 #we are not on the eclipse build machine. for testing, let's
 #deploy the build inside the builds folder of org.eclipse.rtp.releng
@@ -129,12 +129,14 @@ else
 fi
 mkdir -p $DOWNLOAD_P2_FOLDER
 
+SCRIPTS_FOLDER=$PACKAGES_FOLDER/org.eclipse.rtp.releng/scripts
+
 # Create Composite Repository if needed
 echo "Check if Composite Repository creation is needed"
 if [ ! -f "$DOWNLOAD_P2_FOLDER/compositeArtifacts.xml" ]; then
   echo "Create Composite Repository at $DOWNLOAD_P2_FOLDER"
   cd $CURRENT_DIR
-  sh repo-tool.sh $DOWNLOAD_P2_FOLDER create "RTP Repository"
+  sh $SCRIPTS_FOLDER/repo-tool.sh $DOWNLOAD_P2_FOLDER create "RTP Repository"
 fi
 
 #remove the last 2 characters to get the version number without build identifier.
@@ -162,7 +164,7 @@ cp $BUILT_PRODUCTS/../$RT_FOLDER_NAME.zip $DOWNLOAD_PRODUCTS_FOLDER
 # Adding repository to composite repository
 echo "Adding repository to composite repository"
 cd $CURRENT_DIR
-sh repo-tool.sh $DOWNLOAD_P2_FOLDER add $BUILD_VERSION_NO_BUILD_IDENTIFIER
+sh $SCRIPTS_FOLDER/repo-tool.sh $DOWNLOAD_P2_FOLDER add $BUILD_VERSION_NO_BUILD_IDENTIFIER
 
 # Purigng old nightlies
 if [ -n "$DO_PURGE" ]; then
@@ -175,7 +177,7 @@ if [ -n "$DO_PURGE" ]; then
     files_to_delete=`ls -t | tail -n $files_to_delete_number`
     cd $CURRENT_DIR
     for file in $files_to_delete; do
-      sh repo-tool.sh $DOWNLOAD_P2_FOLDER remove $file
+      sh $SCRIPTS_FOLDER/repo-tool.sh $DOWNLOAD_P2_FOLDER remove $file
       rm -rf $DOWNLOAD_P2_FOLDER/$file
     done
   else
