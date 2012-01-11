@@ -99,7 +99,7 @@ DOWNLOAD_FOLDER=/home/data/httpd/download.eclipse.org/rtp/incubation
 if [ ! -d "$DOWNLOAD_FOLDER" ]; then
 #we are not on the eclipse build machine. for testing, let's
 #deploy the build inside the builds folder of org.eclipse.rtp.releng
-   DOWNLOAD_FOLDER="$PACKAGES_FOLDER/org.eclipse.rtp.releng/builds/download.eclipse.org/rtp/incubation"
+   DOWNLOAD_FOLDER="$PACKAGES_FOLDER/org.eclipse.rtp.releng/builds/download.eclipse.org/rtp"
    mkdir -p $DOWNLOAD_FOLDER
 fi
 
@@ -129,6 +129,14 @@ else
 fi
 mkdir -p $DOWNLOAD_P2_FOLDER
 
+# Create Composite Repository if needed
+echo "Check if Composite Repository creation is needed"
+if [ ! -f "$DOWNLOAD_P2_FOLDER/compositeArtifacts.xml" ]; then
+  echo "Create Composite Repository at $DOWNLOAD_P2_FOLDER"
+  cd $CURRENT_DIR
+  sh repo-tool.sh $DOWNLOAD_P2_FOLDER create "RTP Repository"
+fi
+
 #remove the last 2 characters to get the version number without build identifier.
 #This will make it easier to promote an N build to a I or S build.
 BUILD_VERSION_NO_BUILD_IDENTIFIER=$(echo "$BUILD_VERSION" | sed 's/.\{2\}$//')
@@ -142,15 +150,6 @@ echo "Deploying the p2 repository in $DOWNLOAD_P2_FOLDER"
 cp -r "$BUILT_PRODUCTS/../repository" "$BUILT_PRODUCTS/../$BUILD_VERSION_NO_BUILD_IDENTIFIER"
 mv "$BUILT_PRODUCTS/../$BUILD_VERSION_NO_BUILD_IDENTIFIER" "$DOWNLOAD_P2_FOLDER"
 
-#echo "Create the symbolic link 'current' to the p2 repository... 
-#this does not work on eclipse server as the http server does not follow symbolic links."
-#make sure that the symbolic link is a relative path. so it can be move arround, mirrored
-#etc as long as the p2repo folder is also moved around and mirrored at the same time.
-#cd $DOWNLOAD_P2_FOLDER
-#[ -h "current"] && rm "current"
-#ln -s $BUILD_VERSION_NO_BUILD_IDENTIFIER "current"
-#back to the original directory before we exit:
-#cd $CURRENT_DIR
 
 
 echo "Deploying the archived products in $DOWNLOAD_PRODUCTS_FOLDER"
@@ -160,19 +159,27 @@ cp $BUILT_PRODUCTS/../$RT_HEADLESS_FOLDER_NAME.zip $DOWNLOAD_PRODUCTS_FOLDER
 echo "$BUILT_PRODUCTS/../$RT_FOLDER_NAME.zip"
 cp $BUILT_PRODUCTS/../$RT_FOLDER_NAME.zip $DOWNLOAD_PRODUCTS_FOLDER
 
+# Adding repository to composite repository
+echo "Adding repository to composite repository"
+cd $CURRENT_DIR
+sh repo-tool.sh $DOWNLOAD_P2_FOLDER add $BUILD_VERSION_NO_BUILD_IDENTIFIER
 
+# Purigng old nightlies
 if [ -n "$DO_PURGE" ]; then
   echo "Purging the old builds as this is an N or I build."
   cd $DOWNLOAD_P2_FOLDER
-  nbFiles=`ls -l |wc -l`
-  #This will keep only the 10 oldest builds
-  while [ 10 -le $nbFiles ]
-  do
-    #fileToDelete=`ls -tr | head -1`
-    fileToDelete=`ls -trd */ | head -1 | cut -f 1 -d /`
-    echo "Purging the oldest file: $fileToDelete"
-    rm -rf $fileToDelete
-    nbFiles=`ls -l |wc -l`
-  done
+  
+  files_in_dir=`ls -d */ | wc -l`
+  files_to_delete_number=`expr $files_in_dir - 10`
+  if [ $files_to_delete_number -gt 0 ]; then
+    files_to_delete=`ls -t | tail -n $files_to_delete_number`
+    cd $CURRENT_DIR
+    for file in $files_to_delete; do
+      sh repo-tool.sh $DOWNLOAD_P2_FOLDER remove $file
+      rm -rf $DOWNLOAD_P2_FOLDER/$file
+    done
+  else
+    echo "nothing to delete!"
+  fi
   cd $CURRENT_DIR
 fi

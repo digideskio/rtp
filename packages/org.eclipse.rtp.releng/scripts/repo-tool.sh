@@ -12,8 +12,8 @@
 #
 # Tool to maintain composite repositories
 
-SCRIPTS_DIR=$(dirname $(readlink -nm $0))
-DOWNLOAD_DIR=/home/data/httpd/download.eclipse.org/rtp/incubation/updates
+SCRIPTS_DIR=`pwd`
+echo "Using SCripts Dir: $SCRIPTS_DIR"
 
 if [ -z "$RUNTIME_DIR" ]; then
   RUNTIME_DIR=/shared/technology/rtp/eclipse-3.6.2
@@ -34,8 +34,8 @@ fail() {
   echo "  $0 repo-dir remove <child>"
   echo
   echo "Example:"
-  echo "  $0 3.8milestones create \"RTP 1.0 Repository\""
-  echo "  $0 3.8milestones 1.0.0.v20111216-1245 add M1"
+  echo "  $0 /home/.../3.8milestones create \"RTP 1.0 Repository\""
+  echo "  $0 /home/.../3.8milestones add 1.0.0.v20120111-1355"
   exit 1
 }
 
@@ -46,8 +46,9 @@ fi
 
 repoDir=$1
 if [ ${repoDir:0:1} != "/" ]; then
-  repoDir="$DOWNLOAD_DIR/$repoDir"
+  repoDir="$repoDir"
 fi
+  echo "Using REPO DIR $repoDir"
 if [ ! -d "$repoDir" ]; then
   fail "Repository does not exist: $repoDir"
 fi
@@ -59,6 +60,8 @@ elif [ "$mode" == "add" -o "$mode" == "remove" ]; then
   repoName=$3
   if [ ${repoName:0:7} != "http://" -a ! -d "$repoDir/$repoName" ]; then
     fail "Child to add/remove does not exist: $repoDir/$repoName"
+  else
+    echo "Adding Child $repoName to composite repo at $repoDir"   
   fi
 else
   fail "Illegal mode: $mode"
