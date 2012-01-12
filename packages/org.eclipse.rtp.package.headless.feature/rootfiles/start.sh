@@ -1,6 +1,6 @@
 #!/bin/bash
 ################################################################################
-# Copyright (c) 2011 EclipseSource Inc. and others.
+# Copyright (c) 2011-2012 EclipseSource Inc. and others.
 # All rights reserved. This program and the accompanying materials
 # are made available under the terms of the Eclipse Public License v1.0
 # which accompanies this distribution, and is available at
@@ -8,6 +8,7 @@
 # 
 # Contributors:
 #     hmalphettes - initial API and implementation
+#     hstaudacher - ongoing development
 ################################################################################
 # This scripts generates a command-line to launch equinox.
 # It uses the arguments defined in the *.ini file
@@ -53,18 +54,13 @@ if [ ! -f "$startup" ]; then
   fi
 fi  
 
-
 ##VM arguments and system properties
-#PermGen
-#XXMaxPermSize=`echo "$args" | sed -n '/--launcher\.XXMaxPermSize/{n;p;}'`
-#if [ -n "$XXMaxPermSize" ]; then  
-#  XXMaxPermSize="-XX:MaxPermSize=$XXMaxPermSize"
-#  #also remove those 2 lines from the args
-#  args=`echo "$args" | sed '/--launcher\.XXMaxPermSize/,+1d'`
-#fi
-#vmargs
-#VMARGS=`sed '1,/-vmargs/d' $ini | tr '\n' ' '`$XXMaxPermSize
-#VMARGS=`sed '1,/-vmargs/d' $ini`     
+for argLine in `cat $ini`
+do
+    if [ ${argLine} != "-vmargs" ]; then
+        VMARGS=${VMARGS}" "${argLine} 
+    fi
+done   
 
 if [ -z "$JAVA_OPTS" ]; then
   JAVA_OPTS=`echo "$VMARGS" | tr '\n' ' '`$XXMaxPermSize

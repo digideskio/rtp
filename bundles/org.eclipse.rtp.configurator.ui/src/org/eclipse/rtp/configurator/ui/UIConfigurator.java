@@ -15,7 +15,7 @@ import org.eclipse.rwt.application.ApplicationConfigurator;
 
 public class UIConfigurator implements ApplicationConfigurator {
 
-  public static final String RTP = "rtp";
+  public static final String RTP = "rt";
 
   @Override
   public void configure( ApplicationConfiguration configuration ) {

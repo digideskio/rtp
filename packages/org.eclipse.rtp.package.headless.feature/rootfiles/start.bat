@@ -1,6 +1,6 @@
 @ echo off 
 ::##############################################################################
-:: Copyright (c) 2011 EclipseSource Inc. and others.
+:: Copyright (c) 2011-2012 EclipseSource Inc. and others.
 :: All rights reserved. This program and the accompanying materials
 :: are made available under the terms of the Eclipse Public License v1.0
 :: which accompanies this distribution, and is available at
@@ -8,6 +8,7 @@
 :: 
 :: Contributors:
 ::     hmalphettes - initial API and implementation
+::     hstaudacher - ongoing development
 ::##############################################################################
 :: This scripts generates a command-line to launch equinox.
 :: It uses the arguments defined in the *.ini file
@@ -92,9 +93,6 @@ if not "%argvalue%"=="" (
     set "application= -application %argvalue%"
 )
 
-:: logback config:
-set "logback=-Dlogback.configurationFile^=%ECLIPSEHOME%etc\logback.xml"
-
 ::-launcher.XXMaxPermSize
 call :findargvalue -launcher.XXMaxPermSize
 set "XXMaxPermSize="
@@ -118,6 +116,6 @@ set NLM=^
 set NL=^^^%NLM%%NLM%^%NLM%%NLM%
 
 :: start Eclipse w/ java
-set command=%java% -jar %startup% %vmargs% %logback% -install %install%%application%%console%%XXMaxPermSize% %*
+set command=%java% -jar %startup% %vmargs% -install %install%%application%%console%%XXMaxPermSize% %*
 echo %NL%Launching Equinox with: %command%%NL%
 %command%
