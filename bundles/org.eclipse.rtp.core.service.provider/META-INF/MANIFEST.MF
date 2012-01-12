@@ -1,9 +1,10 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: RTP Configurator Service Provider
+Bundle-Name: %bundleName
 Bundle-SymbolicName: org.eclipse.rtp.core.service.provider
 Bundle-Version: 1.0.0.qualifier
-Bundle-Vendor: Ecipse RTP
+Bundle-Vendor: %bundleVendor
+Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Service-Component: OSGI-INF/rtpConfiguratorServiceProvider.xml, OSGI-INF/rtpConfigurator.xml

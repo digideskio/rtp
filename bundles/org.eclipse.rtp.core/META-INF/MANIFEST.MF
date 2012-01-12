@@ -1,9 +1,10 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Configurator Core
+Bundle-Name: %bundleName
 Bundle-SymbolicName: org.eclipse.rtp.core
 Bundle-Version: 1.0.0.qualifier
-Bundle-Vendor: Eclipse RTP
+Bundle-Vendor: %bundleVendor
+Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.rtp.core;version="1.0.0",
  org.eclipse.rtp.core.util;version="1.0.0"
