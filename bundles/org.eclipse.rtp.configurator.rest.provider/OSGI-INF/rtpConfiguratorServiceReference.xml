@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" activate="activateServices" deactivate="deactivateServices" name="org.eclipse.rtp.configurator.rest.provider">
+   <implementation class="org.eclipse.rtp.configurator.rest.provider.RestProviderActivator"/>
+   <reference bind="setUp" cardinality="1..1" interface="org.eclipse.rtp.core.RuntimeProvisioningService" name="RuntimeProvisioningService" policy="static" unbind="shutDown"/>
+   <reference bind="setUpHttpService" cardinality="1..1" interface="org.osgi.service.http.HttpService" name="HttpService" policy="static" unbind="shutDownHttpService"/>
+   <reference bind="setUpSourceUnmarshaller" cardinality="1..1" interface="org.eclipse.rtp.core.model.SourceUnMarshaller" name="SourceUnMarshaller" policy="static" unbind="shutDownSourceUnmarshaller"/>
+</scr:component>

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011 EclipseSource and others. All rights reserved. This program and the
+ * Copyright (c) 2012 EclipseSource and others. All rights reserved. This program and the
  * accompanying materials are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html Contributors: EclipseSource - initial API and
@@ -13,6 +13,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.rtp.core.internal.CoreActivator;
@@ -98,7 +99,7 @@ public class ModelUtil {
     return comparator;
   }
 
-  public Comparator<Source> getSourceComparator() {
+  private Comparator<Source> getSourceComparator() {
     Comparator<Source> comparator = new Comparator<Source>() {
 
       @Override
@@ -126,8 +127,8 @@ public class ModelUtil {
 
   public SourceVersion searchSourceVerions( String sourceVersion, List<Source> sources ) {
     SourceVersion result = null;
-    for( Source source : sources ) {
-      List<SourceVersion> versions = source.getVersions();
+    for( int i = 0; i < sources.size() && result == null; i++ ) {
+      List<SourceVersion> versions = sources.get( i ).getVersions();
       result = getVersion( sourceVersion, versions );
     }
     return result;
@@ -145,6 +146,18 @@ public class ModelUtil {
         }
       }
     }
+    return result;
+  }
+  
+  public List<Source> list() throws CoreException {
+    List<Source> sources = getSourceProvider().getSources();
+    Collections.sort( sources, getSourceComparator() );
+    return sources;
+  }
+  
+  public List<Source> search( List<String> searchQueries ) {
+    List<Source> sources = getSourceProvider().getSources();
+    List<Source> result = new ModelUtil().searchSources( searchQueries, sources );
     return result;
   }
 }

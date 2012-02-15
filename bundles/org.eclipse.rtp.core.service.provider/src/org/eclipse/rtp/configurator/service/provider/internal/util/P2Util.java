@@ -1,5 +1,5 @@
 /******************************************************************************* 
-* Copyright (c) 2011 EclipseSource and others. All rights reserved. This
+* Copyright (c) 2012 EclipseSource and others. All rights reserved. This
 * program and the accompanying materials are made available under the terms of
 * the Eclipse Public License v1.0 which accompanies this distribution, and is
 * available at http://www.eclipse.org/legal/epl-v10.html
@@ -17,6 +17,7 @@ import org.eclipse.equinox.p2.core.IProvisioningAgentProvider;
 import org.eclipse.rtp.configurator.service.provider.internal.ProviderActivator;
 import org.eclipse.rtp.configurator.service.provider.internal.deploy.FeatureManager;
 import org.eclipse.rtp.configurator.service.provider.internal.deploy.RepositoryManager;
+import org.eclipse.rtp.core.model.SourceVersion;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 
@@ -57,6 +58,10 @@ public class P2Util {
 		configurator = null;
 	}
 
+	public boolean isSourceVersionInstalled(SourceVersion sourceVersion){
+	  return featureManager.isInstalled( sourceVersion );
+	}
+	
 	private static IProvisioningAgent getAgent() throws CoreException {
 		BundleContext bundleContext = ProviderActivator.getBundleContext();
 		IProvisioningAgentProvider agentProvider = getService(bundleContext, IProvisioningAgentProvider.class, IProvisioningAgentProvider.SERVICE_NAME);

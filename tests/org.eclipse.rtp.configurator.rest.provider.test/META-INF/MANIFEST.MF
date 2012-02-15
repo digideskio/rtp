@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Rest Provider Test
+Bundle-SymbolicName: org.eclipse.rtp.configurator.rest.provider.test
+Bundle-Version: 1.0.0.qualifier
+Fragment-Host: org.eclipse.rtp.configurator.rest.provider;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.eclipse.rtp.core.model;bundle-version="1.0.0",
+ org.junit;bundle-version="4.8.2",
+ org.mockito;bundle-version="1.8.4"
+Import-Package: org.objenesis;version="1.0.0"

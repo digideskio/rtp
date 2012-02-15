@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011 EclipseSource and others. All rights reserved. This program and the
+ * Copyright (c) 2012 EclipseSource and others. All rights reserved. This program and the
  * accompanying materials are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html Contributors: EclipseSource - initial API and
@@ -117,23 +117,21 @@ public class RuntimeProvisioningServiceImpl implements RuntimeProvisioningServic
 
   @Override
   public List<String> search( List<String> anyListOf ) {
-    List<Source> sources = ModelUtil.getSourceProvider().getSources();
-    List<Source> result = searchSources( sources, anyListOf );
+    List<Source> result = new ModelUtil().search( anyListOf );
     return sourcesToStringSorted( result, false );
   }
 
   @Override
   public List<String> show( List<String> anyListOf ) {
-    List<Source> sources = ModelUtil.getSourceProvider().getSources();
     List<String> showSource = new ArrayList<String>();
     showSource.add( anyListOf.get( 0 ) );
-    List<Source> result = searchSources( sources, showSource );
+    List<Source> result = new ModelUtil().search( showSource );
     return sourcesToStringSorted( result, false );
   }
 
   @Override
   public List<String> list() throws CoreException {
-    List<Source> sources = ModelUtil.getSourceProvider().getSources();
+    List<Source> sources = new ModelUtil().list();
     List<String> sourcesAsString = sourcesToStringSorted( sources, true );
     return sourcesAsString;
   }
@@ -150,9 +148,8 @@ public class RuntimeProvisioningServiceImpl implements RuntimeProvisioningServic
 
   @Override
   public IStatus update( List<String> anyListOf ) {
-    List<Source> sources = ModelUtil.getSourceProvider().getSources();
     System.out.println( "Searching for updates" );
-    List<Source> sourceToUpdate = searchSources( sources, anyListOf );
+    List<Source> sourceToUpdate = new ModelUtil().search( anyListOf );
     System.out.println( "Update started" );
     IStatus result = updateSources( sourceToUpdate );
     System.out.println( "Update successful" );
@@ -162,11 +159,6 @@ public class RuntimeProvisioningServiceImpl implements RuntimeProvisioningServic
   @Override
   public URI[] getRepositories() {
     return p2Util.getRepositoryManager().getRepositories();
-  }
-
-  protected List<Source> searchSources( List<Source> sources, List<String> showSource ) {
-    List<Source> result = new ModelUtil().searchSources( showSource, sources );
-    return result;
   }
 
   @Override
@@ -205,7 +197,6 @@ public class RuntimeProvisioningServiceImpl implements RuntimeProvisioningServic
   }
 
   protected List<String> sourcesToString( List<Source> sources, boolean addInstalledInfo ) {
-    Collections.sort( sources, new ModelUtil().getSourceComparator() );
     List<String> sourcesAsString = new ArrayList<String>();
     for( Source source : sources ) {
       sourcesAsString.add( source.toString() );

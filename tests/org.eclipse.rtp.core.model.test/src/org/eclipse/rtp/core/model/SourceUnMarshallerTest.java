@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011 EclipseSource and others. All rights reserved. This program and the
+ * Copyright (c) 2012 EclipseSource and others. All rights reserved. This program and the
  * accompanying materials are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html Contributors: EclipseSource - initial API and
@@ -12,20 +12,16 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.List;
 
-import org.eclipse.rtp.core.model.Feature;
-import org.eclipse.rtp.core.model.Source;
-import org.eclipse.rtp.core.model.SourceProvider;
-import org.eclipse.rtp.core.model.SourceUnMarshaller;
-import org.eclipse.rtp.core.model.SourceVersion;
 import org.eclipse.rtp.core.model.internal.SourceUnMarshallerImpl;
 import org.junit.Test;
 
 public class SourceUnMarshallerTest {
 
   @Test
-  public void testUnmarshal() throws IOException {
+  public void testMarshal() throws IOException {
     InputStream stream = readExampleSources();
     SourceUnMarshaller marshaller = new SourceUnMarshallerImpl();
     SourceProvider provider = marshaller.marshal( stream );
@@ -85,6 +81,29 @@ public class SourceUnMarshallerTest {
     assertTrue( 2 == features.size() );
     checkFeature( "org.eclipse.rap.feature.group", "2.5.0", features.get( 0 ) );
     checkFeature( "org.eclipse.rap.feature.group.ext", "1.5.0", features.get( 1 ) );
+  }
+  
+  @Test
+  public void testUnmarshal() throws IOException {
+    String expectedUnmarshalledString = "{\"sources\":[{\"name\":\"test\",\"description\":\"test description\"," +
+    		"\"infoUrl\":\"http://foo/test\",\"versions\":[{\"version\":\"1.0.0\",\"repositoryUrl\":\"http://foo/test/repository\"," +
+    		"\"features\":[]},{\"version\":\"2.0.0\",\"repositoryUrl\":\"http://foo/test2/repository\",\"features\":[]}]}," +
+    		"{\"name\":\"test2\",\"description\":\"test2 description\",\"infoUrl\":\"http://foo/test2\",\"versions\":[]}]}";
+    SourceUnMarshaller marshaller = new SourceUnMarshallerImpl();
+    List<Source> sources = createTestModel();
+    String unmarshalledSources = marshaller.unmarshal( sources );
+    assertEquals( expectedUnmarshalledString, unmarshalledSources );
+  }
+
+  private List<Source> createTestModel() {
+    Source source = new Source( "test", "test description", "http://foo/test" );
+    SourceVersion version = new SourceVersion( "1.0.0", "http://foo/test/repository", "test version", "htt://foo/version/info" );
+    source.addVersion( version );
+    Source source2 = new Source( "test2", "test2 description", "http://foo/test2" );
+    SourceVersion version2 = new SourceVersion( "2.0.0", "http://foo/test2/repository", "test2 version", "htt://foo/version/info2" );
+    source.addVersion( version2 );
+    List<Source> sources = Arrays.asList( new Source[]{source, source2} );
+    return sources;
   }
 
   private InputStream readExampleSources() throws IOException {

@@ -12,7 +12,9 @@ package org.eclipse.rtp.core.model.internal;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.List;
 
+import org.eclipse.rtp.core.model.Source;
 import org.eclipse.rtp.core.model.SourceProvider;
 import org.eclipse.rtp.core.model.SourceUnMarshaller;
 
@@ -28,5 +30,19 @@ public class SourceUnMarshallerImpl implements SourceUnMarshaller {
     Reader streamReader = new InputStreamReader( sources );
     JsonReader reader = new JsonReader( streamReader );
     return gson.fromJson( reader, SourceProvider.class );
+  }
+  
+  @Override
+  public String unmarshal( List<Source> sources) {
+    SourceProvider sourceProvider = createSourceProvider( sources );
+    return new Gson().toJson( sourceProvider );
+  }
+
+  private SourceProvider createSourceProvider( List<Source> sources ) {
+    SourceProvider sourceProvider = new SourceProvider();
+    for( Source source : sources ) {
+      sourceProvider.addSource( source );
+    }
+    return sourceProvider;
   }
 }
