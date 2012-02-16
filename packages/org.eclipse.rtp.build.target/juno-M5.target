@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.8"?>
+
+<target name="juno-M4" sequenceNumber="11">
+<locations>
+<location includeAllPlatforms="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
+<unit id="org.apache.commons.io" version="2.0.1.v201105210651"/>
+<unit id="org.apache.commons.io.source" version="2.0.1.v201105210651"/>
+<unit id="com.google.gson" version="1.6.0.v201101131530"/>
+<unit id="com.google.gson.source" version="1.6.0.v201101131530"/>
+<unit id="org.hamcrest.core" version="1.1.0.v20090501071000"/>
+<unit id="org.hamcrest.core.source" version="1.1.0.v20090501071000"/>
+<unit id="org.objenesis" version="1.0.0.v201105211943"/>
+<unit id="org.mockito" version="1.8.4.v201102171835"/>
+<unit id="org.junit" version="4.8.2.v4_8_2_v20110321-1705"/>
+<unit id="org.junit.source" version="4.8.2.v4_8_2_v20110321-1705"/>
+<unit id="org.apache.commons.fileupload" version="1.2.2.v20111214-1400"/>
+<unit id="org.apache.commons.fileupload.source" version="1.2.2.v20111214-1400"/>
+<unit id="org.jdom" version="1.1.1.v201101151400"/>
+<unit id="org.jdom.source" version="1.1.1.v201101151400"/>
+<repository location="http://download.eclipse.org/tools/orbit/downloads/drops/S20120123151124/repository/"/>
+</location>
+<location includeAllPlatforms="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.core.runtime.feature.feature.group" version="1.1.0.v20110822-1716-7H7NFEcBpeImXU3ZbWkihqMVTb9S"/>
+<unit id="org.eclipse.equinox.executable.feature.group" version="3.6.0.v20120123-1704-7P7OFvNFLWUl76sUqHOCz0ZV"/>
+<unit id="org.eclipse.equinox.compendium.sdk.feature.group" version="3.8.0.v20111010-1614-7X7eGA-FPGjtJNFBNfSKlTn"/>
+<unit id="org.eclipse.equinox.core.sdk.feature.group" version="3.8.0.v20120106-1613-85FAaG3oFoYTlcgQOfs3Lmun"/>
+<unit id="org.eclipse.equinox.p2.core.feature.feature.group" version="1.1.0.v20111122-1412-8295FixFWmE7gmOqvHcfrcD"/>
+<unit id="org.eclipse.equinox.server.jetty.feature.group" version="1.1.0.v20111206-1542-8077BgD-hk888B5A47FGA"/>
+<repository location="http://download.eclipse.org/eclipse/updates/3.8milestones/S-3.8M5-201201251800"/>
+</location>
+<location includeAllPlatforms="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.rap.runtime.feature.group" version="1.5.0.20120131-1125"/>
+<repository location="http://download.eclipse.org/rt/rap/1.5/runtime/M5-20120131-1110"/>
+</location>
+</locations>
+</target>
