@@ -9,20 +9,28 @@
 *******************************************************************************/ 
 package org.eclipse.rtp.configurator.ui;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.rwt.lifecycle.IEntryPoint;
-import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
-
 public class UIEntryPoint implements IEntryPoint {
+
+  private List<TabContribution> contributions = new ArrayList<TabContribution>();
 
   @Override
   public int createUI() {
     Display display = new Display();
-    Shell shell = new Shell( display );
-    shell.setLayout( new GridLayout( 1, false ) );
-    shell.setSize( 500, 500 );
+    final Shell shell = UiHelper.createShell(display);
+
+    new ConfiguratorUiHeader().createHeader(display, shell);
+//    contributions.add( new ComponentsTab());
+    contributions.add( new ProvisioningTab());
+    new ConfiguratorUiBody().createBody(shell, contributions);
+    new ConfiguratorUiFooter().createFooter(shell);
+
     shell.open();
     return 0;
   }
