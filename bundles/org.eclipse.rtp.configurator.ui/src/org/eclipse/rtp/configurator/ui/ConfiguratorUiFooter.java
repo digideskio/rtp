@@ -9,22 +9,14 @@
 *******************************************************************************/ 
 package org.eclipse.rtp.configurator.ui;
 
-import org.eclipse.rwt.branding.AbstractBranding;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Shell;
 
-class UIBranding extends AbstractBranding {
+public class ConfiguratorUiFooter {
 
-  @Override
-  public String getServletName() {
-    return UIConfigurator.RTP;
-  }
-
-  @Override
-  public String getThemeId() {
-    return UIConfigurator.RTP;
-  }
-  
-  @Override
-  public String getTitle() {
-    return "EclipseRT Configurator";
+  public void createFooter( Shell shell ) {
+    Composite footer = UiHelper.createGridComposite( shell, 1 );
+    // TODO - Get the RTP version.
+    UiHelper.createLabel( footer, 1, "RTP Version XZY" );
   }
 }
