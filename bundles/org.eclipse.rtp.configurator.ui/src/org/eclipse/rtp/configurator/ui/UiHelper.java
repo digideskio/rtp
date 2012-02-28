@@ -9,6 +9,8 @@
 *******************************************************************************/ 
 package org.eclipse.rtp.configurator.ui;
 
+import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -51,6 +53,25 @@ public class UiHelper {
     label.setText( text );
     label.setLayoutData( UiHelper.createOneLinerGridData( horizontalSpan ) );
     return label;
+  }
+
+  public static TreeViewer createTreeViewer(Composite tab) {
+    TreeViewer viewer = new TreeViewer( tab, SWT.H_SCROLL | SWT.V_SCROLL );
+    Tree tree = viewer.getTree();
+    tree.setHeaderVisible( true );
+    tree.setLinesVisible( true );
+    GridData layoutData = new GridData( SWT.FILL, SWT.FILL, true, true );
+    layoutData.horizontalSpan = 4;
+    tree.setLayoutData( layoutData );
+    TreeColumn column0 = new TreeColumn( viewer.getTree(), SWT.LEFT );
+    column0.setText( "Component" );
+    column0.setAlignment( SWT.LEFT );
+    column0.setWidth( 300 );
+    TreeColumn column1 = new TreeColumn( viewer.getTree(), SWT.LEFT );
+    column1.setText( "Version" );
+    column1.setAlignment( SWT.LEFT );
+    column1.setWidth( 260 );
+    return viewer;
   }
 
   public static Tree createTree( Composite composite ) {
@@ -115,10 +136,12 @@ public class UiHelper {
     return text;
   }
 
-  public static void createComboBox( Composite parent, int horizontalSpan, String... labels ) {
+  public static Combo createComboBox( Composite parent, int horizontalSpan, String... labels ) {
     Combo combo = new Combo (parent, SWT.READ_ONLY);
     combo.setItems (labels);
     combo.setLayoutData( createOneLinerGridData( horizontalSpan ) );
     combo.setText( labels[0] );
+    return combo;
   }
+
 }
