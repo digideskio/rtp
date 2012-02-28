@@ -16,7 +16,7 @@ import org.eclipse.swt.widgets.Display;
 /**
  * A tab contribution is intended to be used inside an SWT tab.
  */
-public interface TabContribution {
+public interface ContributionTab {
 
 	/**
 	 * Title shown in the enclosing tab folder.

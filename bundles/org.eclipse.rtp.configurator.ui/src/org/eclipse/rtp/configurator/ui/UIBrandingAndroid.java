@@ -7,18 +7,27 @@
  *******************************************************************************/
 package org.eclipse.rtp.configurator.ui;
 
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.Display;
+import org.eclipse.rwt.branding.AbstractBranding;
 
-public abstract class AbstractTabContribution implements ContributionTab {
+class UIBrandingAndroid extends AbstractBranding {
 
   @Override
-  public Control getControl( Display display, Composite parent ) {
-    Composite composite = UiHelper.createGridComposite( parent, 1 );
-    populateControl( display, composite );
-    return composite;
+  public String getServletName() {
+    return "rt-android";
   }
 
-  protected abstract void populateControl( Display display, Composite composite );
+  @Override
+  public String getThemeId() {
+    return UIConfigurator.THEME_ID_ANDROID;
+  }
+
+  @Override
+  public String getTitle() {
+    return "EclipseRT Configurator for Android";
+  }
+
+  @Override
+  public String getDefaultEntryPoint() {
+    return UIConfigurator.DEFAULT_ENTRY_POINT;
+  }
 }
