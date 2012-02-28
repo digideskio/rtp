@@ -7,10 +7,6 @@
  *******************************************************************************/
 package org.eclipse.rtp.configurator.ui;
 
-import java.util.List;
-
-import org.eclipse.rtp.configurator.rest.RestTemplate;
-import org.eclipse.rtp.core.model.Source;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 

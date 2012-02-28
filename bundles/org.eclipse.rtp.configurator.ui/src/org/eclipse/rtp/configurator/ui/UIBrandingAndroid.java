@@ -13,7 +13,7 @@ class UIBrandingAndroid extends AbstractBranding {
 
   @Override
   public String getServletName() {
-    return "rt-android";
+    return "configurator";
   }
 
   @Override

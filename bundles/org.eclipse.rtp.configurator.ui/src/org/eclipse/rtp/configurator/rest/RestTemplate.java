@@ -57,10 +57,12 @@ public class RestTemplate {
 
   public void get( String string ) {
     GetMethod method = new GetMethod( urlBase + string );
+    executeMethod( method );
   }
 
   public void delete( String string ) {
     DeleteMethod method = new DeleteMethod( urlBase + string);
+    executeMethod( method );
   }
 
   private SourceProvider getProvider( HttpMethodBase method ) {
