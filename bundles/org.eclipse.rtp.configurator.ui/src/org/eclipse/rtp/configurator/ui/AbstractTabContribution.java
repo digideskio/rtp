@@ -11,7 +11,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 
-public abstract class AbstractTabContribution implements ContributionTab {
+public abstract class AbstractTabContribution implements TabContribution {
 
   @Override
   public Control getControl( Display display, Composite parent ) {

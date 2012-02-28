@@ -18,7 +18,7 @@ import org.eclipse.swt.widgets.Shell;
 
 public class UIEntryPoint implements IEntryPoint {
 
-  private List<ContributionTab> contributions = new ArrayList<ContributionTab>();
+  private List<TabContribution> contributions = new ArrayList<TabContribution>();
 
   @Override
   public int createUI() {

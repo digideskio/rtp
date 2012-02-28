@@ -20,11 +20,11 @@ import org.eclipse.swt.widgets.TabItem;
 
 public class ConfiguratorUiBody {
 
-  public void createBody( Shell shell, List<ContributionTab> contributions ) {
+  public void createBody( Shell shell, List<TabContribution> contributions ) {
     Composite body = UiHelper.createGreedyGridComposite( shell, 1 );
     final TabFolder tabFolder = new TabFolder( body, SWT.BORDER );
     tabFolder.setLayoutData( UiHelper.createGreedyGridData() );
-    for( ContributionTab contribution : contributions ) {
+    for( TabContribution contribution : contributions ) {
       TabItem tabItem = new TabItem( tabFolder, SWT.INHERIT_DEFAULT );
       tabItem.setText( contribution.getTitle() );
       Control control = contribution.getControl( shell.getDisplay(), tabFolder );

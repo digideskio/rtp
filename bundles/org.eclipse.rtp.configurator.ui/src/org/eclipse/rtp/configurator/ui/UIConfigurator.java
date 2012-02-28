@@ -23,9 +23,8 @@ public class UIConfigurator implements ApplicationConfigurator {
   public void configure( ApplicationConfiguration configuration ) {
     configuration.addEntryPoint( DEFAULT_ENTRY_POINT, UIEntryPoint.class );
     configuration.addStyleSheet( THEME_ID_WEB, "default-theme/theme.css" );
-//    configuration.addStyleSheet( THEME_ID_ANDROID, "theme/theme-android-holo.css" );
+    configuration.addStyleSheet( THEME_ID_ANDROID, "theme/theme-android-holo.css" );
 
     configuration.addBranding( new UIBrandingWeb() );
-    
   }
 }
