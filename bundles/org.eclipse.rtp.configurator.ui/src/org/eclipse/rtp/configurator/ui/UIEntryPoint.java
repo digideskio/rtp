@@ -18,7 +18,7 @@ import org.eclipse.swt.widgets.Shell;
 
 public class UIEntryPoint implements IEntryPoint {
 
-  private List<TabContribution> contributions = new ArrayList<TabContribution>();
+  private List<ContributionTab> contributions = new ArrayList<ContributionTab>();
 
   @Override
   public int createUI() {
@@ -26,7 +26,7 @@ public class UIEntryPoint implements IEntryPoint {
     final Shell shell = UiHelper.createShell(display);
 
     new ConfiguratorUiHeader().createHeader(display, shell);
-//    contributions.add( new ComponentsTab());
+    contributions.add( new ComponentsTab());
     contributions.add( new ProvisioningTab());
     new ConfiguratorUiBody().createBody(shell, contributions);
     new ConfiguratorUiFooter().createFooter(shell);

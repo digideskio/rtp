@@ -15,7 +15,7 @@ import org.eclipse.rwt.application.ApplicationConfigurator;
 public class UIConfigurator implements ApplicationConfigurator {
 
   public static final String THEME_ID_WEB = "web";
-//  public static final String THEME_ID_ANDROID = "android";
+  public static final String THEME_ID_ANDROID = "android";
 
   public static final String DEFAULT_ENTRY_POINT = "default";
 

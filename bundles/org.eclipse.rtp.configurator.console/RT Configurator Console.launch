@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.eclipse.pde.ui.EquinoxLauncher">
 <booleanAttribute key="append.args" value="true"/>
@@ -23,3 +24,29 @@
 <booleanAttribute key="useDefaultConfigArea" value="true"/>
 <stringAttribute key="workspace_bundles" value="org.eclipse.rtp.configurator.console.test@default:false,org.eclipse.rtp.configurator.console@default:default,org.eclipse.rtp.configurator.rest.provider.test@default:false,org.eclipse.rtp.configurator.rest.provider@default:default,org.eclipse.rtp.core.model.test@default:false,org.eclipse.rtp.core.model@default:default,org.eclipse.rtp.core.service.provider.test@default:false,org.eclipse.rtp.core.service.provider@default:default,org.eclipse.rtp.core.test@default:false,org.eclipse.rtp.core@default:default,org.hamcrest.core@default:default"/>
 </launchConfiguration>
+=======
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.pde.ui.EquinoxLauncher">
+<booleanAttribute key="append.args" value="true"/>
+<booleanAttribute key="automaticAdd" value="true"/>
+<booleanAttribute key="automaticValidate" value="false"/>
+<stringAttribute key="bootstrap" value=""/>
+<stringAttribute key="checked" value="[NONE]"/>
+<booleanAttribute key="clearConfig" value="false"/>
+<stringAttribute key="configLocation" value="${workspace_loc}/.metadata/.plugins/org.eclipse.pde.core/RTP Console"/>
+<booleanAttribute key="default" value="true"/>
+<booleanAttribute key="default_auto_start" value="true"/>
+<intAttribute key="default_start_level" value="4"/>
+<booleanAttribute key="includeOptional" value="true"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-os ${target.os} -ws ${target.ws} -arch ${target.arch} -nl ${target.nl} -consoleLog -console"/>
+<stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.eclipse.pde.ui.workbenchClasspathProvider"/>
+<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Declipse.ignoreApp=true -Dosgi.noShutdown=true"/>
+<stringAttribute key="pde.version" value="3.3"/>
+<booleanAttribute key="show_selected_only" value="false"/>
+<stringAttribute key="target_bundles" value="com.google.gson@default:default,javax.servlet@default:default,org.apache.commons.codec@default:default,org.apache.commons.fileupload@default:default,org.apache.commons.httpclient@default:default,org.apache.commons.io@default:default,org.apache.commons.logging@default:default,org.apache.felix.gogo.runtime@default:default,org.eclipse.core.contenttype@default:default,org.eclipse.core.jobs@default:default,org.eclipse.core.runtime@default:true,org.eclipse.equinox.app@default:default,org.eclipse.equinox.common@2:true,org.eclipse.equinox.console@default:default,org.eclipse.equinox.ds@1:true,org.eclipse.equinox.p2.core@default:default,org.eclipse.equinox.p2.director@default:default,org.eclipse.equinox.p2.engine@default:default,org.eclipse.equinox.p2.metadata.repository@default:default,org.eclipse.equinox.p2.metadata@default:default,org.eclipse.equinox.p2.operations@default:default,org.eclipse.equinox.p2.repository@default:default,org.eclipse.equinox.preferences@default:default,org.eclipse.equinox.registry@default:default,org.eclipse.equinox.security.macosx@default:false,org.eclipse.equinox.security@default:default,org.eclipse.equinox.simpleconfigurator@1:true,org.eclipse.equinox.transforms.hook@default:false,org.eclipse.equinox.util@default:default,org.eclipse.osgi.services@default:default,org.eclipse.osgi@-1:true,org.eclipse.rap.rwt@default:default,org.hamcrest.core@default:default,org.jdom@default:default,org.junit@default:default,org.mockito@default:default,org.objenesis@default:default,org.sat4j.core@default:default,org.sat4j.pb@default:default"/>
+<booleanAttribute key="tracing" value="false"/>
+<booleanAttribute key="useCustomFeatures" value="false"/>
+<booleanAttribute key="useDefaultConfigArea" value="true"/>
+<stringAttribute key="workspace_bundles" value="org.eclipse.rtp.configurator.console.test@default:false,org.eclipse.rtp.configurator.console@default:default,org.eclipse.rtp.configurator.ui@default:default,org.eclipse.rtp.core.model.test@default:false,org.eclipse.rtp.core.model@default:default,org.eclipse.rtp.core.service.provider.test@default:false,org.eclipse.rtp.core.service.provider@default:default,org.eclipse.rtp.core.test@default:false,org.eclipse.rtp.core@default:default,org.eclipse.rtp.httpdeployer.launch.test@default:false,org.eclipse.rtp.httpdeployer.launch.ui@default:default,org.eclipse.rtp.httpdeployer.launch@default:default,org.eclipse.rtp.httpdeployer.test@default:false,org.eclipse.rtp.httpdeployer@default:default"/>
+</launchConfiguration>
+>>>>>>> 364706 Added filter to Runtime Components tab.
