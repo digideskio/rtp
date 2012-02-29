@@ -29,21 +29,27 @@ public class PathInfoUtil {
   }
 
   public String getSourceVersion( String pathInfo ) {
+    String result;
     String[] provisioningInfo = getProvisioningInfo( pathInfo );
-    return provisioningInfo[ 1 ];
+    if(provisioningInfo.length >= 3){
+      result = provisioningInfo[2];
+    }else{
+      result = "";
+    }
+    return result;
   }
 
   public String getSourceName( String pathInfo ) {
     String[] provisioningInfo = getProvisioningInfo( pathInfo );
-    return provisioningInfo[ 0 ];
+    return provisioningInfo[ 1 ];
   }
 
   public boolean isProvisioning( String pathInfo, ModelUtil modelUtil, List<Source> sources ) {
     boolean result = false;
     String[] provisioningInfo = getProvisioningInfo( pathInfo );
-    if( provisioningInfo.length == 2 ) {
+    if( provisioningInfo.length != 0 && isProvisionigCommand( provisioningInfo[ 0 ] ) ) {
       List<String> sourceQuery = Arrays.asList( new String[]{
-        provisioningInfo[ 0 ]
+        provisioningInfo[ 1 ]
       } );
       List<Source> searchResult = modelUtil.searchSources( sourceQuery, sources );
       result = !searchResult.isEmpty();
@@ -51,11 +57,16 @@ public class PathInfoUtil {
     return result;
   }
 
+  private boolean isProvisionigCommand( String provisioningCommand ) {
+    return "install".equalsIgnoreCase( provisioningCommand )
+           || "uninstall".equalsIgnoreCase( provisioningCommand );
+  }
+
   public String[] getProvisioningInfo( String pathInfo ) {
     String[] provisioningInfo = new String[ 0 ];
     if( pathInfo != null && pathInfo.length() > 0 ) {
       Path path = new Path( pathInfo );
-      if( path.segmentCount() == 2 ) {
+      if( path.segmentCount() >= 2 ) {
         provisioningInfo = path.segments();
       }
     }

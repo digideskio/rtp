@@ -46,35 +46,35 @@ public class PathInfoUtilTest {
   @Test
   public void testsearchSourceVersionTest() {
     PathInfoUtil pathInfoUtil = new PathInfoUtil();
-    SourceVersion result = pathInfoUtil.getSourceVersion( "/test/1.0.0/", new ModelUtil(), sources );
+    SourceVersion result = pathInfoUtil.getSourceVersion( "/install/test/1.0.0/", new ModelUtil(), sources );
     assertEquals( sourceVersion, result );
   }
 
   @Test
   public void testsearchSourceVersionTest2() {
     PathInfoUtil pathInfoUtil = new PathInfoUtil();
-    SourceVersion result = pathInfoUtil.getSourceVersion( "/test2/1.1.0/", new ModelUtil(), sources );
+    SourceVersion result = pathInfoUtil.getSourceVersion( "/install/test2/1.1.0/", new ModelUtil(), sources );
     assertEquals( sourceVersion2, result );
   }
 
   @Test
   public void testsearchSourceVersionTestNotExits() {
     PathInfoUtil pathInfoUtil = new PathInfoUtil();
-    SourceVersion result = pathInfoUtil.getSourceVersion( "/test3/1.1.0/", new ModelUtil(), sources );
+    SourceVersion result = pathInfoUtil.getSourceVersion( "/install/test3/1.1.0/", new ModelUtil(), sources );
     assertNull( result );
   }
 
   @Test
   public void testGetSourceVersionString() {
     PathInfoUtil pathInfoUtil = new PathInfoUtil();
-    String result = pathInfoUtil.getSourceVersion( "foo/1.0.0" );
+    String result = pathInfoUtil.getSourceVersion( "install/foo/1.0.0" );
     assertEquals( "1.0.0", result );
   }
 
   @Test
   public void testGetSourceName() {
     PathInfoUtil pathInfoUtil = new PathInfoUtil();
-    String result = pathInfoUtil.getSourceName( "foo/1.0.0" );
+    String result = pathInfoUtil.getSourceName( "install/foo/1.0.0" );
     assertEquals( "foo", result );
   }
 
@@ -95,51 +95,51 @@ public class PathInfoUtilTest {
   @Test
   public void testIsProvisioningPathInfoStartsAndEndsWithSlash() {
     PathInfoUtil pathInfoUtil = new PathInfoUtil();
-    boolean result = pathInfoUtil.isProvisioning( "/test/1.0.0/", new ModelUtil(), sources );
+    boolean result = pathInfoUtil.isProvisioning( "/install/test/1.0.0/", new ModelUtil(), sources );
     assertTrue( result );
   }
 
   @Test
   public void testIsProvisioningPathInfoStartsWithSlash() {
     PathInfoUtil pathInfoUtil = new PathInfoUtil();
-    boolean result = pathInfoUtil.isProvisioning( "/test/1.0.0", new ModelUtil(), sources );
+    boolean result = pathInfoUtil.isProvisioning( "/install/test/1.0.0", new ModelUtil(), sources );
     assertTrue( result );
   }
 
   @Test
   public void testIsProvisioningPathInfoEndsWithSlash() {
     PathInfoUtil pathInfoUtil = new PathInfoUtil();
-    boolean result = pathInfoUtil.isProvisioning( "test/1.0.0/", new ModelUtil(), sources );
+    boolean result = pathInfoUtil.isProvisioning( "install/test/1.0.0/", new ModelUtil(), sources );
     assertTrue( result );
   }
 
   @Test
   public void testIsProvisioningPathInfoWithoutEndAnsStartSlash() {
     PathInfoUtil pathInfoUtil = new PathInfoUtil();
-    boolean result = pathInfoUtil.isProvisioning( "test/1.0.0", new ModelUtil(), sources );
+    boolean result = pathInfoUtil.isProvisioning( "install/test/1.0.0", new ModelUtil(), sources );
     assertTrue( result );
   }
 
   @Test
   public void testIsProvisioningPathInfoSourceNotExists() {
     PathInfoUtil pathInfoUtil = new PathInfoUtil();
-    boolean result = pathInfoUtil.isProvisioning( "test3/1.0.0", new ModelUtil(), sources );
+    boolean result = pathInfoUtil.isProvisioning( "install/test3/1.0.0", new ModelUtil(), sources );
     assertFalse( result );
   }
 
   @Test
   public void testIsProvisioningPathInfoSourceVersionNotExists() {
     PathInfoUtil pathInfoUtil = new PathInfoUtil();
-    boolean result = pathInfoUtil.isProvisioning( "test3/1.2.0", new ModelUtil(), sources );
+    boolean result = pathInfoUtil.isProvisioning( "install/test3/1.2.0", new ModelUtil(), sources );
     assertFalse( result );
   }
 
   @Test
   public void testGetProvisioningInfo() {
     PathInfoUtil pathInfoUtil = new PathInfoUtil();
-    String[] result = pathInfoUtil.getProvisioningInfo( "/foo/1.0.0/" );
+    String[] result = pathInfoUtil.getProvisioningInfo( "install/foo/1.0.0/" );
     assertArrayEquals( new String[]{
-      "foo", "1.0.0"
+      "install", "foo", "1.0.0"
     }, result );
   }
 }
