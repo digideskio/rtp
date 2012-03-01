@@ -18,10 +18,10 @@ import org.eclipse.rtp.core.model.internal.SourceUnMarshallerImpl;
 public class RestTemplate {
 
   SourceUnMarshaller unMarshaller = new SourceUnMarshallerImpl();
-  private String urlBase = "http://localhost:8888";
+  private final String urlBase;
 
-  public void setUrlBase( String urlBase ) {
-    this.urlBase = urlBase;
+  public RestTemplate( String newIntanceURI ) {
+    this.urlBase = newIntanceURI;
   }
 
   @SuppressWarnings( "unchecked" )
@@ -61,7 +61,7 @@ public class RestTemplate {
   }
 
   public void delete( String string ) {
-    DeleteMethod method = new DeleteMethod( urlBase + string);
+    DeleteMethod method = new DeleteMethod( urlBase + string );
     executeMethod( method );
   }
 

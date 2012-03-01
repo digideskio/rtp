@@ -37,7 +37,11 @@ class SourcesContentProvider implements ITreeContentProvider {
 
   @Override
   public Object[] getChildren( Object parentElement ) {
-    return null;
+    Object[] result = null;
+    if( parentElement instanceof Source ) {
+      result = ( ( Source )parentElement ).getVersions().toArray();
+    }
+    return result;
   }
 
   @Override
@@ -47,6 +51,6 @@ class SourcesContentProvider implements ITreeContentProvider {
 
   @Override
   public boolean hasChildren( Object element ) {
-    return false;
+    return getChildren( element ) != null;
   }
 }

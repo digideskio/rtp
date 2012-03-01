@@ -15,7 +15,7 @@ public abstract class AbstractTabContribution implements TabContribution {
 
   @Override
   public Control getControl( Display display, Composite parent ) {
-    Composite composite = UiHelper.createGridComposite( parent, 1 );
+    Composite composite = UiHelper.createGridComposite( parent, 1, true );
     populateControl( display, composite );
     return composite;
   }

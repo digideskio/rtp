@@ -10,16 +10,19 @@ package org.eclipse.rtp.configurator.ui;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.rtp.core.model.Source;
+import org.eclipse.rtp.core.model.SourceVersion;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 
 class SourcesLabelProvider implements ITableLabelProvider {
 
   private Image httpSource;
+  private final ComponentsTab componentsTab;
 
   // TODO check supported sources...
   // private Image fileSource;
-  public SourcesLabelProvider() {
+  public SourcesLabelProvider( ComponentsTab componentsTab ) {
+    this.componentsTab = componentsTab;
   }
 
   public void init( Display display ) {
@@ -30,23 +33,33 @@ class SourcesLabelProvider implements ITableLabelProvider {
 
   @Override
   public Image getColumnImage( Object element, int columnIndex ) {
-    if( columnIndex == 0 ) {
-      return httpSource;
+    Image result = null;
+    if( columnIndex == 0 && element instanceof Source ) {
+      result = httpSource;
     }
-    return null;
+    return result;
   }
 
   @Override
   public String getColumnText( Object element, int columnIndex ) {
-    Source row = ( Source )element;
+    String result = "";
     if( columnIndex == 0 ) {
-      // source name
-      return row.getName();
-    } else if (columnIndex == 1) {
-      // TODO - support multiple versions
-      return row.getVersions().get( 0 ).getVersion();
+      if( element instanceof Source ) {
+        result = ( ( Source )element ).getName();
+      } else if( element instanceof SourceVersion ) {
+        result = ( ( SourceVersion )element ).getVersion();
+      }
+    } else if( columnIndex == 1 && element instanceof SourceVersion ) {
+      result = ( ( SourceVersion )element ).getRepositoryUrl().toString();
+    } else if( columnIndex == 2 && element instanceof SourceVersion ) {
+      boolean installed = componentsTab.isInstalled( ( SourceVersion )element );
+      if( installed ) {
+        result = "installed";
+      } else {
+        result = "uninstalled";
+      }
     }
-    return null;
+    return result;
   }
 
   @Override
