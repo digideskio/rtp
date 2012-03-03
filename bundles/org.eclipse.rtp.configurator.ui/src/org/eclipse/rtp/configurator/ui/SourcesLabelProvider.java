@@ -17,12 +17,12 @@ import org.eclipse.swt.widgets.Display;
 class SourcesLabelProvider implements ITableLabelProvider {
 
   private Image httpSource;
-  private final ComponentsTab componentsTab;
+  private final ComponentsTabContentUtil contentUtil;
 
   // TODO check supported sources...
   // private Image fileSource;
-  public SourcesLabelProvider( ComponentsTab componentsTab ) {
-    this.componentsTab = componentsTab;
+  public SourcesLabelProvider( ComponentsTabContentUtil contentUtil ) {
+    this.contentUtil = contentUtil;
   }
 
   public void init( Display display ) {
@@ -52,7 +52,7 @@ class SourcesLabelProvider implements ITableLabelProvider {
     } else if( columnIndex == 1 && element instanceof SourceVersion ) {
       result = ( ( SourceVersion )element ).getRepositoryUrl().toString();
     } else if( columnIndex == 2 && element instanceof SourceVersion ) {
-      boolean installed = componentsTab.isInstalled( ( SourceVersion )element );
+      boolean installed = contentUtil.isInstalled( ( SourceVersion )element );
       if( installed ) {
         result = "installed";
       } else {

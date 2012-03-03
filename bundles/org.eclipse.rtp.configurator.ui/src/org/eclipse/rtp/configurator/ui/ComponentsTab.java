@@ -8,16 +8,12 @@
 package org.eclipse.rtp.configurator.ui;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TreeSelection;
 import org.eclipse.jface.viewers.TreeViewer;
-import org.eclipse.rtp.configurator.rest.RestTemplate;
 import org.eclipse.rtp.configurator.ui.internal.event.EventingServiceUtil;
 import org.eclipse.rtp.configurator.ui.internal.event.IConfigurationEvent;
 import org.eclipse.rtp.configurator.ui.internal.event.IConfigurationListener;
@@ -29,6 +25,8 @@ import org.eclipse.swt.events.KeyAdapter;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
@@ -39,26 +37,17 @@ import org.eclipse.swt.widgets.Text;
 public class ComponentsTab extends AbstractTabContribution {
 
   private final SourcesContentProvider contentProvider = new SourcesContentProvider();
-  private RestTemplate restTemplate;
-  protected static String[] comboLabels = new String[]{
-    "all", "installed", "uninstalled"
-  };
-  private final Map<String, String> listMapping = new HashMap<String, String>() {
-
-    {
-      put( comboLabels[ 0 ], "/rt/list" );
-      put( comboLabels[ 1 ], "/rt/list/installed" );
-      put( comboLabels[ 2 ], "/rt/list/uninstaller" );
-    }
-  };
   TreeViewer viewer;
   private Combo combo;
   private Button addSource;
   private Button removeSource;
   private Button updateWorld;
-  private List<Source> sources;
-  private List<Source> installedSources;
   private Display display;
+  ComponentsTabContentUtil contentUtil;
+
+  public ComponentsTab() {
+    contentUtil = new ComponentsTabContentUtil();
+  }
 
   @Override
   public String getTitle() {
@@ -70,10 +59,23 @@ public class ComponentsTab extends AbstractTabContribution {
   protected void populateControl( Display display, Composite composite ) {
     this.display = display;
     Composite tab = UiHelper.createGreedyGridComposite( composite, 1, true );
-    Composite tabToolbarComposite = UiHelper.createGridComposite( tab, 5, false );
-    Label searchLabel = new Label( tabToolbarComposite, SWT.NONE );
+    final ComponentsFilter filter = createToolBar( tab );
+    createTreeView( display, tab, filter );
+    Composite provisioningActionsComposite = UiHelper.createGridComposite( tab, 2, false );
+    addInstallButton( provisioningActionsComposite );
+    addUninstallButton( provisioningActionsComposite );
+    addUpdateWorldButton( provisioningActionsComposite );
+    registerTabForConfigurationChanges();
+  }
+
+  private ComponentsFilter createToolBar( Composite tab ) {
+    Composite tabToolbarComposite = UiHelper.createGridComposite( tab, 3, true );
+    Composite searchComposite = new Composite( tabToolbarComposite, SWT.NONE );
+    searchComposite.setLayout( new GridLayout( 2, false ) );
+    searchComposite.setLayoutData( new GridData( SWT.FILL, SWT.FILL, true, true ) );
+    Label searchLabel = new Label( searchComposite, SWT.NONE );
     searchLabel.setText( "Search: " );
-    final Text filterText = UiHelper.createText( tabToolbarComposite, 1, "Please enter filter" );
+    final Text filterText = UiHelper.createText( searchComposite, 1, "Please enter filter" );
     final ComponentsFilter filter = new ComponentsFilter();
     filterText.addKeyListener( new KeyAdapter() {
 
@@ -83,9 +85,12 @@ public class ComponentsTab extends AbstractTabContribution {
         viewer.refresh();
       }
     } );
-    Label filterLabel = new Label( tabToolbarComposite, SWT.NONE );
+    Composite filterComposite = new Composite( tabToolbarComposite, SWT.NONE );
+    filterComposite.setLayout( new GridLayout( 2, false ) );
+    filterComposite.setLayoutData( new GridData( SWT.FILL, SWT.FILL, true, true ) );
+    Label filterLabel = new Label( filterComposite, SWT.NONE );
     filterLabel.setText( "Filter: " );
-    combo = UiHelper.createComboBox( tabToolbarComposite, 1, comboLabels );
+    combo = UiHelper.createComboBox( filterComposite, 1, contentUtil.getComboLabels() );
     combo.addSelectionListener( new SelectionAdapter() {
 
       @Override
@@ -93,8 +98,16 @@ public class ComponentsTab extends AbstractTabContribution {
         refresh();
       }
     } );
-    Button refreshButton = UiHelper.createPushButton( tabToolbarComposite, "refresh" );
+    Composite refreshComposite = new Composite( tabToolbarComposite, SWT.NONE );
+    refreshComposite.setLayout( new GridLayout( 2, true ) );
+    refreshComposite.setLayoutData( new GridData( SWT.FILL, SWT.FILL, true, true ) );
+    new Label( refreshComposite, SWT.NONE );
+    Button refreshButton = UiHelper.createPushButton( refreshComposite, "refresh" );
     refreshButton.addSelectionListener( new RefreshButtonSelectionListener( this ) );
+    return filter;
+  }
+
+  private void createTreeView( Display display, Composite tab, final ComponentsFilter filter ) {
     Composite treeComposite = UiHelper.createGreedyGridComposite( tab, 1, true );
     viewer = UiHelper.createTreeViewer( new Composite( treeComposite, SWT.NONE ) );
     viewer.addFilter( filter );
@@ -112,15 +125,10 @@ public class ComponentsTab extends AbstractTabContribution {
     };
     viewer.addSelectionChangedListener( listener );
     viewer.setContentProvider( contentProvider );
-    SourcesLabelProvider labelProvider = new SourcesLabelProvider( this );
+    SourcesLabelProvider labelProvider = new SourcesLabelProvider( contentUtil );
     labelProvider.init( display );
     viewer.setLabelProvider( labelProvider );
     viewer.setInput( new ArrayList<Source>() );
-    Composite provisioningActionsComposite = UiHelper.createGridComposite( tab, 2, false );
-    addInstallButton( provisioningActionsComposite );
-    addUninstallButton( provisioningActionsComposite );
-    addUpdateWorldButton( provisioningActionsComposite );
-    registerTabForConfigurationChanges();
   }
 
   private void registerTabForConfigurationChanges() {
@@ -134,7 +142,7 @@ public class ComponentsTab extends AbstractTabContribution {
 
       @Override
       public void widgetSelected( SelectionEvent e ) {
-        restTemplate.delete( "/rt/uninstall" + generateSelectedSourceUri() );
+        contentUtil.getRestTemplate().delete( "/rt/uninstall" + generateSelectedSourceUri() );
       }
     } );
   }
@@ -145,7 +153,7 @@ public class ComponentsTab extends AbstractTabContribution {
 
       @Override
       public void widgetSelected( SelectionEvent e ) {
-        restTemplate.put( "/rt/updateworld" );
+        contentUtil.getRestTemplate().put( "/rt/updateworld" );
       }
     } );
   }
@@ -157,7 +165,7 @@ public class ComponentsTab extends AbstractTabContribution {
       @Override
       public void widgetSelected( SelectionEvent e ) {
         String uri = "/rt/install" + generateSelectedSourceUri();
-        restTemplate.put( uri );
+        contentUtil.getRestTemplate().put( uri );
       }
     } );
   }
@@ -169,22 +177,13 @@ public class ComponentsTab extends AbstractTabContribution {
     } else {
       sourceVersion = ( SourceVersion )selectedElement;
     }
-    if( isInstalled( sourceVersion ) ) {
+    if( contentUtil.isInstalled( sourceVersion ) ) {
       addSource.setEnabled( false );
       removeSource.setEnabled( true );
     } else {
       addSource.setEnabled( true );
       removeSource.setEnabled( false );
     }
-  }
-
-  public boolean isInstalled( SourceVersion sourceVersion ) {
-    boolean result = false;
-    for( int i = 0; i < installedSources.size() && result == false; i++ ) {
-      Source source = installedSources.get( i );
-      result = source.getVersions().contains( sourceVersion );
-    }
-    return result;
   }
 
   String generateSelectedSourceUri() {
@@ -196,44 +195,26 @@ public class ComponentsTab extends AbstractTabContribution {
       name = ( ( Source )selectedElement ).getName();
     } else if( selectedElement instanceof SourceVersion ) {
       version = ( ( SourceVersion )selectedElement ).getVersion();
-      name = getSourceVersionSource( ( SourceVersion )selectedElement ).getName();
+      name = contentUtil.getSourceVersionSource( ( SourceVersion )selectedElement ).getName();
     }
     String uri = "/" + name + "/" + version;
     return uri;
   }
 
-  private Source getSourceVersionSource( SourceVersion sourceVersion ) {
-    Source result = null;
-    if( sources != null ) {
-      for( Source source : sources ) {
-        List<SourceVersion> versions = source.getVersions();
-        for( SourceVersion version : versions ) {
-          if( version.equals( sourceVersion ) ) {
-            result = source;
-          }
-        }
-      }
-    }
-    return result;
-  }
-
   public void configurationChanged( IConfigurationEvent event ) {
-    restTemplate = new RestTemplate( event.getNewIntanceURI() );
+    contentUtil.setConfigurationURI( event.getNewIntanceURI() );
     refresh();
   }
 
   public void refresh() {
-    if( restTemplate != null && !display.isDisposed() ) {
+    if( contentUtil != null && !display.isDisposed() ) {
       display.asyncExec( new Runnable() {
 
         @Override
         public void run() {
           int selectionIndex = combo.getSelectionIndex();
-          sources = restTemplate.getForEntitiesAsList( listMapping.get( ComponentsTab.comboLabels[ selectionIndex ] ),
-                                                       Source.class );
-          installedSources = restTemplate.getForEntitiesAsList( listMapping.get( ComponentsTab.comboLabels[ 1 ] ),
-                                                                Source.class );
-          viewer.setInput( sources );
+          contentUtil.refresh( contentUtil.getComboLabels()[ selectionIndex ] );
+          viewer.setInput( contentUtil.getSourcec() );
           addSource.setEnabled( false );
           removeSource.setEnabled( false );
         }
