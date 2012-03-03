@@ -17,4 +17,8 @@ public class ConfiguratorUiFooter {
     // TODO - Get the RTP version.
     UiHelper.createLabel( footer, 1, "RTP Version XZY" );
   }
+
+  public void dispose() {
+    // TODO Auto-generated method stub
+  }
 }

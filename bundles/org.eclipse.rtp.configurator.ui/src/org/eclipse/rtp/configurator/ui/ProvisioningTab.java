@@ -23,4 +23,9 @@ public class ProvisioningTab extends AbstractTabContribution {
     Composite planetTab = UiHelper.createGreedyGridComposite( composite, 1, true );
     UiHelper.createLabel( planetTab, 1, "Provisioning Tab" );
   }
+
+  @Override
+  public void dispose() {
+    // TODO Auto-generated method stub
+  }
 }

@@ -13,15 +13,16 @@ import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PutMethod;
 import org.eclipse.rtp.core.model.SourceProvider;
 import org.eclipse.rtp.core.model.SourceUnMarshaller;
-import org.eclipse.rtp.core.model.internal.SourceUnMarshallerImpl;
+import org.eclipse.rtp.core.util.ModelUtil;
 
 public class RestTemplate {
 
-  SourceUnMarshaller unMarshaller = new SourceUnMarshallerImpl();
+  SourceUnMarshaller unMarshaller;
   private final String urlBase;
 
   public RestTemplate( String newIntanceURI ) {
     this.urlBase = newIntanceURI;
+    unMarshaller = ModelUtil.getSourceUnMarshaller();
   }
 
   @SuppressWarnings( "unchecked" )

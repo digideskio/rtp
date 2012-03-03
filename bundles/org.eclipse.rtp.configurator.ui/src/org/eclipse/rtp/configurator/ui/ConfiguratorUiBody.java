@@ -18,7 +18,10 @@ import org.eclipse.swt.widgets.TabItem;
 
 public class ConfiguratorUiBody {
 
+  private List<TabContribution> contributions;
+
   public void createBody( Shell shell, List<TabContribution> contributions ) {
+    this.contributions = contributions;
     Composite body = UiHelper.createGreedyGridComposite( shell, 1, true );
     final TabFolder tabFolder = new TabFolder( body, SWT.BORDER );
     tabFolder.setLayoutData( UiHelper.createGreedyGridData() );
@@ -31,6 +34,12 @@ public class ConfiguratorUiBody {
     }
     if( tabFolder.getChildren().length > 0 ) {
       tabFolder.setSelection( 0 );
+    }
+  }
+
+  public void dispose() {
+    for( TabContribution contribution : contributions ) {
+      contribution.dispose();
     }
   }
 }

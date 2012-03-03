@@ -12,17 +12,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TreeSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.rtp.configurator.rest.RestTemplate;
+import org.eclipse.rtp.configurator.ui.internal.event.EventingServiceUtil;
 import org.eclipse.rtp.configurator.ui.internal.event.IConfigurationEvent;
 import org.eclipse.rtp.configurator.ui.internal.event.IConfigurationListener;
 import org.eclipse.rtp.core.model.Source;
 import org.eclipse.rtp.core.model.SourceVersion;
+import org.eclipse.rwt.RWT;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyAdapter;
 import org.eclipse.swt.events.KeyEvent;
@@ -34,7 +35,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
-import org.osgi.framework.Bundle;
 
 public class ComponentsTab extends AbstractTabContribution {
 
@@ -120,7 +120,12 @@ public class ComponentsTab extends AbstractTabContribution {
     addInstallButton( provisioningActionsComposite );
     addUninstallButton( provisioningActionsComposite );
     addUpdateWorldButton( provisioningActionsComposite );
-    addConfigurationListener();
+    registerTabForConfigurationChanges();
+  }
+
+  private void registerTabForConfigurationChanges() {
+    IConfigurationListener configurationListenerService = EventingServiceUtil.getConfigurationListenerService();
+    configurationListenerService.addInterestedView( RWT.getSessionStore().getId(), this );
   }
 
   private void addUninstallButton( Composite tab ) {
@@ -212,19 +217,9 @@ public class ComponentsTab extends AbstractTabContribution {
     return result;
   }
 
-  private void addConfigurationListener() {
-    Bundle bundle = Platform.getBundle( "org.eclipse.rtp.configurator.ui" );
-    IConfigurationListener configurationListener = new IConfigurationListener() {
-
-      @Override
-      public void configurationchanged( IConfigurationEvent event ) {
-        restTemplate = new RestTemplate( event.getNewIntanceURI() );
-        refresh();
-      }
-    };
-    bundle.getBundleContext().registerService( IConfigurationListener.class,
-                                               configurationListener,
-                                               null );
+  public void configurationChanged( IConfigurationEvent event ) {
+    restTemplate = new RestTemplate( event.getNewIntanceURI() );
+    refresh();
   }
 
   public void refresh() {
@@ -244,5 +239,11 @@ public class ComponentsTab extends AbstractTabContribution {
         }
       } );
     }
+  }
+
+  @Override
+  public void dispose() {
+    IConfigurationListener configurationListenerService = EventingServiceUtil.getConfigurationListenerService();
+    configurationListenerService.removeInterestedView( RWT.getSessionStore().getId() );
   }
 }

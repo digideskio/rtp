@@ -7,12 +7,10 @@
  *******************************************************************************/
 package org.eclipse.rtp.configurator.ui;
 
-import java.util.Collection;
-
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.dialogs.InputDialog;
+import org.eclipse.rtp.configurator.rest.IEventService;
 import org.eclipse.rtp.configurator.ui.internal.event.ConfigurationEvent;
-import org.eclipse.rtp.configurator.ui.internal.event.IConfigurationListener;
+import org.eclipse.rtp.configurator.ui.internal.event.EventingServiceUtil;
 import org.eclipse.rwt.RWT;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -24,9 +22,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
-import org.osgi.framework.Bundle;
-import org.osgi.framework.InvalidSyntaxException;
-import org.osgi.framework.ServiceReference;
 
 /**
  * Constructs the Configurator UI header.
@@ -37,16 +32,17 @@ public class ConfiguratorUiHeader {
 
   private Label configurationUriLabel;
   private Composite header;
+  private Image logo;
 
   public void createHeader( final Display display, Shell shell ) {
-    header = UiHelper.createGridComposite( shell, 5, false );
-    Image logo = new Image( display, getClass().getResourceAsStream( "/images/rtp-icon.png" ) );
+    header = UiHelper.createGridComposite( shell, 4, false );
+    logo = new Image( display, getClass().getResourceAsStream( "/images/rtp-icon.png" ) );
     Label label = new Label( header, SWT.CENTER );
     label.setImage( logo );
     configurationUriLabel = new Label( header, SWT.NONE );
-    configurationUriLabel.setLayoutData( new GridData( SWT.CENTER, SWT.CENTER, false, false ) );
-    Label headerLabel = UiHelper.createLabel( header, 2, new UIBrandingWeb().getTitle() );
-    headerLabel.setLayoutData( new GridData( SWT.CENTER, SWT.CENTER, true, false ) );
+    configurationUriLabel.setLayoutData( new GridData( SWT.FILL, SWT.CENTER, true, false ) );
+    Label headerLabel = UiHelper.createLabel( header, 1, new UIBrandingWeb().getTitle() );
+    headerLabel.setLayoutData( new GridData( SWT.FILL, SWT.CENTER, true, false ) );
     createConfigurationButton( display, header );
   }
 
@@ -61,46 +57,44 @@ public class ConfiguratorUiHeader {
   {
     rtpInstanceManagementButton.addSelectionListener( new SelectionAdapter() {
 
+      @SuppressWarnings( "synthetic-access" )
       @Override
       public void widgetSelected( SelectionEvent e ) {
-        final InputDialog inputDialog = new InputDialog( Display.getCurrent().getActiveShell(),
-                                                         "RTP Instance Configuration",
-                                                         "Enter instance URI",
-                                                         "",
-                                                         null )
-        {
-
-          @Override
-          protected void okPressed() {
-            super.okPressed();
-            configurationUriLabel.setText( getValue() );
-            header.layout( true );
-            fireConfigurationChagned( getValue() );
-          }
-
-          private void fireConfigurationChagned( String value ) {
-            try {
-              ConfigurationEvent configurationEvent = new ConfigurationEvent( value,
-                                                                              RWT.getSessionStore()
-                                                                                .getId() );
-              Bundle bundle = Platform.getBundle( "org.eclipse.rtp.configurator.ui" );
-              Collection<ServiceReference<IConfigurationListener>> serviceReferences = bundle.getBundleContext()
-                .getServiceReferences( IConfigurationListener.class, null );
-              for( ServiceReference<IConfigurationListener> serviceReference : serviceReferences ) {
-                IConfigurationListener service = bundle.getBundleContext()
-                  .getService( serviceReference );
-                service.configurationchanged( configurationEvent );
-                bundle.getBundleContext().ungetService( serviceReference );
-              }
-            } catch( InvalidSyntaxException e ) {
-              // TODO Auto-generated catch block
-              e.printStackTrace();
-            }
-          }
-        };
-        inputDialog.setBlockOnOpen( false );
-        inputDialog.open();
+        showInputDialog();
       }
     } );
+  }
+
+  private void showInputDialog() {
+    final InputDialog inputDialog = new InputDialog( Display.getCurrent().getActiveShell(),
+                                                     "RTP Instance Configuration",
+                                                     "Enter instance URI",
+                                                     "",
+                                                     null )
+    {
+
+      @SuppressWarnings( "synthetic-access" )
+      @Override
+      protected void okPressed() {
+        super.okPressed();
+        configurationUriLabel.setText( getValue() );
+        fireConfigurationChagned( getValue() );
+      }
+    };
+    inputDialog.setBlockOnOpen( false );
+    inputDialog.open();
+  }
+
+  private void fireConfigurationChagned( String value ) {
+    ConfigurationEvent configurationEvent = new ConfigurationEvent( value, RWT.getSessionStore()
+      .getId() );
+    IEventService eventService = EventingServiceUtil.getEventService();
+    eventService.fireConfigurationEvent( configurationEvent );
+  }
+
+  public void dispose() {
+    if( logo != null ) {
+      logo.dispose();
+    }
   }
 }
