@@ -87,11 +87,13 @@
     <module>../../bundles/org.eclipse.rtp.configurator.console</module>
     <module>../../bundles/org.eclipse.rtp.configurator.ui</module>
     <module>../../bundles/org.eclipse.rtp.httpdeployer</module>
+    <module>../../bundles/org.eclipse.rtp.configurator.rest.provider</module>
     <!-- Tests -->
     <module>../../tests/org.eclipse.rtp.core.test</module>
     <module>../../tests/org.eclipse.rtp.core.model.test</module>
     <!-- <module>../../tests/org.eclipse.rtp.core.service.provider.test</module>  -->
     <module>../../tests/org.eclipse.rtp.httpdeployer.test</module>
+    <!-- <module>../../tests/org.eclipse.rtp.configurator.rest.provider.test</module>  -->
     <!--  <module>../../tests/org.eclipse.rtp.configurator.console.test</module>  -->
     <!-- Features -->
     <module>../org.eclipse.rtp.package.runtime.feature</module>
