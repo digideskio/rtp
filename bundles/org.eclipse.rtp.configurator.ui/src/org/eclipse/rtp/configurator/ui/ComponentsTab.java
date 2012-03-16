@@ -177,7 +177,10 @@ public class ComponentsTab extends AbstractTabContribution {
     } else {
       sourceVersion = ( SourceVersion )selectedElement;
     }
-    if( contentUtil.isInstalled( sourceVersion ) ) {
+    if( sourceVersion == null ) {
+      addSource.setEnabled( false );
+      removeSource.setEnabled( false );
+    } else if( contentUtil.isInstalled( sourceVersion ) ) {
       addSource.setEnabled( false );
       removeSource.setEnabled( true );
     } else {
