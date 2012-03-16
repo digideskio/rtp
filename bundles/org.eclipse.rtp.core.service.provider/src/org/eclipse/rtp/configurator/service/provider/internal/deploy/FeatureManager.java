@@ -119,7 +119,7 @@ public class FeatureManager {
 
   protected ProvisioningContext createProvisioningContext() {
     ProvisioningContext context = new ProvisioningContext( provisioningAgent );
-    context.setArtifactRepositories( repositoryManager.getRepositories() );
+    context.setMetadataRepositories( repositoryManager.getRepositories() );
     context.setArtifactRepositories( repositoryManager.getRepositories() );
     return context;
   }
