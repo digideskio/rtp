@@ -52,7 +52,7 @@ public class RuntimeProvisioningServiceImpl implements RuntimeProvisioningServic
         System.out.println( "Repository loaded: " + sourceVersion.getRepositoryUrl() );
         System.out.println( "Installation started" );
         installVersion( sourceVersion );
-        System.out.println( "Installaiton successful" );
+        System.out.println( "Installation successful" );
         result = Status.OK_STATUS;
       } else {
         System.out.println( "No source found to install" );
