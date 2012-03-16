@@ -42,7 +42,7 @@ public class UIEntryPoint implements IEntryPoint {
     initShell( shell );
     configuratorUiHeader.createHeader( display, shell );
     contributions.add( new ComponentsTab() );
-    contributions.add( new ProvisioningTab() );
+    // contributions.add( new ProvisioningTab() );
     configuratorUiBody.createBody( shell, contributions );
     configuratorUiFooter.createFooter( shell );
     shell.open();

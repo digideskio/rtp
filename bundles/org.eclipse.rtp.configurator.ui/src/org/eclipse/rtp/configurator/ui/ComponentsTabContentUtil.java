@@ -22,7 +22,7 @@ public class ComponentsTabContentUtil {
     {
       put( comboLabels[ 0 ], "/rt/list" );
       put( comboLabels[ 1 ], "/rt/list/installed" );
-      put( comboLabels[ 2 ], "/rt/list/uninstaller" );
+      put( comboLabels[ 2 ], "/rt/list/uninstalled" );
     }
   };
 
@@ -46,7 +46,11 @@ public class ComponentsTabContentUtil {
     boolean result = false;
     for( int i = 0; i < installedSources.size() && result == false; i++ ) {
       Source source = installedSources.get( i );
-      result = source.getVersions().contains( sourceVersion );
+      // TODO Fix me. This is a hack!
+      List<SourceVersion> versions = source.getVersions();
+      for( int j = 0; j < versions.size() && result == false; j++ ) {
+        result = versions.get( j ).toString().equals( sourceVersion.toString() );
+      }
     }
     return result;
   }
@@ -69,7 +73,7 @@ public class ComponentsTabContentUtil {
   public void refresh( String componentsFilter ) {
     restTemplate = new RestTemplate( configurationURI );
     sources = restTemplate.getForEntitiesAsList( listMapping.get( componentsFilter ), Source.class );
-    installedSources = restTemplate.getForEntitiesAsList( listMapping.get( componentsFilter ),
+    installedSources = restTemplate.getForEntitiesAsList( listMapping.get( comboLabels[ 1 ] ),
                                                           Source.class );
   }
 }

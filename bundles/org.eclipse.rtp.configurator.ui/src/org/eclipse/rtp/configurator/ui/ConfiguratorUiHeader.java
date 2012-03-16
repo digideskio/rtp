@@ -9,9 +9,12 @@ package org.eclipse.rtp.configurator.ui;
 
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.rtp.configurator.rest.IEventService;
+import org.eclipse.rtp.configurator.rest.RestTemplate;
 import org.eclipse.rtp.configurator.ui.internal.event.ConfigurationEvent;
 import org.eclipse.rtp.configurator.ui.internal.event.EventingServiceUtil;
+import org.eclipse.rtp.core.model.Source;
 import org.eclipse.rwt.RWT;
+import org.eclipse.rwt.widgets.DialogUtil;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -21,6 +24,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 
 /**
@@ -77,12 +81,37 @@ public class ConfiguratorUiHeader {
       @Override
       protected void okPressed() {
         super.okPressed();
-        configurationUriLabel.setText( getValue() );
-        fireConfigurationChagned( getValue() );
+        if( isValidLocation( getValue() ) ) {
+          configurationUriLabel.setText( getValue() );
+          fireConfigurationChagned( getValue() );
+        } else {
+          showWarningDialog();
+        }
       }
     };
     inputDialog.setBlockOnOpen( false );
     inputDialog.open();
+  }
+
+  private boolean isValidLocation( String configurationURI ) {
+    boolean result = false;
+    try {
+      // do a test rest call to test the entered URI.
+      RestTemplate restTemplate = new RestTemplate( configurationURI );
+      restTemplate.getForEntitiesAsList( "/rt/list", Source.class );
+      result = true;
+    } catch( Exception e ) {
+      result = false;
+    }
+    return result;
+  }
+
+  private void showWarningDialog() {
+    MessageBox infoDialog = new MessageBox( Display.getDefault().getActiveShell(),
+                                            SWT.OK | SWT.ICON_WARNING | SWT.APPLICATION_MODAL );
+    infoDialog.setText( "Invalide Location" );
+    infoDialog.setMessage( "No instance found." );
+    DialogUtil.open( infoDialog, null );
   }
 
   private void fireConfigurationChagned( String value ) {
