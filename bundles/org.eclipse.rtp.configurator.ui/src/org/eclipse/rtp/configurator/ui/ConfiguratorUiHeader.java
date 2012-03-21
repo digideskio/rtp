@@ -29,8 +29,6 @@ import org.eclipse.swt.widgets.Shell;
 
 /**
  * Constructs the Configurator UI header.
- * 
- * @author fluffi
  */
 public class ConfiguratorUiHeader {
 

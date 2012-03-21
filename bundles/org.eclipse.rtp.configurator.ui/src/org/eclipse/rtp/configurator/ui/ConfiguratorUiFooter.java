@@ -15,7 +15,7 @@ public class ConfiguratorUiFooter {
   public void createFooter( Shell shell ) {
     Composite footer = UiHelper.createGridComposite( shell, 1, true );
     // TODO - Get the RTP version.
-    UiHelper.createLabel( footer, 1, "RTP Version XZY" );
+    UiHelper.createLabel( footer, 1, "RTP Version 1.0.0" );
   }
 
   public void dispose() {
