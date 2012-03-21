@@ -1,0 +1,33 @@
+{
+  "sources": [
+    {
+      "name": "rap",
+      "description": "Some text",
+      "infoUrl": "http://foo.bar/info",
+      "versions": [
+        {
+          "features": [ { id : "org.eclipse.rap.feature.group", version : "2.4.0" }, { id : "org.eclipse.rap.feature.group.ext", version : "1.4.0" } ],
+          "version": "1.4",
+          "repositoryUrl": "http://foo.bar"
+        },
+        {
+          "features": [ { id : "org.eclipse.rap.feature.group", version : "2.5.0" }, { id : "org.eclipse.rap.feature.group.ext", version : "1.5.0" } ],
+          "version": "1.5",
+          "repositoryUrl": "http://foo.bar2"
+        }
+      ]
+    },
+    {
+      "name": "equinox",
+      "description": "Some text3",
+      "infoUrl": "http://foo.bar/info3",      
+      "versions": [
+        {
+          "features": [ { id : "org.eclipse.rap.feature.group", version : "2.5.0" }, { id : "org.eclipse.rap.feature.group.ext", version : "1.5.0" } ],
+          "version": "3.8.1",
+          "repositoryUrl": "http://foo.bar3"
+        }
+      ]
+    }
+  ]
+}

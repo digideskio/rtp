@@ -12,15 +12,21 @@ package org.eclipse.rtp.configurator.ui;
 import org.eclipse.rwt.application.ApplicationConfiguration;
 import org.eclipse.rwt.application.ApplicationConfigurator;
 
-
 public class UIConfigurator implements ApplicationConfigurator {
 
-  public static final String RTP = "rt";
+  public static final String THEME_ID_WEB = "web";
+  public static final String THEME_ID_ANDROID = "android";
+
+  public static final String DEFAULT_ENTRY_POINT = "default";
 
   @Override
   public void configure( ApplicationConfiguration configuration ) {
-    configuration.addEntryPoint( "default", UIEntryPoint.class );
-    configuration.addStyleSheet( RTP, "theme/theme.css" );
-    configuration.addBranding( new UIBranding() );
+    configuration.addEntryPoint( DEFAULT_ENTRY_POINT, UIEntryPoint.class );
+
+    //    configuration.addStyleSheet( THEME_ID_WEB, "default-theme/theme.css" );
+    //    configuration.addBranding( new UIBrandingWeb() );
+
+    configuration.addStyleSheet( THEME_ID_ANDROID, "theme/theme-android-holo.css" );
+    configuration.addBranding( new UIBrandingAndroid() );
   }
 }
