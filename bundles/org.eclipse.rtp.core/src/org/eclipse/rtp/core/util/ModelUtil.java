@@ -54,19 +54,29 @@ public class ModelUtil {
 
   private static SourceProvider getDefaultModel() {
     SourceProvider result = null;
-    String[] modelURLs = new String[] {
-      getConfigurationURL(), getLocalURL()
-    };
+    String[] modelURLs = createModelUrls();
     for( int i = 0; i < modelURLs.length && result == null; i++ ) {
       try {
         URL url = new URL( modelURLs[ i ] );
         result = sourceUnMarshaller.marshal( url.openStream() );
       } catch( Exception e ) {
-        System.out.println( "Failed to load model" );
-        e.printStackTrace();
+        throw new IllegalStateException( "Failed to load model. Maybe you forgot to set the " +
+                                         "System Property configuration.url", e );
       }
     }
     return result;
+  }
+
+  private static String[] createModelUrls() {
+    ArrayList<String> list = new ArrayList<String>();
+    String configurationURL = getConfigurationURL();
+    if( configurationURL != null && configurationURL.length() > 0 ) {
+      list.add( configurationURL );
+    }
+    list.add( getLocalURL() );
+    String[] modelURLs = new String[ list.size() ];
+    list.toArray( modelURLs );
+    return modelURLs;
   }
 
   private static String getLocalURL() {

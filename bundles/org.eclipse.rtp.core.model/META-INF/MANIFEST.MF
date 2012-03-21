@@ -5,8 +5,8 @@ Bundle-SymbolicName: org.eclipse.rtp.core.model
 Bundle-Version: 1.0.0.qualifier
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Import-Package: com.google.gson;version="[1.6.0,2.0.0)",
- com.google.gson.stream;version="[1.6.0,2.0.0)"
+Import-Package: com.google.gson;version="[1.6.0,2.2.0)",
+ com.google.gson.stream;version="[1.6.0,2.2.0)"
 Export-Package: org.eclipse.rtp.core.model;version="1.0.0",
  org.eclipse.rtp.core.model.internal;version="1.0.0"
 Service-Component: OSGI-INF/sourceUnMarshaler.xml

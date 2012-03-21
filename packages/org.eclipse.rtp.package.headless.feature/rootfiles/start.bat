@@ -116,6 +116,6 @@ set NLM=^
 set NL=^^^%NLM%%NLM%^%NLM%%NLM%
 
 :: start Eclipse w/ java
-set command=%java% -jar %startup% %vmargs% -install %install%%application%%console%%XXMaxPermSize% %*
+set command=%java% %vmargs% -jar %startup% -install %install%%application%%console%%XXMaxPermSize% %*
 echo %NL%Launching Equinox with: %command%%NL%
 %command%

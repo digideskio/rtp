@@ -43,7 +43,7 @@ public class ConfiguratorUiHeader {
     label.setImage( logo );
     configurationUriLabel = new Label( header, SWT.NONE );
     configurationUriLabel.setLayoutData( new GridData( SWT.FILL, SWT.CENTER, true, false ) );
-    Label headerLabel = UiHelper.createLabel( header, 1, new UIBrandingWeb().getTitle() );
+    Label headerLabel = UiHelper.createLabel( header, 1, "EclipseRT Configurator" );
     headerLabel.setLayoutData( new GridData( SWT.FILL, SWT.CENTER, true, false ) );
     createConfigurationButton( display, header );
   }
