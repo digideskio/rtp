@@ -26,9 +26,6 @@ public class RuntimeProvisioningServlet extends HttpServlet implements Servlet {
 
   private static final int ERROR_STATUS = 500;
   private static final int OK_STATUS = 200;
-  /**
-	 * 
-	 */
   private static final long serialVersionUID = 1L;
 
   @Override
@@ -42,8 +39,6 @@ public class RuntimeProvisioningServlet extends HttpServlet implements Servlet {
       resp.setStatus( OK_STATUS );
     } catch( CoreException e ) {
       resp.setStatus( ERROR_STATUS );
-      System.out.println( "Failed to handle get request" );
-      System.out.println( e.getStackTrace() );
     }
     PrintWriter writer = resp.getWriter();
     writer.write( resultList );

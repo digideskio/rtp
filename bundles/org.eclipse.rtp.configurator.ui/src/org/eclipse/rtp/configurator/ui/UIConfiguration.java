@@ -9,14 +9,14 @@
 *******************************************************************************/ 
 package org.eclipse.rtp.configurator.ui;
 
+import org.eclipse.rwt.application.Application;
 import org.eclipse.rwt.application.ApplicationConfiguration;
-import org.eclipse.rwt.application.ApplicationConfigurator;
 
-public class UIConfigurator implements ApplicationConfigurator {
+public class UIConfiguration implements ApplicationConfiguration {
 
 
   @Override
-  public void configure( ApplicationConfiguration configuration ) {
-    configuration.addEntryPoint( "/configurator", UIEntryPoint.class, null );
+  public void configure( Application application ) {
+    application.addEntryPoint( "/configurator", UIEntryPoint.class, null );
   }
 }

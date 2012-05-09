@@ -47,19 +47,13 @@ public class RuntimeProvisioningServiceImpl implements RuntimeProvisioningServic
     IStatus result = null;
     try {
       if( sourceVersion != null ) {
-        System.out.println( "Loading repository: " + sourceVersion.getRepositoryUrl() );
         loadRepository( sourceVersion );
-        System.out.println( "Repository loaded: " + sourceVersion.getRepositoryUrl() );
-        System.out.println( "Installation started" );
         installVersion( sourceVersion );
-        System.out.println( "Installation successful" );
         result = Status.OK_STATUS;
       } else {
-        System.out.println( "No source found to install" );
         result = Status.CANCEL_STATUS;
       }
     } catch( Exception e ) {
-      System.out.println( "Feature will not be installed" );
       e.printStackTrace();
       result = new Status( IStatus.ERROR,
                            ProviderActivator.BUNDLE_ID,
@@ -102,7 +96,6 @@ public class RuntimeProvisioningServiceImpl implements RuntimeProvisioningServic
       try {
         featureManager.uninstallFeature( sourceVersion );
       } catch( FeatureInstallException e ) {
-        System.out.println( "Failed to uninstall source version: " + sourceVersion.toString() );
         e.printStackTrace();
         Status status = new Status( IStatus.ERROR,
                                     ProviderActivator.BUNDLE_ID,
@@ -148,11 +141,8 @@ public class RuntimeProvisioningServiceImpl implements RuntimeProvisioningServic
 
   @Override
   public IStatus update( List<String> anyListOf ) {
-    System.out.println( "Searching for updates" );
     List<Source> sourceToUpdate = new ModelUtil().search( anyListOf );
-    System.out.println( "Update started" );
     IStatus result = updateSources( sourceToUpdate );
-    System.out.println( "Update successful" );
     return result;
   }
 
@@ -164,9 +154,7 @@ public class RuntimeProvisioningServiceImpl implements RuntimeProvisioningServic
   @Override
   public IStatus updateWorld() {
     List<Source> sources = ModelUtil.getSourceProvider().getSources();
-    System.out.println( "Update started" );
     IStatus result = updateSources( sources );
-    System.out.println( "Update successful" );
     return result;
   }
 
@@ -178,7 +166,6 @@ public class RuntimeProvisioningServiceImpl implements RuntimeProvisioningServic
       Collections.sort( versions, new ModelUtil().getSourceVersionComparator() );
       SourceVersion latestSourceVersion = versions.get( 0 );
       if( !featureManager.isInstalled( latestSourceVersion ) ) {
-        System.out.println( "Updating feature: " + source.getName() );
         updateStatusList.addAll( uninstall( featureManager, versions ) );
         updateStatusList.add( install( latestSourceVersion ) );
       }

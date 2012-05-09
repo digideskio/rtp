@@ -4,8 +4,8 @@
   of the Eclipse Public License v1.0 which accompanies this distribution, and 
   is available at http://www.eclipse.org/legal/epl-v10.html -->
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="UIConfigurator">
-   <implementation class="org.eclipse.rtp.configurator.ui.UIConfigurator"/>
+   <implementation class="org.eclipse.rtp.configurator.ui.UIConfiguration"/>
    <service>
-      <provide interface="org.eclipse.rwt.application.ApplicationConfigurator"/>
+      <provide interface="org.eclipse.rwt.application.ApplicationConfiguration"/>
    </service>
 </scr:component>

@@ -21,6 +21,7 @@ import org.eclipse.rtp.core.model.SourceVersion;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 
+@SuppressWarnings( "restriction" )
 public class P2Util {
 	
 	private static Configurator configurator;

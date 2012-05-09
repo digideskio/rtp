@@ -31,20 +31,28 @@ public class DeleteRequestHandler {
     if( pathInfo == null || pathInfo.length() == 0 ) {
       result = Status.CANCEL_STATUS;
     } else if( pathInfoUtil.isProvisioning( pathInfo, getModelUtil(), getSources() ) ) {
-      SourceVersion sourceVerionToRemove = pathInfoUtil.getSourceVersion( pathInfo,
-                                                                          getModelUtil(),
-                                                                          getSources() );
-      List<SourceVersion> sourceVersoinsToDelte = Arrays.asList( new SourceVersion[]{
-        sourceVerionToRemove
-      } );
-      result = provisioningService.remove( sourceVersoinsToDelte );
+      result = removeResources( provisioningService, pathInfo, pathInfoUtil );
     }
     return result;
   }
 
+  private IStatus removeResources( RuntimeProvisioningService provisioningService,
+                                   String pathInfo,
+                                   PathInfoUtil pathInfoUtil )
+  {
+    IStatus result;
+    SourceVersion sourceVerionToRemove = pathInfoUtil.getSourceVersion( pathInfo,
+                                                                        getModelUtil(),
+                                                                        getSources() );
+    List<SourceVersion> sourceVersoinsToDelte = Arrays.asList( new SourceVersion[]{
+      sourceVerionToRemove
+    } );
+    result = provisioningService.remove( sourceVersoinsToDelte );
+    return result;
+  }
+
   protected List<Source> getSources() {
-    List<Source> sources = ModelUtil.getSourceProvider().getSources();
-    return sources;
+    return ModelUtil.getSourceProvider().getSources();
   }
 
   protected ModelUtil getModelUtil() {

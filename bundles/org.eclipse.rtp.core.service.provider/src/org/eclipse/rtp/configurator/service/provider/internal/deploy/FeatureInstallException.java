@@ -9,7 +9,7 @@
 *******************************************************************************/
 package org.eclipse.rtp.configurator.service.provider.internal.deploy;
 
-public class FeatureInstallException extends Exception {
+public class FeatureInstallException extends RuntimeException {
 
 	private static final long serialVersionUID = 7654279780139556052L;
 

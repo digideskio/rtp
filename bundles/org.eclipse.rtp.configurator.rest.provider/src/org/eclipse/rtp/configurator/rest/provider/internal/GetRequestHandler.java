@@ -39,7 +39,7 @@ public class GetRequestHandler {
     } else if( "search".equalsIgnoreCase( pathSegments[ 0 ] ) ) {
       result = handleSearchRequest( pathInfo, request.getParameter( "query" ) );
     } else {
-      result = "Unsupported GET REST API";
+      result = "Unsupported";
     }
     return result;
   }

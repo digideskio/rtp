@@ -65,10 +65,6 @@ public class RestProviderActivator implements BundleActivator {
     return instance;
   }
 
-  /*
-   * (non-Javadoc)
-   * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
-   */
   @Override
   public void start( BundleContext bundleContext ) throws Exception {
     RestProviderActivator.context = bundleContext;
@@ -84,10 +80,6 @@ public class RestProviderActivator implements BundleActivator {
     }
   }
 
-  /*
-   * (non-Javadoc)
-   * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
-   */
   @Override
   public void stop( BundleContext bundleContext ) throws Exception {
     RestProviderActivator.context = null;

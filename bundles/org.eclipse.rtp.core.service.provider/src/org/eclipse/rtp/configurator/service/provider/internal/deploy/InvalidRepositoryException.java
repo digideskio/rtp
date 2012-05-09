@@ -9,7 +9,7 @@
 *******************************************************************************/
 package org.eclipse.rtp.configurator.service.provider.internal.deploy;
 
-public class InvalidRepositoryException extends Exception {
+public class InvalidRepositoryException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 

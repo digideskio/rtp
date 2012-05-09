@@ -92,7 +92,15 @@ public class CommandDelegateImpl implements CommandDelegate {
      * the secodn entry is not a OSGI.version than the latest should be installed.
      */
     SourceVersion sourceVersion = commandUtil.getSourceVersions( parameter );
-    configurationService.install( sourceVersion );
+    System.out.println( "Loading repository: " + sourceVersion.getRepositoryUrl() );
+    System.out.println( "Repository loaded: " + sourceVersion.getRepositoryUrl() );
+    System.out.println( "Installation started" );
+    IStatus status = configurationService.install( sourceVersion );
+    if( status.isOK() ) {
+      System.out.println( "Feature will not be installed" );
+    } else {
+      System.out.println( "Installation successful" );
+    }
   }
 
   @Override
@@ -100,7 +108,10 @@ public class CommandDelegateImpl implements CommandDelegate {
     /*
      * Updates a specific componennt. Same parameter as install
      */
+    System.out.println( "Searching for updates" );
+    System.out.println( "Update started" );
     configurationService.update( anyListOf );
+    System.out.println( "Update successful" );
   }
 
   @Override
@@ -157,6 +168,8 @@ public class CommandDelegateImpl implements CommandDelegate {
     /*
      * Update the whole system to the latest version. No Parameter
      */
+    System.out.println( "Update started" );
     configurationService.updateWorld();
+    System.out.println( "Update successful" );
   }
 }

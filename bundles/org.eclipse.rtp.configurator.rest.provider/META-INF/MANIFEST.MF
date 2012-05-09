@@ -14,4 +14,4 @@ Bundle-Vendor: %bundleVendor
 Service-Component: OSGI-INF/rtpConfiguratorServiceReference.xml
 Import-Package: javax.servlet;version="[2.6.0,3.1.0)",
  javax.servlet.http;version="[2.6.0,3.1.0)",
- org.eclipse.rtp.configurator.service.provider.internal.util
+ org.eclipse.rtp.configurator.service.provider.internal.util;version="[1.0.0,1.1.0)"
