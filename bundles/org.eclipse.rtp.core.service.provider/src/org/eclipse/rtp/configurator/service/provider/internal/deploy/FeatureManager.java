@@ -7,7 +7,7 @@
  * 
  * Contributors:
  *     EclipseSource - initial API and implementation
- *     SAP AG - fix for bug 380696
+ *     SAP AG - fix for bug 380696, 380700
  *******************************************************************************/
 package org.eclipse.rtp.configurator.service.provider.internal.deploy;
 
@@ -123,8 +123,9 @@ public class FeatureManager {
   private void resolveOperation( ProfileChangeOperation operation ) throws FeatureInstallException {
     IStatus result = operation.resolveModal( null );
     if( !result.isOK() ) {
-      String errorMessage = generateErrorMessage( result );
-      throw new FeatureInstallException( errorMessage );
+      StringBuilder errorMessage = new StringBuilder();
+      generateErrorMessage( result, errorMessage );
+      throw new FeatureInstallException( errorMessage.toString() );
     }
   }
 
@@ -156,13 +157,12 @@ public class FeatureManager {
     }
   }
 
-  private String generateErrorMessage( IStatus result ) {
+  protected void generateErrorMessage( IStatus result, StringBuilder message ) {
+    message.append( result.getMessage() + "\n" );
     IStatus[] children = result.getChildren();
-    String message = "";
     for( int i = 0; i < children.length; i++ ) {
-      message = children[ i ].getMessage() + "\n";
+      generateErrorMessage( children[ i ], message );
     }
-    return message;
   }
 
   protected Collection<IInstallableUnit> getInstallableUnits( ProvisioningContext context,

@@ -4,6 +4,11 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html Contributors: EclipseSource - initial API and
  * implementation
+ * 
+ * Contributors:
+ *     EclipseSource - initial API and implementation
+ *     SAP AG - fix for 380700
+
  *******************************************************************************/
 package org.eclipse.rtp.configurator.service.provider.internal.deploy;
 
@@ -15,6 +20,8 @@ import static org.mockito.Mockito.when;
 
 import java.net.URI;
 
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.equinox.internal.provisional.configurator.Configurator;
@@ -102,5 +109,24 @@ public class FeatureManagerTest {
                     e.getMessage() );
     }
     verifyZeroInteractions( configurator );
+  }
+
+  @Test
+  public void testGenerateErrorMessage() {
+    IStatus[] children = new IStatus[ 2 ];
+    children[ 0 ] = new Status( 0, "test.id", "child 0" );
+    children[ 1 ] = new Status( 0, "test.id", "child 1" );
+    MultiStatus status = new MultiStatus( "test.id", 0, children, "multi status", null );
+    StringBuilder errorMessage = new StringBuilder();
+    objectUnderTest.generateErrorMessage( status, errorMessage );
+    assertEquals( "multi status\nchild 0\nchild 1\n", errorMessage.toString() );
+  }
+  
+  @Test
+  public void testGenerateErrorMessageNull() {
+    IStatus status = new Status( 0, "test.id", null );
+    StringBuilder errorMessage = new StringBuilder();
+    objectUnderTest .generateErrorMessage( status, errorMessage );
+    assertEquals( "\n", errorMessage.toString() );
   }
 }
