@@ -4,6 +4,10 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html Contributors: EclipseSource - initial API and
  * implementation
+ * 
+ * Contributors:
+ *     EclipseSource - initial API and implementation
+ *     SAP AG - fix for bug 380696
  *******************************************************************************/
 package org.eclipse.rtp.configurator.service.provider.internal.deploy;
 
@@ -53,25 +57,43 @@ public class FeatureManager {
 
   // TODO: Not tested
   public void installFeature( SourceVersion sourceVersion ) throws FeatureInstallException {
-    ProfileChangeOperation operation = resolveProfileChangeOperation( sourceVersion, Action.INSTALL );
-    executeProfileChangeOperation( operation );
-    applyChanges();
+    List<IInstallableUnit> unitsToUpdate = getUnitsToUpdate( sourceVersion, Action.INSTALL );
+    if( unitsToUpdate.size() > 0 ) {
+      ProfileChangeOperation operation = resolveProfileChangeOperation( unitsToUpdate,
+                                                                        Action.INSTALL );
+      executeProfileChangeOperation( operation );
+      applyChanges();
+    } else {
+      System.out.println( "Nothing found for installation" );
+    }
   }
 
   // TODO: Not tested
   public void uninstallFeature( SourceVersion sourceVersion ) throws FeatureInstallException {
-    ProfileChangeOperation operation = resolveProfileChangeOperation( sourceVersion,
-                                                                      Action.UNINSTALL );
-    executeProfileChangeOperation( operation );
-    applyChanges();
+    List<IInstallableUnit> unitsToUpdate = getUnitsToUpdate( sourceVersion, Action.UNINSTALL );
+    if( unitsToUpdate.size() > 0 ) {
+      ProfileChangeOperation operation = resolveProfileChangeOperation( unitsToUpdate,
+                                                                        Action.UNINSTALL );
+      executeProfileChangeOperation( operation );
+      applyChanges();
+    } else {
+      System.out.println( "Nothing found for uninstall" );
+    }
   }
 
   // TODO: Not tested
-  private ProfileChangeOperation resolveProfileChangeOperation( SourceVersion sourceVersion,
+  private ProfileChangeOperation resolveProfileChangeOperation( List<IInstallableUnit> unitsToInstall,
                                                                 Action action )
     throws FeatureInstallException
   {
     ProvisioningSession session = new ProvisioningSession( provisioningAgent );
+    ProfileChangeOperation operation = getOperation( session, unitsToInstall, action );
+    operation.setProvisioningContext( createProvisioningContext() );
+    resolveOperation( operation );
+    return operation;
+  }
+
+  private List<IInstallableUnit> getUnitsToUpdate( SourceVersion sourceVersion, Action action ) {
     ProvisioningContext context = createProvisioningContext();
     List<Feature> features = sourceVersion.getFeatures();
     List<IInstallableUnit> unitsToInstall = new ArrayList<IInstallableUnit>();
@@ -82,10 +104,7 @@ public class FeatureManager {
                                                                 action );
       unitsToInstall.addAll( units );
     }
-    ProfileChangeOperation operation = getOperation( session, unitsToInstall, action );
-    operation.setProvisioningContext( context );
-    resolveOperation( operation );
-    return operation;
+    return unitsToInstall;
   }
 
   private ProfileChangeOperation getOperation( ProvisioningSession session,
