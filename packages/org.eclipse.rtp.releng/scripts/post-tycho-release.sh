@@ -27,7 +27,7 @@ cd $PACKAGES_FOLDER
 # Look for the *.sh files there and change their permission to executable.
 # tar.gz those products.
 # For example:
-# org.eclipse.rtp.packages/target/products/org.eclipse.rtp.package/linux/gtk/x86/rt-incubation-0.1.0.v20110308-1242-N
+# org.eclipse.rtp.packages/target/products/org.eclipse.rtp.package/linux/gtk/x86/rt-0.1.0.v20110308-1242-N
 # is such a folder where the manips must take place.
 BUILT_PRODUCTS="$PACKAGES_FOLDER/org.eclipse.rtp.packages/target/products"
 
@@ -41,7 +41,7 @@ RT_HEADLESS_LINUX32_PRODUCT="$BUILT_PRODUCTS/org.eclipse.rtp.package.headless/li
 # Reads the name of the top level folder.
 RT_HEADLESS_FOLDER_NAME=`find $RT_HEADLESS_LINUX32_PRODUCT -maxdepth 1 -mindepth 1 -type d -exec basename {} \;`
 #get the version number from the folder name. it looks like this:
-# rt-headless-incubation-0.1.0.v20110308-1653-N
+# rt-headless-0.1.0.v20110308-1653-N
 
 
 # Now change the permission: NOT useful anymore with TYCHO-566 partially fixed.
@@ -67,7 +67,7 @@ zip -r $RT_HEADLESS_FOLDER_NAME.zip $RT_HEADLESS_FOLDER_NAME/
 mv $RT_HEADLESS_FOLDER_NAME.zip $BUILT_PRODUCTS/../
 cd $PACKAGES_FOLDER
 
-BUILD_VERSION=$(echo "$RT_HEADLESS_FOLDER_NAME" | sed 's/^rt-headless-incubation-//')
+BUILD_VERSION=$(echo "$RT_HEADLESS_FOLDER_NAME" | sed 's/^rt-headless-//')
 
 #Same for normal package:
 RT_LINUX32_PRODUCT="$BUILT_PRODUCTS/org.eclipse.rtp.package/linux/gtk/x86"

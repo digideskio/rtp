@@ -55,11 +55,11 @@
             <product>
               <id>org.eclipse.rtp.package.headless</id>
               <attachId>org.eclipse.rtp.package.headless</attachId>
-              <rootFolder>rt-headless-incubation-${artifact-build-version}</rootFolder>
+              <rootFolder>rt-headless-${artifact-build-version}</rootFolder>
             </product>
             <product>
               <id>org.eclipse.rtp.package</id>
-              <rootFolder>rt-incubation-${artifact-build-version}</rootFolder>
+              <rootFolder>rt-${artifact-build-version}</rootFolder>
             </product>
           </products>
         </configuration>

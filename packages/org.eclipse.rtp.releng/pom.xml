@@ -18,7 +18,7 @@
   <version>1.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
-  <name>RTP packages (Incubation)</name>
+  <name>RTP packages</name>
 
   <properties>
     <rtp-version>0.1.0-SNAPSHOT</rtp-version>
