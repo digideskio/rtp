@@ -8,7 +8,7 @@
 <listAttribute key="M2_PROPERTIES">
 <listEntry value="build-identifier=N"/>
 <listEntry value="pack-and-sign=false"/>
-<listEntry value="target=juno-RC2"/>
+<listEntry value="target=juno-RC3"/>
 </listAttribute>
 <stringAttribute key="M2_RUNTIME" value="/usr/share/java/maven-3.0.3"/>
 <booleanAttribute key="M2_SKIP_TESTS" value="false"/>
