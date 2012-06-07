@@ -97,9 +97,9 @@ public class CommandDelegateImpl implements CommandDelegate {
     System.out.println( "Installation started" );
     IStatus status = configurationService.install( sourceVersion );
     if( status.isOK() ) {
-      System.out.println( "Feature will not be installed" );
-    } else {
       System.out.println( "Installation successful" );
+    } else {
+      System.out.println( "Installation failed" );
     }
   }
 
