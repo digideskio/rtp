@@ -4,6 +4,10 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html Contributors: EclipseSource - initial API and
  * implementation
+ * 
+ * Contributors:
+ *     EclipseSource - initial API and implementation
+ *     SAP AG - fix for bug 382043
  *******************************************************************************/
 package org.eclipse.rtp.configurator.console;
 
