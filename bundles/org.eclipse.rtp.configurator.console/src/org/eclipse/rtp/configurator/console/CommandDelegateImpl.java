@@ -7,7 +7,7 @@
  * 
  * Contributors:
  *     EclipseSource - initial API and implementation
- *     SAP AG - fix for bug 382043
+ *     SAP AG - fix for bug 382043, bug 382106
  *******************************************************************************/
 package org.eclipse.rtp.configurator.console;
 
@@ -96,9 +96,6 @@ public class CommandDelegateImpl implements CommandDelegate {
      * the secodn entry is not a OSGI.version than the latest should be installed.
      */
     SourceVersion sourceVersion = commandUtil.getSourceVersions( parameter );
-    System.out.println( "Loading repository: " + sourceVersion.getRepositoryUrl() );
-    System.out.println( "Repository loaded: " + sourceVersion.getRepositoryUrl() );
-    System.out.println( "Installation started" );
     IStatus status = configurationService.install( sourceVersion );
     if( status.isOK() ) {
       System.out.println( "Installation successful" );

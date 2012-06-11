@@ -4,6 +4,10 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html Contributors: EclipseSource - initial API and
  * implementation
+ * 
+ * Contributors:
+ *     EclipseSource - initial API and implementation
+ *     SAP AG - fix for bug 382106 
  *******************************************************************************/
 package org.eclipse.rtp.configurator.service.provider.internal;
 
@@ -47,7 +51,10 @@ public class RuntimeProvisioningServiceImpl implements RuntimeProvisioningServic
     IStatus result = null;
     try {
       if( sourceVersion != null ) {
+        System.out.println( "Loading repository: " + sourceVersion.getRepositoryUrl() );
         loadRepository( sourceVersion );
+        System.out.println( "Repository loaded: " + sourceVersion.getRepositoryUrl() );
+        System.out.println( "Installation started" );
         installVersion( sourceVersion );
         result = Status.OK_STATUS;
       } else {
