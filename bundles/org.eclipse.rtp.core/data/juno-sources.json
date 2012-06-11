@@ -1,79 +1,14 @@
 {
   "sources": [
-    {
-      "name": "rap",
-      "description": "The Rich Ajax Platform lets you build rich, Ajax-enabled Web applications by using the Eclipse development model, plug-ins with the well known Eclipse workbench extension points and a widget toolkit with SWT API.",
-      "infoUrl": "http://eclipse.org/rap/",
+   {
+      "name": "ecf-remoteservices",
+      "description": "The ECF Remote Services API allows distribution of services over a network.",
+      "infoUrl": "http://www.eclipse.org/ecf/",      
       "versions": [
         {
-          "features": [ { id : "org.eclipse.rap.runtime.feature.group", version : "1.5.0.20110926-1711" } ],
-          "version": "1.5.0",
-          "repositoryUrl": "http://download.eclipse.org/rt/rap/1.5/runtime"
-        },
-        {
-          "features": [ { id : "org.eclipse.rap.runtime.sdk.feature.group", version : "1.4.1.20110914-1945" } ],
-          "version": "1.4.1",
-          "repositoryUrl": "http://download.eclipse.org/rt/rap/1.4/runtime"
-        }
-      ]
-    },
-    {
-      "name": "equinox-server",
-      "description": "Equinox can be used on the server to serve up static content and to run servlets or JSPs.",
-      "infoUrl": "http://eclipse.org/equinox/",      
-      "versions": [
-        {
-          "features": [ { id : "org.eclipse.equinox.serverside.sdk.feature.group", version : "3.8.0.v20110912-1543-7u7QFyQFN5Ljx9Z5NRF-qJ7jJWj4" } ],
-          "version": "3.8.0",
-          "repositoryUrl": "http://download.eclipse.org/eclipse/updates/3.8milestones/S-3.8M2-201109151308"
-        }
-      ]
-    },
-	{
-      "name": "riena",
-      "description": "The Riena platform is the foundation for building multi-tier enterprise client/server applications. As such Riena is broadening the usage of the service oriented architecture of OSGi/Equinox by providing access to local and remote services in a transparent way.",
-      "infoUrl": "http://eclipse.org/riena/",      
-      "versions": [
-        {
-          "features": [ { id : "org.eclipse.riena.build.feature.core.sdk.feature.group", version : "3.0.0.v20110614_3_0_0_0" } ],
-          "version": "3.0.0",
-          "repositoryUrl": "http://download.eclipse.org/rt/riena/3.0.0.0/rcp/"
-        }
-      ]
-    },
-    {
-      "name": "ecf",
-      "description": "ECF is a framework for building distributed servers, applications, and tools. It provides a modular implementation of the OSGi 4.2 Remote Services standard, along with support for REST-based and SOAP-based remote services, and asynchronous messaging for remote services.",
-      "infoUrl": "http://eclipse.org/ecf/",      
-      "versions": [
-        {
-          "features": [ { id : "org.eclipse.ecf.core.feature.group", version : "3.5.2.v20110829-0349" } ],
-          "version": "3.5.2",
-          "repositoryUrl": "http://download.eclipse.org/rt/ecf/3.5.2/site.p2"
-        }
-      ]
-    },
-    {
-      "name": "eclipselink",
-      "description": "The EclipseLink project delivers a comprehensive open-source Java persistence solution addressing relational, XML, and database web services.",
-      "infoUrl": "http://eclipse.org/eclipselink/",      
-      "versions": [
-        {
-          "features": [ { id : "org.eclipse.persistence.sdk.feature.group", version : "2.4.0.v20111012-r10221" } ],
-          "version": "2.4.0",
-          "repositoryUrl": "http://download.eclipse.org/rt/eclipselink/milestone-updates/"
-        }
-      ]
-    },
-    {
-      "name": "teneo",
-      "description": "Teneo is a Model-Relational mapping and runtime database persistence solution for the Eclipse Modeling Framework (EMF). Teneo integrates EMF with both Hibernate and EclipseLink.",
-      "infoUrl": "http://wiki.eclipse.org/Teneo",      
-      "versions": [
-        {
-          "features": [ { id : "org.eclipse.emf.teneo.feature.group", version : "1.0.0.v200806111928-78--DUUEFDEz0MMNLVD" } ],
+          "features": [ { id : "org.eclipse.ecf.remoteservice.feature.feature.group", version : "1.0.0.v20120531-2105" } ],
           "version": "1.0.0",
-          "repositoryUrl": "http://download.eclipse.org/modeling/emf/updates/milestones/"
+          "repositoryUrl": "http://download.eclipse.org/releases/juno/"
         }
       ]
     }
