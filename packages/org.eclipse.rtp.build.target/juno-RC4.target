@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.8"?>
+
+<target name="juno-RC2" sequenceNumber="26">
+<locations>
+<location includeAllPlatforms="true" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
+<unit id="org.apache.commons.fileupload" version="1.2.2.v20111214-1400"/>
+<unit id="org.apache.commons.fileupload.source" version="1.2.2.v20111214-1400"/>
+<unit id="org.apache.commons.io" version="2.0.1.v201105210651"/>
+<unit id="org.apache.commons.io.source" version="2.0.1.v201105210651"/>
+<unit id="com.google.gson.source" version="2.1.0.v201203072145"/>
+<unit id="com.google.gson" version="2.1.0.v201203072145"/>
+<unit id="org.hamcrest.core" version="1.1.0.v20090501071000"/>
+<unit id="org.hamcrest.core.source" version="1.1.0.v20090501071000"/>
+<unit id="org.objenesis" version="1.0.0.v201105211943"/>
+<unit id="org.mockito" version="1.8.4.v201102171835"/>
+<unit id="org.mockito.source" version="1.8.4.v201102171835"/>
+<unit id="org.jdom" version="1.1.1.v201101151400"/>
+<unit id="org.jdom.source" version="1.1.1.v201101151400"/>
+<unit id="org.junit" version="4.8.2.v4_8_2_v20110321-1705"/>
+<unit id="org.junit.source" version="4.8.2.v4_8_2_v20110321-1705"/>
+<repository location="http://download.eclipse.org/tools/orbit/downloads/drops/R20120526062928/repository/"/>
+</location>
+<location includeAllPlatforms="true" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.equinox.p2.extras.feature.feature.group" version="1.1.0.v20120524-0542-7A6FEcDiVOTg1Q_HuZrEuBtr2dhs"/>
+<unit id="org.eclipse.equinox.server.core.feature.group" version="1.2.0.v20120522-1841-7K7VFMRF7RZHQYI0Yh8U-ov"/>
+<unit id="org.eclipse.core.runtime.feature.feature.group" version="1.1.0.v20120521-2346-7H7NFHkBpeIm_WQ_SXscjz-J1Zi9"/>
+<unit id="org.eclipse.help.feature.group" version="1.4.0.v20120528-1717-8P7vFOTFK_Qj4JmDIQXJ8Tn"/>
+<unit id="org.eclipse.platform.feature.group" version="3.8.0.v20120607-071945-9gF7jI7nG5qByXMVdkhRMWBQlF4PnDCLybDCPQ"/>
+<unit id="org.eclipse.platform.ide" version="3.8.0.I20120608-1200"/>
+<unit id="org.eclipse.equinox.executable.feature.group" version="3.6.0.v20120522-1813-7P7OG2BFLWUl7UmbVUO9iCm"/>
+<unit id="org.eclipse.rcp.feature.group" version="3.8.0.v20120528-1716-92BmGJTFw3Ez0W7_KvHqgZUR"/>
+<unit id="org.eclipse.equinox.compendium.sdk.feature.group" version="3.8.0.v20120522-1841-7X7eGb7FPGjtJjv1kjS_NdG"/>
+<unit id="org.eclipse.equinox.core.feature.feature.group" version="1.1.0.v20120522-1841-7K7XFKsF7RZHQYI0Yh8T7on"/>
+<unit id="org.eclipse.equinox.core.sdk.feature.group" version="3.8.0.v20120522-1813-85FAcGbBFoYTldHrOJw3cF4q"/>
+<unit id="org.eclipse.equinox.p2.core.feature.feature.group" version="1.1.0.v20120524-0542-8297FncFWmE7h4Asq1cgrz-i38"/>
+<unit id="org.eclipse.equinox.p2.user.ui.feature.group" version="2.2.0.v20120524-0542-62DG9JXTlSiz-UbcP0w0KGe8CBOP"/>
+<unit id="org.eclipse.equinox.p2.rcp.feature.feature.group" version="1.1.0.v20120524-0542-785EoBqNKNYz-GX2sUgCaBtr2dhs"/>
+<unit id="org.eclipse.equinox.serverside.sdk.feature.group" version="3.8.0.v20120522-1841-9Q7dFszFYGis9uYGz0QodZP3fH0t"/>
+<unit id="org.eclipse.equinox.server.jetty.feature.group" version="1.1.0.v20120522-1841-8077C0F8NcJTbL1ab47MJ5"/>
+<unit id="org.eclipse.equinox.server.p2.feature.group" version="1.2.0.v20120522-1841-7z7_FfoFTy21Yu4Ydp_WohB38"/>
+<unit id="org.eclipse.equinox.server.servletbridge.feature.group" version="1.0.101.v20120522-1841-42F9w9oB58B5KBB2ADHO"/>
+<repository location="http://download.eclipse.org/eclipse/updates/3.8milestones/S-3.8RC4-201206081200"/>
+</location>
+<location includeAllPlatforms="true" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.rap.runtime.feature.group" version="1.5.0.20120612-1510"/>
+<repository location="http://download.eclipse.org/rt/rap/1.5/runtime/RC4-20120612-1458"/>
+</location>
+</locations>
+</target>
