@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/org.eclipse.rtp.package.runtime_1.0.0.qualifier.jar" id="org.eclipse.rtp.package.runtime" version="1.0.0.qualifier">
+   <feature url="features/org.eclipse.rtp.package_1.1.0.qualifier.jar" id="org.eclipse.rtp.package" version="1.1.0.qualifier">
       <category name="org.eclipse.rtp"/>
    </feature>
-   <feature url="features/org.eclipse.rtp.package.headless_1.0.0.qualifier.jar" id="org.eclipse.rtp.package.headless" version="1.0.0.qualifier">
+   <feature url="features/org.eclipse.rtp.package.headless_1.1.0.qualifier.jar" id="org.eclipse.rtp.package.headless" version="1.1.0.qualifier">
       <category name="org.eclipse.rtp"/>
    </feature>
-   <feature url="features/org.eclipse.rtp.package_1.0.0.qualifier.jar" id="org.eclipse.rtp.package" version="1.0.0.qualifier">
+   <feature url="features/org.eclipse.rtp.package.runtime_1.1.0.qualifier.jar" id="org.eclipse.rtp.package.runtime" version="1.1.0.qualifier">
       <category name="org.eclipse.rtp"/>
    </feature>
    <category-def name="org.eclipse.rtp" label="RTP Target Components"/>
