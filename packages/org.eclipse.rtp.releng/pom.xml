@@ -27,7 +27,7 @@
     <tycho-version>0.14.1</tycho-version>
     <tycho-groupid>org.eclipse.tycho</tycho-groupid>
     
-    <surefire-version>2.9</surefire-version>
+    <surefire-version>2.12.2</surefire-version>
     <junit-version>4.8.2</junit-version>
     <mockito-version>1.8.4</mockito-version>
     <test-arguments>-Xms512m -Xmx512m</test-arguments>
