@@ -8,13 +8,13 @@
 package org.eclipse.rtp.configurator.ui;
 
 import org.eclipse.jface.dialogs.InputDialog;
+import org.eclipse.rap.rwt.RWT;
+import org.eclipse.rap.rwt.widgets.DialogUtil;
 import org.eclipse.rtp.configurator.rest.IEventService;
 import org.eclipse.rtp.configurator.rest.RestTemplate;
 import org.eclipse.rtp.configurator.ui.internal.event.ConfigurationEvent;
 import org.eclipse.rtp.configurator.ui.internal.event.EventingServiceUtil;
 import org.eclipse.rtp.core.model.Source;
-import org.eclipse.rwt.RWT;
-import org.eclipse.rwt.widgets.DialogUtil;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;

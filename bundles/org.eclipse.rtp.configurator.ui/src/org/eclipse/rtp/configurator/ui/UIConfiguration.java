@@ -9,8 +9,8 @@
 *******************************************************************************/ 
 package org.eclipse.rtp.configurator.ui;
 
-import org.eclipse.rwt.application.Application;
-import org.eclipse.rwt.application.ApplicationConfiguration;
+import org.eclipse.rap.rwt.application.Application;
+import org.eclipse.rap.rwt.application.ApplicationConfiguration;
 
 public class UIConfiguration implements ApplicationConfiguration {
 

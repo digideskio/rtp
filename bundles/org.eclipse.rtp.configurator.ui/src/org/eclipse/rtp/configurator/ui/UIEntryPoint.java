@@ -10,7 +10,7 @@ package org.eclipse.rtp.configurator.ui;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.rwt.lifecycle.IEntryPoint;
+import org.eclipse.rap.rwt.lifecycle.IEntryPoint;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.widgets.Display;
