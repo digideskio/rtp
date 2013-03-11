@@ -8,5 +8,5 @@ Fragment-Host: org.eclipse.rtp.httpdeployer
 Import-Package: org.eclipse.equinox.internal.p2.director,
  org.eclipse.equinox.p2.planner;version="2.0.0",
  org.objenesis;version="1.0.0"
-Require-Bundle: org.junit;bundle-version="[4.8.2,4.9.0)",
+Require-Bundle: org.junit;bundle-version="[4.8.2,5)",
  org.mockito;bundle-version="[1.8.0,1.9.0)"
